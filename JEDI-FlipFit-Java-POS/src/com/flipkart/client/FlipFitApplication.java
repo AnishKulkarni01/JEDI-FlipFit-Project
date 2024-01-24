@@ -17,12 +17,12 @@ public class FlipFitApplication {
         System.out.println("4. Update Password");
         System.out.println("5. Exit");
 
-        Scanner sc = new Scanner(System.in);
-        int opt = sc.nextInt();
+            Scanner sc = new Scanner(System.in);
+            int opt = sc.nextInt();
 
-        String username;
-        String passcode;
-        int role;
+            String username;
+            String passcode;
+            int role;
 
             switch(opt)
             {
@@ -33,37 +33,37 @@ public class FlipFitApplication {
                     passcode = sc.next();
                     //int flag=0;
                     //while(flag==0)
-                    {
+                {
                     System.out.println("Enter role : \n1. Gym Customer\n2. Gym Owner\n3. GymFlipFit Admin\n4. Exit");
                     role=sc.nextInt();
 
-                        switch(role)
-                        {
-                            case(1):
-                                System.out.println("Gym Customer Menu");
-                                GymCustomerFlipFitMenu customerMenu=new GymCustomerFlipFitMenu();
-                                customerMenu.showCustomerMenu();
-                                break;
-                            case(2):
-                                System.out.println("Gym Owner Menu");
-                                GymOwnerFlipFitMenu ownerMenu=new GymOwnerFlipFitMenu();
-                                ownerMenu.showGymOwnerFlipMenu();
-                                break;
-                            case(3):
-                                System.out.println("Gym Admin Menu\n");
-                                AdminFlipFitMenu adminMenu = new AdminFlipFitMenu();
-                                adminMenu.showAdminFlipFitMenu();
-                                break;
-                            //case(4):
-                                //flag=1;
-                                //break;
-                            default:
-                                throw new IllegalStateException("Unexpected value: " + role);
-                        }
+                    switch(role)
+                    {
+                        case(1):
+                            System.out.println("Gym Customer Menu");
+                            GymCustomerFlipFitMenu customerMenu=new GymCustomerFlipFitMenu();
+                            customerMenu.showCustomerMenu();
+                            break;
+                        case(2):
+                            System.out.println("Gym Owner Menu");
+                            GymOwnerFlipFitMenu ownerMenu=new GymOwnerFlipFitMenu();
+                            ownerMenu.showGymOwnerFlipMenu();
+                            break;
+                        case(3):
+                            System.out.println("Gym Admin Menu\n");
+                            AdminFlipFitMenu adminMenu = new AdminFlipFitMenu();
+                            adminMenu.showAdminFlipFitMenu();
+                            break;
+                        //case(4):
+                        //flag=1;
+                        //break;
+                        default:
+                            throw new IllegalStateException("Unexpected value: " + role);
                     }
+                }
 
 
-                    break;
+                break;
                 case 2:
                     System.out.println("Registering Gym Customer");
                     break;
