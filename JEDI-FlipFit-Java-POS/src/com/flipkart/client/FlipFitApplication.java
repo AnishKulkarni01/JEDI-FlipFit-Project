@@ -29,6 +29,7 @@ public class FlipFitApplication {
                 passcode = sc.next();
                 System.out.println("Enter role : \n1. Gym Customer\n2. Gym Owner\n3. GymFlipFit Admin");
                 role=sc.nextInt();
+                GymOwnerFlipFitMenu ownerMenu=new GymOwnerFlipFitMenu();
 
                 switch(role)
                 {
@@ -37,6 +38,7 @@ public class FlipFitApplication {
                         break;
                     case(2):
                         System.out.println("Gym Owner Menu");
+                        ownerMenu.showGymOwnerFlipMenu();
                         break;
                     case(3):
                         System.out.println("Gym Admin Menu\n");
