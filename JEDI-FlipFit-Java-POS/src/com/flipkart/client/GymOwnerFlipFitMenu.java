@@ -8,7 +8,12 @@ public class GymOwnerFlipFitMenu {
         int fl=0;
         while(fl==0)
         {
-        System.out.println("1. Request Gym Onboarding\n2. Gym Details Update\n3. Request Slot Update\n4. Edit Profile\n5. Log out\n6. Back");
+        System.out.println("1. Request Gym Onboarding\n" +
+                "2. Gym Details Update\n" +
+                "3. Request Slot Update\n" +
+                "4. Edit Profile\n" +
+                "5. Log out\n" +
+                "6. Back");
         Scanner sc=new Scanner(System.in);
         int opt=sc.nextInt();
 

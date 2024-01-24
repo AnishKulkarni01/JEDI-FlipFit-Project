@@ -6,7 +6,12 @@ public class GymCustomerFlipFitMenu {
         int fl=0;
         while(fl==0)
         {
-        System.out.println("1. Edit Profile\n2. View Profile\n3. View Bookings\n4. Book Slot\n5. Log out\n6. Back");
+        System.out.println("1. Edit Profile\n" +
+                "2. View Profile\n" +
+                "3. View Bookings\n" +
+                "4. Book Slot\n" +
+                "5. Log out\n" +
+                "6. Back");
         Scanner in = new Scanner(System.in);
         int choice = in.nextInt();
 
@@ -22,16 +27,17 @@ public class GymCustomerFlipFitMenu {
                     break;
                 case 4:
                     System.out.println("Book your Slot");
-                    System.out.println("Select a Gym");
-                    System.out.println("1. Bellandur\n2. Marathalli");
+                    System.out.println("Select an area where you'd like to book a slot.");
+                    System.out.println("1. Bellandur\n" +
+                            "2. Marathalli");
                     int gymOpt=in.nextInt();
                     switch (gymOpt)
                     {
                         case 1:
-                            System.out.println("Listing Slots..");
+                            System.out.println("Listing Gyms at Bellandur..");
                             break;
                         case 2:
-                            System.out.println("Listing Slots..");
+                            System.out.println("Listing Gyms at Marathalli..");
                             break;
                     }
                     break;

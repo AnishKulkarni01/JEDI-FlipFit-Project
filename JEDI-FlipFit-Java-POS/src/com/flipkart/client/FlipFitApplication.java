@@ -34,7 +34,10 @@ public class FlipFitApplication {
                     //int flag=0;
                     //while(flag==0)
                 {
-                    System.out.println("Enter role : \n1. Gym Customer\n2. Gym Owner\n3. GymFlipFit Admin");
+                    System.out.println("Enter role : \n" +
+                            "1. Gym Customer\n" +
+                            "2. Gym Owner\n" +
+                            "3. GymFlipFit Admin");
                     role=sc.nextInt();
 
                     switch(role)
