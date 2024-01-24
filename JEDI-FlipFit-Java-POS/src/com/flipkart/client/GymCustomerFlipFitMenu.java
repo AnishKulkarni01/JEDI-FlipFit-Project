@@ -6,7 +6,7 @@ public class GymCustomerFlipFitMenu {
         int fl=0;
         while(fl==0)
         {
-        System.out.println("1. Edit Profile\n2. View Bookings\n3. Book Slot\n4. Log out\n5. Exit");
+        System.out.println("1. Edit Profile\n2. View Profile\n3. View Bookings\n4. Book Slot\n5. Log out\n6. Back");
         Scanner in = new Scanner(System.in);
         int choice = in.nextInt();
 

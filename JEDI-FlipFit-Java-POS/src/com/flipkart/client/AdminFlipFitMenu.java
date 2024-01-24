@@ -7,7 +7,7 @@ public class AdminFlipFitMenu {
         int fl=0;
         while(fl==0)
         {
-        System.out.println("1. Approve Gym Onboarding Requests. \n2. Approve Gym Slot Update Requests.\n3. Exit");
+        System.out.println("1. Approve Gym Onboarding Requests. \n2. Approve Gym Slot Update Requests.\n3. Log out\n4. Back");
         Scanner sc = new Scanner(System.in);
         int action = sc.nextInt();
 
@@ -20,6 +20,9 @@ public class AdminFlipFitMenu {
                     System.out.println("Approving Slot Update Requests...");
                     break;
                 case 3:
+                    System.out.println("Logging Out");
+                    break;
+                case 4:
                     fl=1;
                     break;
 

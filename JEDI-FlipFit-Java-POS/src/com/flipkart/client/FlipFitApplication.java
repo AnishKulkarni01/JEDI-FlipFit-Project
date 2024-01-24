@@ -30,29 +30,37 @@ public class FlipFitApplication {
                     username = sc.next();
                     System.out.println("Enter Passcode : ");
                     passcode = sc.next();
-                    System.out.println("Enter role : \n1. Gym Customer\n2. Gym Owner\n3. GymFlipFit Admin");
+                    //int flag=0;
+                    //while(flag==0)
+                    {
+                    System.out.println("Enter role : \n1. Gym Customer\n2. Gym Owner\n3. GymFlipFit Admin\n4. Exit");
                     role=sc.nextInt();
 
-                    switch(role)
-                    {
-                        case(1):
-                            System.out.println("Gym Customer Menu");
-                            GymCustomerFlipFitMenu customerMenu=new GymCustomerFlipFitMenu();
-                            customerMenu.showCustomerMenu();
-                            break;
-                        case(2):
-                            System.out.println("Gym Owner Menu");
-                            GymOwnerFlipFitMenu ownerMenu=new GymOwnerFlipFitMenu();
-                            ownerMenu.showGymOwnerFlipMenu();
-                            break;
-                        case(3):
-                            System.out.println("Gym Admin Menu\n");
-                            AdminFlipFitMenu adminMenu = new AdminFlipFitMenu();
-                            adminMenu.showAdminFlipFitMenu();
-                            break;
-                        default:
-                            throw new IllegalStateException("Unexpected value: " + role);
+                        switch(role)
+                        {
+                            case(1):
+                                System.out.println("Gym Customer Menu");
+                                GymCustomerFlipFitMenu customerMenu=new GymCustomerFlipFitMenu();
+                                customerMenu.showCustomerMenu();
+                                break;
+                            case(2):
+                                System.out.println("Gym Owner Menu");
+                                GymOwnerFlipFitMenu ownerMenu=new GymOwnerFlipFitMenu();
+                                ownerMenu.showGymOwnerFlipMenu();
+                                break;
+                            case(3):
+                                System.out.println("Gym Admin Menu\n");
+                                AdminFlipFitMenu adminMenu = new AdminFlipFitMenu();
+                                adminMenu.showAdminFlipFitMenu();
+                                break;
+                            //case(4):
+                                //flag=1;
+                                //break;
+                            default:
+                                throw new IllegalStateException("Unexpected value: " + role);
+                        }
                     }
+
 
                     break;
                 case 2:
