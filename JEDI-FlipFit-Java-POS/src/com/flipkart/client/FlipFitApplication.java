@@ -13,8 +13,9 @@ public class FlipFitApplication {
         System.out.println("Choice Menu");
         System.out.println("1. Login");
         System.out.println("2. Registration of Gym Customer");
-        System.out.println("3. Update Password");
-        System.out.println("4. Exit");
+        System.out.println("3. Registration of Gym Owner");
+        System.out.println("4. Update Password");
+        System.out.println("5. Exit");
 
         Scanner sc = new Scanner(System.in);
         int opt = sc.nextInt();
@@ -67,9 +68,12 @@ public class FlipFitApplication {
                     System.out.println("Registering Gym Customer");
                     break;
                 case 3:
-                    System.out.println("Updating Password");
+                    System.out.println("Registering Gym Owner");
                     break;
                 case 4:
+                    System.out.println("Updating Password");
+                    break;
+                case 5:
                     fl=1;
                     break;
                 default:
