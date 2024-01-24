@@ -3,8 +3,7 @@ package com.flipkart.bean;
 public class Customer {
     private int customerID;
     private String password;
-    private String name;
-
+    private String username;
     public int getCustomerID() {
         return customerID;
     }
@@ -22,31 +21,31 @@ public class Customer {
     }
 
     public String getName() {
-        return name;
+        return username;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setName(String username) {
+        this.username = username;
     }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getContact() {
-        return contact;
-    }
-
-    public void setContact(String contact) {
-        this.contact = contact;
-    }
-
-    private String email;
-    private String contact;
+//
+//    public String getEmail() {
+//        return email;
+//    }
+//
+//    public void setEmail(String email) {
+//        this.email = email;
+//    }
+//
+//    public String getContact() {
+//        return contact;
+//    }
+//
+//    public void setContact(String contact) {
+//        this.contact = contact;
+//    }
+//
+//    private String email;
+//    private String contact;
 
 
 }

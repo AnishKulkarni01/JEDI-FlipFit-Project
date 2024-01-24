@@ -3,6 +3,7 @@ package com.flipkart.client;
 import java.util.Scanner;
 
 public class GymOwnerFlipFitMenu {
+
     public void showGymOwnerFlipMenu()
     {
         int loopFlag=0;
@@ -21,6 +22,7 @@ public class GymOwnerFlipFitMenu {
             {
                 case 1:
                     System.out.println("Request for Gym onboarding sent");
+
                     break;
                 case 2:
                     System.out.println("Gym Details updated");

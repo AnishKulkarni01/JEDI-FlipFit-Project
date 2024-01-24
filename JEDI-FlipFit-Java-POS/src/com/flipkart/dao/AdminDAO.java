@@ -1,7 +1,6 @@
 package com.flipkart.dao;
 
 public class AdminDAO {
-
     public boolean makeAdmin(String adminID)
     {
         //Provides admin privileges to a user

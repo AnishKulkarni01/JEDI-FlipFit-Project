@@ -1,12 +1,16 @@
 package com.flipkart.client;
+import com.flipkart.service.CustomerService;
+
 import java.util.*;
-public class GymCustomerFlipFitMenu {
+public class GymCustomerFlipFitMenu
+{
+    CustomerService customerService=new CustomerService();
     public void showCustomerMenu(){
 
         int loopFlag=0;
         while(loopFlag==0)
         {
-        System.out.println("1. Edit Profile\n" +
+            System.out.println("1. Edit Profile\n" +
                 "2. View Profile\n" +
                 "3. View Bookings\n" +
                 "4. Book Slot\n" +
@@ -18,6 +22,7 @@ public class GymCustomerFlipFitMenu {
             switch(choice){
                 case 1:
                     System.out.println("Function to edit profile");
+                    customerService.register("c","c");
                     break;
                 case 2:
                     System.out.println("Function to View profile");

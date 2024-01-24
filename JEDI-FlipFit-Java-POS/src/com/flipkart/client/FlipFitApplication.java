@@ -1,5 +1,7 @@
 package com.flipkart.client;
 
+import com.flipkart.service.CustomerService;
+
 import java.sql.SQLOutput;
 import java.util.Scanner;
 
@@ -7,6 +9,7 @@ public class FlipFitApplication {
     public static void main(String[] args)
     {
         int loopFlag=0;
+        CustomerService customerService=new CustomerService();
         while(loopFlag==0)
         {
         System.out.println("<-----Welcome to FlipFit Application----->");
@@ -69,9 +72,15 @@ public class FlipFitApplication {
                 break;
                 case 2:
                     System.out.println("Registering Gym Customer");
+                    customerService.register("anish","anish");
+                    customerService.register("b","b");
+
+
                     break;
                 case 3:
                     System.out.println("Registering Gym Owner");
+
+
                     break;
                 case 4:
                     System.out.println("Updating Password");
