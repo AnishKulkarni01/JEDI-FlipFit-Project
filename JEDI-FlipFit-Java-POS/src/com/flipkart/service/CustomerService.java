@@ -3,47 +3,41 @@ package com.flipkart.service;
 
 import com.flipkart.bean.Slot;
 import com.flipkart.dao.CustomerDAO;
+import com.flipkart.dao.UserDAO;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CustomerService {
-    //book slot
-    CustomerDAO cd=CustomerDAO.getInstance();
+    CustomerDAO customerDAO =CustomerDAO.getInstance();
+    UserDAO userDAO = UserDAO.getInstance();
 
-//    public static void main(String[] args)
-//    {
-//        CustomerDAO cd1=CustomerDAO.getInstance();
-//        System.out.println(cd.hashCode());
-//        System.out.println(cd1.hashCode());
-//    }
-
-    public boolean bookSlot()
-    {
+    public boolean bookSlot() {
         return false;
     }
+
     //view slot
-     public List<Slot> viewSlots()
-     {
-         List<Slot>arr = null;
-         return arr;
+     public List<Slot> viewSlots() {
+         return new ArrayList<>();
      }
+
     //get added to wait list
-    public boolean joinWaitList()
-    {
+    public boolean joinWaitList() {
         return false;
     }
+
     //edit profile
-    public void editProfile()
-    {
-
+    public void editProfile() {
+        return;
     }
+
     //register
-    public void register(String name,String password)
-    {
-        cd.registerCustomer(name,password);
+    public void register(String name, String password) {
+        customerDAO.registerCustomer(name, password);
     }
-    public void viewProfile(String name,String password)
-    {
 
+    public void viewProfile() {
+        List<String> userDetails = userDAO.getCurrentUser();
+        System.out.println("Current user is " + userDetails.get(0) + " as a " + userDetails.get(1));
     }
 }

@@ -3,43 +3,32 @@ package com.flipkart.dao;
 import com.flipkart.bean.Customer;
 import com.flipkart.bean.User;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class UserDAO {
-    static UserDAO userDao=null;
-     Map<String, List<String>> map = new HashMap<>();
-    User currUser=new User();
-    public static synchronized UserDAO getInstance()
-    {
-        if(userDao==null)
-        {
-            userDao=new UserDAO();
-        }
+    static UserDAO userDao = null;
+
+    public static synchronized UserDAO getInstance() {
+        if(userDao == null) userDao = new UserDAO();
         return userDao;
     }
+
+    Map<String, List<String>> map = new HashMap<>();
+    private String currentUsername;
+
     public boolean check(String username,String password){
-        System.out.println("Map size"+map.size());
-        System.out.println(map.containsKey(username));
-        System.out.println(map.get(username));
-        if(map.containsKey(username) && map.get(username).get(0).equals(password))
-        {
-            return true;
-        }
-        return false;
-    }
-    public void addUser(String username,String password,String role)
-    {
-        List<String> l=new ArrayList<>();
-        l.add(password);
-        l.add(role);
-        map.put(username,l);
-        System.out.println(map.containsKey(username));
-
+        return map.containsKey(username) && map.get(username).get(0).equals(password);
     }
 
+    public void addUser(String username,String password,String role) {
+        map.put(username, Arrays.asList(password, role));
+    }
 
+    public void setCurrentUser(String username){
+        this.currentUsername = username;
+    }
 
+    public List<String> getCurrentUser(){
+        return Arrays.asList(currentUsername, map.get(currentUsername).get(1));
+    }
 }

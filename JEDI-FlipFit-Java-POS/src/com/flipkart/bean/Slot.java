@@ -36,7 +36,7 @@ public class Slot {
         this.slotId = slotId;
     }
 
-    private boolean availabilityStatus;
+    private boolean availabilityStatus = true;
     private int slotId;
 
 }

@@ -4,12 +4,13 @@ import com.flipkart.dao.CustomerDAO;
 import com.flipkart.dao.UserDAO;
 
 public class UserService {
-    UserDAO ud= UserDAO.getInstance();
+    UserDAO userDAO= UserDAO.getInstance();
 
-    public boolean authenticate(String username,String password)
-    {
-        if(ud.check(username,password))return true;
-        return false;
+    public boolean authenticate(String username, String password) {
+        return userDAO.check(username, password);
     }
 
+    public void login(String username){
+        userDAO.setCurrentUser(username);
+    }
 }
