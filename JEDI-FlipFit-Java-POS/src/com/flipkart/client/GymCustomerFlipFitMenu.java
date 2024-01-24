@@ -15,15 +15,18 @@ public class GymCustomerFlipFitMenu {
                     System.out.println("Function to edit profile");
                     break;
                 case 2:
-                    System.out.println("Function to View Booking");
+                    System.out.println("Function to View profile");
                     break;
                 case 3:
-                    System.out.println("Function to Book Slots");
+                    System.out.println("Function to View Booking");
                     break;
                 case 4:
-                    System.out.println("Function to Log out");
+                    System.out.println("Function to Book Slots");
                     break;
                 case 5:
+                    System.out.println("Function to Log out");
+                    break;
+                case 6:
                     fl=1;
                     break;
                 default:
