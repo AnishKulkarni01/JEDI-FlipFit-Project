@@ -21,6 +21,7 @@ public class AdminFlipFitMenu {
                     break;
                 case 3:
                     System.out.println("Logging Out");
+                    fl=1;
                     break;
                 case 4:
                     fl=1;

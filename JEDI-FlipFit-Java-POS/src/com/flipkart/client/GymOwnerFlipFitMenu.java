@@ -28,6 +28,7 @@ public class GymOwnerFlipFitMenu {
                     break;
                 case 5:
                     System.out.println("Logging out");
+                    fl=1;
                     break;
                 case 6:
                     fl=1;

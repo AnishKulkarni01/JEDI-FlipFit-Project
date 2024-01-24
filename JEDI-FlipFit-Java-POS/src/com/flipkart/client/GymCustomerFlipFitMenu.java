@@ -21,10 +21,23 @@ public class GymCustomerFlipFitMenu {
                     System.out.println("Function to View Booking");
                     break;
                 case 4:
-                    System.out.println("Function to Book Slots");
+                    System.out.println("Book your Slot");
+                    System.out.println("Select a Gym");
+                    System.out.println("1. Bellandur\n2. Marathalli");
+                    int gymOpt=in.nextInt();
+                    switch (gymOpt)
+                    {
+                        case 1:
+                            System.out.println("Listing Slots..");
+                            break;
+                        case 2:
+                            System.out.println("Listing Slots..");
+                            break;
+                    }
                     break;
                 case 5:
                     System.out.println("Function to Log out");
+                    fl=1;
                     break;
                 case 6:
                     fl=1;
