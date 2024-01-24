@@ -42,4 +42,8 @@ public class CustomerService {
     {
         cd.registerCustomer(name,password);
     }
+    public void viewProfile(String name,String password)
+    {
+
+    }
 }

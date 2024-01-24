@@ -1,6 +1,7 @@
 package com.flipkart.client;
 
 import com.flipkart.service.CustomerService;
+import com.flipkart.service.UserService;
 
 import java.sql.SQLOutput;
 import java.util.Scanner;
@@ -10,6 +11,7 @@ public class FlipFitApplication {
     {
         int loopFlag=0;
         CustomerService customerService=new CustomerService();
+        UserService userService=new UserService();
         while(loopFlag==0)
         {
         System.out.println("<-----Welcome to FlipFit Application----->");
@@ -34,6 +36,12 @@ public class FlipFitApplication {
                     username = sc.next();
                     System.out.println("Enter Passcode : ");
                     passcode = sc.next();
+                   if(userService.authenticate(username,passcode)==false)
+                   {
+                       System.out.println("Wrong credentials");
+                       break;
+                   }
+
                     //int flag=0;
                     //while(flag==0)
                 {
@@ -73,7 +81,6 @@ public class FlipFitApplication {
                 case 2:
                     System.out.println("Registering Gym Customer");
                     customerService.register("anish","anish");
-                    customerService.register("b","b");
 
 
                     break;
