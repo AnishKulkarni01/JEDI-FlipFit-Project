@@ -4,8 +4,8 @@ import java.util.Scanner;
 
 public class AdminFlipFitMenu {
     public void showAdminFlipFitMenu(){
-        int fl=0;
-        while(fl==0)
+        int loopFlag=0;
+        while(loopFlag==0)
         {
         System.out.println("1. Approve Gym Onboarding Requests.\n" +
                 "2. Decline Gym Onboarding Requests\n" +
@@ -31,10 +31,10 @@ public class AdminFlipFitMenu {
                     break;
                 case 5:
                     System.out.println("Logging Out");
-                    fl=1;
+                    loopFlag=1;
                     break;
                 case 6:
-                    fl=1;
+                    loopFlag=1;
                     break;
 
                 default:

@@ -3,8 +3,8 @@ import java.util.*;
 public class GymCustomerFlipFitMenu {
     public void showCustomerMenu(){
 
-        int fl=0;
-        while(fl==0)
+        int loopFlag=0;
+        while(loopFlag==0)
         {
         System.out.println("1. Edit Profile\n" +
                 "2. View Profile\n" +
@@ -30,6 +30,7 @@ public class GymCustomerFlipFitMenu {
                     System.out.println("Select an area where you'd like to book a slot.");
                     System.out.println("1. Bellandur\n" +
                             "2. Marathalli");
+
                     int gymOpt=in.nextInt();
                     switch (gymOpt)
                     {
@@ -43,10 +44,10 @@ public class GymCustomerFlipFitMenu {
                     break;
                 case 5:
                     System.out.println("Function to Log out");
-                    fl=1;
+                    loopFlag=1;
                     break;
                 case 6:
-                    fl=1;
+                    loopFlag=1;
                     break;
                 default:
                     throw new IllegalStateException("Unexpected value: " + choice);

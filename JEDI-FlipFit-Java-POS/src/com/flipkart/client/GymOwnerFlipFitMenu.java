@@ -5,8 +5,8 @@ import java.util.Scanner;
 public class GymOwnerFlipFitMenu {
     public void showGymOwnerFlipMenu()
     {
-        int fl=0;
-        while(fl==0)
+        int loopFlag=0;
+        while(loopFlag==0)
         {
         System.out.println("1. Request Gym Onboarding\n" +
                 "2. Gym Details Update\n" +
@@ -33,10 +33,10 @@ public class GymOwnerFlipFitMenu {
                     break;
                 case 5:
                     System.out.println("Logging out");
-                    fl=1;
+                    loopFlag=1;
                     break;
                 case 6:
-                    fl=1;
+                    loopFlag=1;
                     break;
                 default:
                     throw new IllegalStateException("Unexpected value: " + opt);

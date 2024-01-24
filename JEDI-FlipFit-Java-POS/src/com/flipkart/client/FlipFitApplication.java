@@ -6,8 +6,8 @@ import java.util.Scanner;
 public class FlipFitApplication {
     public static void main(String[] args)
     {
-        int fl=0;
-        while(fl==0)
+        int loopFlag=0;
+        while(loopFlag==0)
         {
         System.out.println("<-----Welcome to FlipFit Application----->");
         System.out.println("Choice Menu");
@@ -77,7 +77,7 @@ public class FlipFitApplication {
                     System.out.println("Updating Password");
                     break;
                 case 5:
-                    fl=1;
+                    loopFlag=1;
                     break;
                 default:
                     throw new IllegalStateException("Unexpected value: " + opt);
