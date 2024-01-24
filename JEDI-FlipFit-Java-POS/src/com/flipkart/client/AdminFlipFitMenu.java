@@ -1,5 +1,4 @@
 package com.flipkart.client;
 
-public class CustomerClient {
-
+public class AdminFlipFitMenu {
 }
