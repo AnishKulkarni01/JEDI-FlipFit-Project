@@ -47,7 +47,7 @@ public class GymOwnerDAO implements GymOwnerDAOInterface {
             }
         }
         return null; // Return null if GymOwner with given ID is not found
-<<<<<<< HEAD
+
     }
     @Override
     public boolean updateGymOwnerDetails(String gymOwnerId, String newName, String newPassword, String newEmail, String newContact) {
@@ -63,31 +63,9 @@ public class GymOwnerDAO implements GymOwnerDAOInterface {
         return false; // Return false if GymOwner with given ID is not found
     }
 
-    @Override
-    public boolean deleteGymOwner(String gymOwnerId) {
-        Iterator<GymOwner> iterator = gymOwnerList.iterator();
-        while (iterator.hasNext()) {
-            GymOwner owner = iterator.next();
-            if (String.valueOf(owner.getGymOwnerID()).equals(gymOwnerId)) {
-                iterator.remove();
-                return true;
-            }
-        }
-        return false; // Return false if GymOwner with given ID is not found
-=======
->>>>>>> 9c12d1eb947e1858f3ae36f668d76e4112e75a95
-    }
 
-    public boolean updateGymOwnerDetails(String gymOwnerId, String newName, String newPassword, String newEmail, String newContact) {
-        for (GymOwner owner : gymOwnerList) {
-            if (String.valueOf(owner.getGymOwnerID()).equals(gymOwnerId)) {
-                owner.setName(newName);
-                owner.setPassword(newPassword);
-                return true;
-            }
-        }
-        return false; // Return false if GymOwner with given ID is not found
-    }
+
+
 
     public boolean deleteGymOwner(String gymOwnerId) {
         Iterator<GymOwner> iterator = gymOwnerList.iterator();
