@@ -5,11 +5,11 @@ public class GymOwner {
     private String password;
     private String name;
 
-    public int getCustomerID() {
+    public int getGymOwnerID() {
         return gymOwnerID;
     }
 
-    public void setCustomerID(int gymOwnerID) {
+    public void setGymOwnerID(int gymOwnerID) {
         this.gymOwnerID = gymOwnerID;
     }
 

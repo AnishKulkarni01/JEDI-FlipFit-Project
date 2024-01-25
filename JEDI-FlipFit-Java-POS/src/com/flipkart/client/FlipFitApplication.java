@@ -37,6 +37,9 @@ public class FlipFitApplication {
                         System.out.println("Wrong credentials");
                         break;
                     }
+                    else{
+                        System.out.println("Successfully logged in");
+                    }
 
                     userService.login(username);
 
