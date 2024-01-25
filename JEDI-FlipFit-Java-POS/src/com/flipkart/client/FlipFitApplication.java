@@ -2,6 +2,7 @@ package com.flipkart.client;
 
 import com.flipkart.dao.UserDAO;
 import com.flipkart.service.CustomerService;
+import com.flipkart.service.GymOwnerService;
 import com.flipkart.service.UserService;
 
 import java.util.Scanner;
@@ -10,6 +11,7 @@ public class FlipFitApplication {
     public static void main(String[] args) {
         CustomerService customerService = new CustomerService();
         UserService userService = new UserService();
+        GymOwnerService gymOwnerService = new GymOwnerService();
 
         int loopFlag=0;
         while(loopFlag==0){
@@ -93,6 +95,7 @@ public class FlipFitApplication {
                     username = sc.next();
                     System.out.println("Enter gym owner passcode");
                     passcode = sc.next();
+                    gymOwnerService.register(username, passcode);
 
                     break;
 

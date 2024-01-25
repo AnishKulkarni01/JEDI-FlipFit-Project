@@ -5,12 +5,14 @@ import com.flipkart.bean.Customer;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CustomerDAO {
+public class CustomerDAO implements CustomerDaoInterface {
     static CustomerDAO custDao=null;
      UserDAO userDao=UserDAO.getInstance();
 
     List<Customer> customerList=new ArrayList<Customer>();
     int id= customerList.size();
+
+
     public static synchronized CustomerDAO getInstance()
     {
         if(custDao==null)
@@ -19,6 +21,8 @@ public class CustomerDAO {
         }
         return custDao;
     }
+
+    @Override
     public void registerCustomer(String username, String password){
         Customer customer = new Customer();
         customer.setCustomerID(id);
@@ -30,6 +34,7 @@ public class CustomerDAO {
             System.out.println(cust.getName());
     }
 
+    @Override
     public Customer getCustomer(int customerId){
         for(Customer c:customerList)
         {
@@ -42,6 +47,7 @@ public class CustomerDAO {
         return null;
     }
 
+
     public boolean updateCustomerDetails(int customerId,String password){
         for(Customer c:customerList)
         {
@@ -53,6 +59,7 @@ public class CustomerDAO {
         }
         return false;
     }
+
 
     public boolean deleteCustomer(int customerId){
         for(int i=0;i<customerList.size();i++)

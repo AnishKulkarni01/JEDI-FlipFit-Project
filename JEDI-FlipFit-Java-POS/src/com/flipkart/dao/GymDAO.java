@@ -9,7 +9,7 @@ import java.util.List;
 
 import static com.flipkart.dao.CustomerDAO.custDao;
 
-public class GymDAO {
+public class GymDAO implements GymDaoInterface {
 
     static GymDAO gymdao=null;
     List<Gym> gymList=new ArrayList<Gym>();
@@ -24,6 +24,7 @@ public class GymDAO {
         return gymdao;
     }
 
+    @Override
     public boolean onBoardGym(String gymName, String gstin, String city, int seats){
         Gym gym=new Gym();
         gym.setGymId(id++);
@@ -40,6 +41,8 @@ public class GymDAO {
         return true;
     }
 
+
+    @Override
     public boolean deleteGym(int gymId){
         for (int i = 0; i < gymList.size(); i++) {
             if(gymList.get(i).getGymId()==gymId){

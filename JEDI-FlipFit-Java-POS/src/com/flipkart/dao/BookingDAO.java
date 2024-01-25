@@ -1,5 +1,5 @@
 package com.flipkart.dao;
 
-public class BookingDAO {
+public class BookingDAO implements BookingDaoInterface {
 
 }
