@@ -1,4 +1,5 @@
 package com.flipkart.service;
 
-public class BookingService {
+public class BookingService implements BookingServiceInterface{
+
 }
