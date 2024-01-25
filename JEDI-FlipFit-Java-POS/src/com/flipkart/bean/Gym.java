@@ -47,4 +47,15 @@ public class Gym {
     private String city;
     private String gstin;
     private int seats;
+
+    @Override
+    public String toString() {
+        return "Gym{" +
+                "GymId=" + GymId +
+                ", name='" + name + '\'' +
+                ", city='" + city + '\'' +
+                ", gstin='" + gstin + '\'' +
+                ", seats=" + seats +
+                '}';
+    }
 }

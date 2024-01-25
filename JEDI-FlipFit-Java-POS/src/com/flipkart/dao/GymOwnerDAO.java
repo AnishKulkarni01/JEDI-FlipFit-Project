@@ -37,18 +37,18 @@ public class GymOwnerDAO {
         return true;
     }
 
-    public GymOwner getGymOwner(String gymOwnerId) {
+    public GymOwner getGymOwner(int gymOwnerId) {
         for (GymOwner owner : gymOwnerList) {
-            if (String.valueOf(owner.getGymOwnerID()).equals(gymOwnerId)) {
+            if (owner.getGymOwnerID() == gymOwnerId) {
                 return owner;
             }
         }
         return null; // Return null if GymOwner with given ID is not found
     }
 
-    public boolean updateGymOwnerDetails(String gymOwnerId, String newName, String newPassword, String newEmail, String newContact) {
+    public boolean updateGymOwnerDetails(int gymOwnerId, String newName, String newPassword, String newEmail, String newContact) {
         for (GymOwner owner : gymOwnerList) {
-            if (String.valueOf(owner.getGymOwnerID()).equals(gymOwnerId)) {
+            if (owner.getGymOwnerID() == gymOwnerId) {
                 owner.setName(newName);
                 owner.setPassword(newPassword);
                 return true;
@@ -57,11 +57,11 @@ public class GymOwnerDAO {
         return false; // Return false if GymOwner with given ID is not found
     }
 
-    public boolean deleteGymOwner(String gymOwnerId) {
+    public boolean deleteGymOwner(int gymOwnerId) {
         Iterator<GymOwner> iterator = gymOwnerList.iterator();
         while (iterator.hasNext()) {
             GymOwner owner = iterator.next();
-            if (String.valueOf(owner.getGymOwnerID()).equals(gymOwnerId)) {
+            if (owner.getGymOwnerID() == gymOwnerId) {
                 iterator.remove();
                 return true;
             }
