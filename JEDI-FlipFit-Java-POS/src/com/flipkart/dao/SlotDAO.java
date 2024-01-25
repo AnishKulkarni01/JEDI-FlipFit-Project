@@ -19,12 +19,6 @@ public class SlotDAO {
         if(slotDao==null)
         {
             slotDao=new SlotDAO();
-            Slot s=new Slot();
-            s.setDate("1 Jan");
-            s.setGymId("2");
-            s.setSlotId(1);
-            s.setAvailabilityStatus(true);
-            s.setStartTime("9");
         }
         return slotDao;
     }
@@ -48,6 +42,16 @@ public class SlotDAO {
             if(slt.getGymId().equals(gymId) && slt.isAvailabilityStatus())l.add(slt);
         }
         return l;
+    }
+
+    public Slot getSlotsBySlotId(String slotId) {
+
+        Slot s = new Slot();
+        for(Slot slt:slotList)
+        {
+            if(Integer.toString(slt.getSlotId()).equals(slotId)) s=slt;
+        }
+        return s;
     }
 
     public boolean updateSlot(String slotId) {

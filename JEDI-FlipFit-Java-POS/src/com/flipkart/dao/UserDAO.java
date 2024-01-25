@@ -29,6 +29,6 @@ public class UserDAO {
     }
 
     public List<String> getCurrentUser(){
-        return Arrays.asList(currentUsername, map.get(currentUsername).get(1));
+        return Arrays.asList(this.currentUsername, map.get(this.currentUsername).get(1));
     }
 }

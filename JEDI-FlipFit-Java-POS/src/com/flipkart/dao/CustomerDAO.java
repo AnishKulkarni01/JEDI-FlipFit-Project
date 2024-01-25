@@ -66,4 +66,12 @@ public class CustomerDAO {
         System.out.println("Customer DNE");
         return false;
     }
+
+    public int getIdFromName(String username){
+        for(Customer cust : customerList){
+            if(cust.getName().equals(username)) return cust.getCustomerID();
+        }
+
+        return -1;
+    }
 }

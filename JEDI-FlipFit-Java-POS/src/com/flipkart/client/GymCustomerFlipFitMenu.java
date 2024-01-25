@@ -1,13 +1,28 @@
 package com.flipkart.client;
+import com.flipkart.bean.Booking;
 import com.flipkart.bean.Slot;
+import com.flipkart.dao.BookingDAO;
+import com.flipkart.dao.CustomerDAO;
 import com.flipkart.dao.SlotDAO;
+import com.flipkart.dao.UserDAO;
 import com.flipkart.service.CustomerService;
 
+import java.awt.print.Book;
 import java.util.*;
 public class GymCustomerFlipFitMenu
 {
     CustomerService customerService=new CustomerService();
     public void showCustomerMenu(){
+        UserDAO userDao= UserDAO.getInstance();
+        CustomerDAO custDao = CustomerDAO.getInstance();
+        BookingDAO b=BookingDAO.getInstance();
+        String custId = Integer.toString(custDao.getIdFromName(userDao.getCurrentUser().get(0)));
+        SlotDAO s=SlotDAO.getInstance();
+
+        s.createSlot("1 Jan", "2", "2");
+        s.createSlot("2 Jan", "4", "2");
+        s.createSlot("3 Jan", "6", "1");
+        s.createSlot("4 Jan", "8", "1");
 
         int loopFlag = 0;
         while(loopFlag == 0) {
@@ -34,6 +49,12 @@ public class GymCustomerFlipFitMenu
 
                 case 3:
                     System.out.println("Function to View Booking");
+                    System.out.println("cust: " + custId);
+                    List<Booking> lb =  b.getBookingbyCustId(custId);
+                    for(Booking b1 : lb){
+                        Slot sl = s.getSlotsBySlotId(b1.getSlotId());
+                        System.out.println("Gym : " + sl.getGymId() + " Time : " + sl.getStartTime());
+                    }
                     break;
 
                 case 4:
@@ -41,32 +62,22 @@ public class GymCustomerFlipFitMenu
                     System.out.println("Select an area where you'd like to book a slot.");
                     System.out.println("1. Bellandur\n" +
                             "2. Marathahalli");
-                    //gymId
-
 
                     int gymOpt=in.nextInt();
-                    SlotDAO s=SlotDAO.getInstance();
-                    List<Slot> l=new ArrayList<>();
-                    switch (gymOpt) {
-                        //printavailableSlots
-                        case 1:
-                            System.out.println("Listing slots at Bellandur..");
-                            l=s.getSlotsByGymId("1");
-                            for(Slot slt:l)
-                            {
-                                System.out.println("Date : "+slt.getDate()+"\n Time : "+slt.getStartTime());
-                            }
-                            break;
+                    List<Slot> l;
 
-                        case 2:
-                            System.out.println("Listing slots at Marathahalli..");
-                            l=s.getSlotsByGymId("2");
-                            for(Slot slt:l)
-                            {
-                                System.out.println("Date : "+slt.getDate()+"\n Time : "+slt.getStartTime());
-                            }
-                            break;
+
+                    System.out.println("Choose a slot at from (GymName)" + gymOpt);
+                    l=s.getSlotsByGymId(Integer.toString(gymOpt));
+                    for(Slot slt:l)
+                    {
+                        System.out.println("Slot Id : " + slt.getSlotId() +" Date : "+slt.getDate()+"\n Time : "+slt.getStartTime());
                     }
+
+                    String slotId = in.next();
+
+                    b.addBooking(custId, slotId);
+                    System.out.println("Booking added.");
                     break;
 
                 case 5:
