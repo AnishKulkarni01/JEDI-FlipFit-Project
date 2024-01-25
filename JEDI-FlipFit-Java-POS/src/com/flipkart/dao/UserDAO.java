@@ -29,6 +29,14 @@ public class UserDAO {
     }
 
     public List<String> getCurrentUser(){
+        if(currentUsername == null) {
+            System.out.println("Please login to the system");
+            return null;
+        }
         return Arrays.asList(currentUsername, map.get(currentUsername).get(1));
+    }
+
+    public void updatePassword(String newPassword){
+        map.put(currentUsername, Arrays.asList(newPassword, map.get(currentUsername).get(1)));
     }
 }
