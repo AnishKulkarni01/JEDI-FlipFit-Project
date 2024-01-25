@@ -1,7 +1,10 @@
 package com.flipkart.service;
 
-public class SlotService {
+import com.flipkart.bean.Slot;
+
+public class SlotService implements SlotServiceInterface {
     //add new
+    @Override
     public void addSlot()
     {
 
