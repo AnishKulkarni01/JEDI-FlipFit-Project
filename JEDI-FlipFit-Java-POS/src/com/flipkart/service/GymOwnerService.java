@@ -2,7 +2,7 @@ package com.flipkart.service;
 
 import com.flipkart.dao.GymOwnerDAO;
 
-public class GymOwnerService {
+public class GymOwnerService implements GymOwnerServiceInterface {
 
     GymOwnerDAO gymOwnerDAO = GymOwnerDAO.getInstance();
     // Add gym request
@@ -18,8 +18,8 @@ public class GymOwnerService {
     }
 
     // Register
-    public void register(String username, String password) {
+    public void register(String username, String password,String email, String contact) {
         // Implementation to register a new gym owner
-        gymOwnerDAO.registerGymOwner(username, password);
+        gymOwnerDAO.registerGymOwner(username, password,email, contact);
     }
 }

@@ -95,7 +95,11 @@ public class FlipFitApplication {
                     username = sc.next();
                     System.out.println("Enter gym owner passcode");
                     passcode = sc.next();
-                    gymOwnerService.register(username, passcode);
+                    System.out.println("Enter gym owner email");
+                    String email = sc.next();
+                    System.out.println("Enter gym owner contact");
+                    String contact = sc.next();
+                    gymOwnerService.register(username, passcode,email, contact);
 
                     break;
 

@@ -24,11 +24,13 @@ public class GymOwnerDAO implements GymOwnerDAOInterface {
         return gymOwnerDAO;
     }
 
-    public boolean registerGymOwner(String name, String password) {
+    public boolean registerGymOwner(String name, String password,String email, String contact) {
         GymOwner gymOwner = new GymOwner();
         gymOwner.setGymOwnerID(id++);
         gymOwner.setName(name);
         gymOwner.setPassword(password);
+        gymOwner.setEmail(email);
+        gymOwner.setContact(contact);
         gymOwnerList.add(gymOwner);
         for (GymOwner owner : gymOwnerList) {
             System.out.println(owner.getName());
@@ -67,6 +69,7 @@ public class GymOwnerDAO implements GymOwnerDAOInterface {
 
 
 
+    @Override
     public boolean deleteGymOwner(String gymOwnerId) {
         Iterator<GymOwner> iterator = gymOwnerList.iterator();
         while (iterator.hasNext()) {

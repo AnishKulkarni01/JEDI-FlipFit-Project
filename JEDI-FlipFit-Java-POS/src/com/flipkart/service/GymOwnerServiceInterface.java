@@ -23,5 +23,5 @@ public interface GymOwnerServiceInterface {
      * @param password Password of gym owner
      * @param email Email of gym owner
      */
-    void register(String username, String password, String email);
+    void register(String username, String password, String email,String contact);
 }
