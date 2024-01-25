@@ -1,7 +1,10 @@
 package com.flipkart.service;
 
-public class GymOwnerService implements GymOwnerServiceInterface{
+import com.flipkart.dao.GymOwnerDAO;
 
+public class GymOwnerService {
+
+    GymOwnerDAO gymOwnerDAO = GymOwnerDAO.getInstance();
     // Add gym request
     @Override
     public void addGymRequest(String gymName, String location, int capacity) {
@@ -15,8 +18,8 @@ public class GymOwnerService implements GymOwnerServiceInterface{
     }
 
     // Register
-    @Override
-    public void register(String username, String password, String email) {
+    public void register(String username, String password) {
         // Implementation to register a new gym owner
+        gymOwnerDAO.registerGymOwner(username, password);
     }
 }
