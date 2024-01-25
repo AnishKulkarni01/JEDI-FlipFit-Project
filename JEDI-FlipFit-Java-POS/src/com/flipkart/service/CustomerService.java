@@ -27,7 +27,9 @@ public class CustomerService {
     }
 
     //edit profile
-    public void editProfile() {
+    public void editProfile(int custId,String password) {
+        customerDAO.updateCustomerDetails(custId,password);
+        userDAO.updatePassword(password);
         return;
     }
 

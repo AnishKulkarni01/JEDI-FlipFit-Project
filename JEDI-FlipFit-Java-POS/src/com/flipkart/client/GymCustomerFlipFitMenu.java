@@ -21,8 +21,11 @@ public class GymCustomerFlipFitMenu
         s.createSlot("2 Jan", "4", "2");
         s.createSlot("3 Jan", "6", "1");
         s.createSlot("4 Jan", "8", "1");
+        s.createSlot("5 Jan", "9", "3");
+        s.createSlot("5 Jan", "10", "3");
         gymDao.onBoardGym("Gym1", "123", "Marathalli", 10) ;
         gymDao.onBoardGym("Gym2", "456", "Bellandur", 10) ;
+        gymDao.onBoardGym("Gym3", "789", "Whitefield", 10) ;
 
 
             int loopFlag = 0;
@@ -40,6 +43,9 @@ public class GymCustomerFlipFitMenu
             switch(choice){
                 case 1:
                     System.out.println("Function to edit profile");
+                    System.out.println("Enter new password");
+                    String newPassword=in.next();
+                    customerService.editProfile(Integer.parseInt(custId),newPassword);
 
                     break;
 
@@ -69,7 +75,6 @@ public class GymCustomerFlipFitMenu
                         System.out.println(idx+". "+area);
                         idx++;
                     }
-
 
                     int gymOpt=in.nextInt();
                     List<Slot> l;
