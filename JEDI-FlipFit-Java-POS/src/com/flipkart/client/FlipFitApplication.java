@@ -29,7 +29,11 @@ public class FlipFitApplication {
 
             switch(option) {
                 case 1:
-
+                    System.out.println("Enter role : \n" +
+                            "1. Gym Customer\n" +
+                            "2. Gym Owner\n" +
+                            "3. GymFlipFit Admin");
+                    role = sc.nextInt();
                     System.out.println("Enter Username : ");
                     username = sc.next();
                     System.out.println("Enter Passcode : ");
@@ -45,11 +49,7 @@ public class FlipFitApplication {
 
                     userService.login(username);
 
-                    System.out.println("Enter role : \n" +
-                            "1. Gym Customer\n" +
-                            "2. Gym Owner\n" +
-                            "3. GymFlipFit Admin");
-                    role = sc.nextInt();
+
 
                     switch(role) {
                         case 1:

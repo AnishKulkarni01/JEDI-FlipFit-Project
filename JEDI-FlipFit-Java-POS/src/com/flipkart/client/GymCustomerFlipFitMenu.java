@@ -1,4 +1,6 @@
 package com.flipkart.client;
+import com.flipkart.bean.Slot;
+import com.flipkart.dao.SlotDAO;
 import com.flipkart.service.CustomerService;
 
 import java.util.*;
@@ -22,6 +24,7 @@ public class GymCustomerFlipFitMenu
             switch(choice){
                 case 1:
                     System.out.println("Function to edit profile");
+
                     break;
 
                 case 2:
@@ -38,16 +41,30 @@ public class GymCustomerFlipFitMenu
                     System.out.println("Select an area where you'd like to book a slot.");
                     System.out.println("1. Bellandur\n" +
                             "2. Marathahalli");
+                    //gymId
+
 
                     int gymOpt=in.nextInt();
-
+                    SlotDAO s=SlotDAO.getInstance();
+                    List<Slot> l=new ArrayList<>();
                     switch (gymOpt) {
+                        //printavailableSlots
                         case 1:
-                            System.out.println("Listing Gyms at Bellandur..");
+                            System.out.println("Listing slots at Bellandur..");
+                            l=s.getSlotsByGymId("1");
+                            for(Slot slt:l)
+                            {
+                                System.out.println("Date : "+slt.getDate()+"\n Time : "+slt.getStartTime());
+                            }
                             break;
 
                         case 2:
-                            System.out.println("Listing Gyms at Marathahalli..");
+                            System.out.println("Listing slots at Marathahalli..");
+                            l=s.getSlotsByGymId("2");
+                            for(Slot slt:l)
+                            {
+                                System.out.println("Date : "+slt.getDate()+"\n Time : "+slt.getStartTime());
+                            }
                             break;
                     }
                     break;

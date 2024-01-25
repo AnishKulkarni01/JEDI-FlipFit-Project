@@ -10,7 +10,7 @@ public class CustomerDAO {
      UserDAO userDao=UserDAO.getInstance();
 
     List<Customer> customerList=new ArrayList<Customer>();
-    int id= customerList.size();
+    private int id= 1;
     public static synchronized CustomerDAO getInstance()
     {
         if(custDao==null)
@@ -21,7 +21,7 @@ public class CustomerDAO {
     }
     public void registerCustomer(String username, String password){
         Customer customer = new Customer();
-        customer.setCustomerID(id);
+        customer.setCustomerID(id++);
         customer.setName(username);
         customer.setPassword(password);
         customerList.add(customer); //first check if in list

@@ -1,24 +1,36 @@
 package com.flipkart.bean;
 
 public class Slot {
-    private String startDateTime;
-    private String endDateTime;
 
-    public String getStartDateTime() {
-        return startDateTime;
+
+    public String getDate() {
+        return date;
     }
 
-    public void setStartDateTime(String startDateTime) {
-        this.startDateTime = startDateTime;
+    public void setDate(String date) {
+        this.date = date;
     }
 
-    public String getEndDateTime() {
-        return endDateTime;
+    public String getStartTime() {
+        return startTime;
     }
 
-    public void setEndDateTime(String endDateTime) {
-        this.endDateTime = endDateTime;
+    public void setStartTime(String startTime) {
+        this.startTime = startTime;
     }
+
+    private String date;
+    private String startTime;
+
+    public String getGymId() {
+        return gymId;
+    }
+
+    public void setGymId(String gymId) {
+        this.gymId = gymId;
+    }
+
+    private String gymId;
 
     public boolean isAvailabilityStatus() {
         return availabilityStatus;
