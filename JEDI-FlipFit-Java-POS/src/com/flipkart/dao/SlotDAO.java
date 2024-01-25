@@ -3,7 +3,7 @@ package com.flipkart.dao;
 
 import com.flipkart.bean.Slot;
 
-public class SlotDAO {
+public class SlotDAO implements SlotDAOInterface {
     public boolean createSlot() {
         //Registers a new slot in the database
         return false;

@@ -5,7 +5,7 @@ import com.flipkart.bean.User;
 
 import java.util.*;
 
-public class UserDAO {
+public class UserDAO implements UserDAOInterface{
     static UserDAO userDao = null;
 
     public static synchronized UserDAO getInstance() {

@@ -1,6 +1,6 @@
 package com.flipkart.dao;
 
-public class PaymentDAO {
+public class PaymentDAO implements PaymentDAOInterface {
     public boolean makePayment(int amount, String customerId){
         //Registers a payment in the system
 

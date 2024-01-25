@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class GymOwnerDAO {
+public class GymOwnerDAO implements GymOwnerDAOInterface {
     private static GymOwnerDAO gymOwnerDAO = null;
     private final List<GymOwner> gymOwnerList = new ArrayList<>();
     private int id = 1; // Starting ID for GymOwners
@@ -21,7 +21,7 @@ public class GymOwnerDAO {
         }
         return gymOwnerDAO;
     }
-
+    @Override
     public boolean registerGymOwner(String name, String password, String email, String contact) {
         GymOwner gymOwner = new GymOwner();
         gymOwner.setGymOwnerID(id++);
@@ -36,6 +36,7 @@ public class GymOwnerDAO {
         return true;
     }
 
+    @Override
     public GymOwner getGymOwner(String gymOwnerId) {
         for (GymOwner owner : gymOwnerList) {
             if (String.valueOf(owner.getGymOwnerID()).equals(gymOwnerId)) {
@@ -44,7 +45,7 @@ public class GymOwnerDAO {
         }
         return null; // Return null if GymOwner with given ID is not found
     }
-
+    @Override
     public boolean updateGymOwnerDetails(String gymOwnerId, String newName, String newPassword, String newEmail, String newContact) {
         for (GymOwner owner : gymOwnerList) {
             if (String.valueOf(owner.getGymOwnerID()).equals(gymOwnerId)) {
@@ -58,6 +59,7 @@ public class GymOwnerDAO {
         return false; // Return false if GymOwner with given ID is not found
     }
 
+    @Override
     public boolean deleteGymOwner(String gymOwnerId) {
         Iterator<GymOwner> iterator = gymOwnerList.iterator();
         while (iterator.hasNext()) {
