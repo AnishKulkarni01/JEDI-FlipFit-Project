@@ -48,4 +48,16 @@ public class GymDAO {
         }
         return true;
     }
+
+    public List<Gym> getGymByLocation(String location) {
+
+        List<Gym> gyms = new ArrayList<>();
+
+        for (Gym gym : gymList)
+            if (gym.getCity().equals(location))
+                gyms.add(gym);
+
+        return gyms;
+
+    }
 }
