@@ -1,6 +1,6 @@
 package com.flipkart.service;
 
-public class SlotService {
+public class SlotService implements SlotServiceInterface {
     //add new
     public void addSlot()
     {

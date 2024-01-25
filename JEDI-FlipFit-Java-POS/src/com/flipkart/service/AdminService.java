@@ -1,6 +1,6 @@
 package com.flipkart.service;
 
-public class AdminService {
+public class AdminService implements AdminServiceInterface {
     // View pending requests
     public void viewPendingRequests() {
         // Implementation to view pending requests

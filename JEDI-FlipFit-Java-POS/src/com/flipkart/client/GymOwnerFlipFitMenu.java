@@ -26,6 +26,7 @@ public class GymOwnerFlipFitMenu {
                     break;
                 case 2:
                     System.out.println("Gym Details updated");
+
                     break;
                 case 3:
                     System.out.println("Request for Slot update sent");

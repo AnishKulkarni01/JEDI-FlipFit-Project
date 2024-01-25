@@ -6,7 +6,7 @@ import com.flipkart.dao.UserDAO;
 import java.util.List;
 import java.util.Scanner;
 
-public class UserService {
+public class UserService implements UserServiceInterface {
     UserDAO userDAO= UserDAO.getInstance();
 
     public boolean authenticate(String username, String password,String role) {

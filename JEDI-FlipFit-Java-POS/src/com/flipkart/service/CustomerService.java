@@ -8,7 +8,7 @@ import com.flipkart.dao.UserDAO;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CustomerService {
+public class CustomerService implements CustomerServiceInterface{
     CustomerDAO customerDAO =CustomerDAO.getInstance();
     UserDAO userDAO = UserDAO.getInstance();
 

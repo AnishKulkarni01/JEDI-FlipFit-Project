@@ -38,6 +38,10 @@ public class GymDAO {
 
         return true;
     }
+    public void updateGym(String gymname,String gstin,String city,int seats)
+    {
+
+    }
 
     public boolean deleteGym(int gymId) {
         for (int i = 0; i < gymList.size(); i++) {
