@@ -98,7 +98,8 @@ public class FlipFitApplication {
                     break;
 
                 case 4:
-                    System.out.println(GREEN_COLOR + "Updating Password..." + RESET_COLOR);
+//                    System.out.println(GREEN_COLOR + "Updating Password..." + RESET_COLOR);
+                    userService.updatePassword();
                     break;
 
                 case 5:
