@@ -25,7 +25,7 @@ public class CustomerDAO {
         customer.setName(username);
         customer.setPassword(password);
         customerList.add(customer); //first check if in list
-        userDao.addUser(username,password,"customer");
+        userDao.addUser(username,password,"GYM_CUSTOMER");
         for(Customer cust : customerList)
             System.out.println(cust.getName());
     }

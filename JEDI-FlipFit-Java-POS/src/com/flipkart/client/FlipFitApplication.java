@@ -34,12 +34,16 @@ public class FlipFitApplication {
                             "2. Gym Owner\n" +
                             "3. GymFlipFit Admin");
                     role = sc.nextInt();
+                    String role_str;
+                    if(role==1)role_str="GYM_CUSTOMER";
+                    else if(role==2)role_str="GYM_OWNER";
+                    else role_str="ADMIN";
                     System.out.println("Enter Username : ");
                     username = sc.next();
                     System.out.println("Enter Passcode : ");
                     passcode = sc.next();
 
-                    if(!userService.authenticate(username, passcode)) {
+                    if(!userService.authenticate(username, passcode,role_str)) {
                         System.out.println("Wrong credentials");
                         break;
                     }
@@ -101,7 +105,7 @@ public class FlipFitApplication {
 
                 case 4:
                     System.out.println("Updating Password");
-
+                    userService.updatePassword();
                     break;
 
                 case 5:

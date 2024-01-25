@@ -16,8 +16,8 @@ public class UserDAO {
     Map<String, List<String>> map = new HashMap<>();
     private String currentUsername;
 
-    public boolean check(String username,String password){
-        return map.containsKey(username) && map.get(username).get(0).equals(password);
+    public boolean check(String username,String password,String role){
+        return map.containsKey(username) && map.get(username).get(0).equals(password) && map.get(username).get(1).equals(role);
     }
 
     public void addUser(String username,String password,String role) {
@@ -29,6 +29,14 @@ public class UserDAO {
     }
 
     public List<String> getCurrentUser(){
-        return Arrays.asList(this.currentUsername, map.get(this.currentUsername).get(1));
+        if(currentUsername == null) {
+            System.out.println("Please login to the system");
+            return null;
+        }
+        return Arrays.asList(currentUsername, map.get(currentUsername).get(1));
+    }
+
+    public void updatePassword(String newPassword){
+        map.put(currentUsername, Arrays.asList(newPassword, map.get(currentUsername).get(1)));
     }
 }
