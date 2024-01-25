@@ -22,17 +22,18 @@ public class GymOwnerDAO {
         return gymOwnerDAO;
     }
 
-    public boolean registerGymOwner(String name, String password, String email, String contact) {
+    public boolean registerGymOwner(String name, String password) {
         GymOwner gymOwner = new GymOwner();
         gymOwner.setGymOwnerID(id++);
         gymOwner.setName(name);
         gymOwner.setPassword(password);
-        gymOwner.setEmail(email);
-        gymOwner.setContact(contact);
         gymOwnerList.add(gymOwner);
         for (GymOwner owner : gymOwnerList) {
             System.out.println(owner.getName());
         }
+
+        UserDAO userDAO = UserDAO.getInstance();
+        userDAO.addUser(name, password, "GYM_OWNER");
         return true;
     }
 
@@ -50,8 +51,6 @@ public class GymOwnerDAO {
             if (String.valueOf(owner.getGymOwnerID()).equals(gymOwnerId)) {
                 owner.setName(newName);
                 owner.setPassword(newPassword);
-                owner.setEmail(newEmail);
-                owner.setContact(newContact);
                 return true;
             }
         }
