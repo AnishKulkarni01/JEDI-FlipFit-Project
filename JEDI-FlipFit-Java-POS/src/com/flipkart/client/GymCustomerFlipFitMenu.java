@@ -1,10 +1,7 @@
 package com.flipkart.client;
 import com.flipkart.bean.Booking;
 import com.flipkart.bean.Slot;
-import com.flipkart.dao.BookingDAO;
-import com.flipkart.dao.CustomerDAO;
-import com.flipkart.dao.SlotDAO;
-import com.flipkart.dao.UserDAO;
+import com.flipkart.dao.*;
 import com.flipkart.service.CustomerService;
 
 import java.awt.print.Book;
@@ -18,13 +15,17 @@ public class GymCustomerFlipFitMenu
         BookingDAO b=BookingDAO.getInstance();
         String custId = Integer.toString(custDao.getIdFromName(userDao.getCurrentUser().get(0)));
         SlotDAO s=SlotDAO.getInstance();
+        GymDAO gymDao= GymDAO.getInstance();
 
         s.createSlot("1 Jan", "2", "2");
         s.createSlot("2 Jan", "4", "2");
         s.createSlot("3 Jan", "6", "1");
         s.createSlot("4 Jan", "8", "1");
+        gymDao.onBoardGym("Gym1", "123", "Marathalli", 10) ;
+        gymDao.onBoardGym("Gym2", "456", "Bellandur", 10) ;
 
-        int loopFlag = 0;
+
+            int loopFlag = 0;
         while(loopFlag == 0) {
             System.out.println("1. Edit Profile\n" +
                 "2. View Profile\n" +
@@ -53,21 +54,28 @@ public class GymCustomerFlipFitMenu
                     List<Booking> lb =  b.getBookingbyCustId(custId);
                     for(Booking b1 : lb){
                         Slot sl = s.getSlotsBySlotId(b1.getSlotId());
-                        System.out.println("Gym : " + sl.getGymId() + " Time : " + sl.getStartTime());
+                        System.out.println("Gym : " + sl.getGymId() + " Time : " + sl.getStartTime()+" Date : "+sl.getDate());
                     }
                     break;
 
                 case 4:
                     System.out.println("Book your Slot");
                     System.out.println("Select an area where you'd like to book a slot.");
-                    System.out.println("1. Bellandur\n" +
-                            "2. Marathahalli");
+                    List<String> areas=new ArrayList<>();
+                    areas=gymDao.getAllAreas();
+                    int idx=1;
+                    for(String area:areas)
+                    {
+                        System.out.println(idx+". "+area);
+                        idx++;
+                    }
+
 
                     int gymOpt=in.nextInt();
                     List<Slot> l;
+                    String selectedArea=areas.get(gymOpt-1);
 
-
-                    System.out.println("Choose a slot at from (GymName)" + gymOpt);
+                    System.out.println("Choose a slot at " + selectedArea);
                     l=s.getSlotsByGymId(Integer.toString(gymOpt));
                     for(Slot slt:l)
                     {
