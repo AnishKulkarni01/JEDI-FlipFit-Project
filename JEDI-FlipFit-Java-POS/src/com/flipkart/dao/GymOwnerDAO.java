@@ -23,12 +23,11 @@ public class GymOwnerDAO {
         return gymOwnerDAO;
     }
 
-    public boolean registerGymOwner(String name, String password,String email,String contact, String address) {
+    public boolean registerGymOwner(String name, String password,String email,String contact) {
         GymOwner gymOwner = new GymOwner();
         gymOwner.setGymOwnerID(id++);
         gymOwner.setName(name);
         gymOwner.setPassword(password);
-        gymOwner.setAddress(address);
         gymOwner.setContact(contact);
         gymOwner.setEmail(email);
         gymOwnerList.add(gymOwner);

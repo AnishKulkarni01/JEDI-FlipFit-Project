@@ -45,6 +45,15 @@ public class BookingDAO {
     }
     public boolean deleteBookingId(String bookingId)
     {
+        for(int i=0;i<bookingList.size();i++)
+        {
+            if(bookingList.get(i).getBookingId()==bookingId)
+            {
+                bookingList.remove(i);
+                return true;
+            }
+        }
+        System.out.println("Booking DNE");
         return false;
     }
 }

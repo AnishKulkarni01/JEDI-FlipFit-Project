@@ -129,6 +129,7 @@ public class GymOwnerFlipFitMenu {
                     List<Gym> pr=new ArrayList<>();
                     pr=gymDao.viewPendingRequests(Integer.parseInt(ownId));
                     for(Gym g:pr) System.out.println("GymId : "+g.getGymId()+",GymName : "+g.getName()+",GSTIN : "+g.getGstin()+",City : "+g.getCity()+",Seats : "+g.getSeats());
+                    break;
                 case 9:
                     System.out.println("Logging out");
                     loopFlag=1;

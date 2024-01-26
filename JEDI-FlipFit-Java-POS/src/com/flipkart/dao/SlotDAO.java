@@ -44,6 +44,14 @@ public class SlotDAO {
         }
         return l;
     }
+    public Slot getSlotbySlotId(int slotId)
+    {
+        for(Slot slot:slotList)
+        {
+            if(slot.getSlotId()==slotId)return slot;
+        }
+        return new Slot();
+    }
 
     public Slot getSlotsBySlotId(String slotId) {
 
@@ -73,6 +81,15 @@ public class SlotDAO {
     }
 
     public boolean deleteSlot(String slotId) {
+        for(int i=0;i<slotList.size();i++)
+        {
+            if(slotList.get(i).getSlotId()==Integer.parseInt(slotId))
+            {
+                slotList.remove(i);
+                return true;
+            }
+        }
+        System.out.println("Slot DNE");
         return false;
     }
 

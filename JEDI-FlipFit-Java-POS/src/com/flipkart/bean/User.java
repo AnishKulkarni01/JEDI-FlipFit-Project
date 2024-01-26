@@ -18,5 +18,15 @@ public class User {
     }
 
     private String username;
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    private String role;
     private String password;
 }

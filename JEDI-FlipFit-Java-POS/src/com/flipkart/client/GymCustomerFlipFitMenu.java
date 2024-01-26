@@ -23,11 +23,12 @@ public class GymCustomerFlipFitMenu
             int loopFlag = 0;
         while(loopFlag == 0) {
             System.out.println("1. Edit Profile\n" +
-                "2. View Profile\n" +
+                    "2. View Profile\n" +
                 "3. View Bookings\n" +
-                "4. Book Slot\n" +
-                "5. Log out\n" +
-                "6. Back");
+                "4. Book Slot\n"+
+                "5. Cancel Booking\n"+
+                    "6. Log out\n" +
+                "7. Back");
 
             Scanner in = new Scanner(System.in);
             int choice = in.nextInt();
@@ -58,7 +59,7 @@ public class GymCustomerFlipFitMenu
                     List<Booking> lb =  b.getBookingbyCustId(custId);
                     for(Booking b1 : lb){
                         Slot sl = s.getSlotsBySlotId(b1.getSlotId());
-                        System.out.println("Gym : " + sl.getGymId() + " Time : " + sl.getStartTime()+" Date : "+sl.getDate());
+                        System.out.println("BookingId : "+b1.getBookingId()+" Gym : " + sl.getGymId() + " Time : " + sl.getStartTime()+" Date : "+sl.getDate());
                     }
                     break;
 
@@ -90,13 +91,23 @@ public class GymCustomerFlipFitMenu
                     b.addBooking(custId, slotId);
                     System.out.println("Booking added.");
                     break;
-
                 case 5:
+                    System.out.println("Cancel Booking");
+                    List<Booking>canBl=b.getBookingbyCustId(custId);
+                    for(Booking book:canBl)
+                    {
+                        Slot sb=s.getSlotbySlotId(Integer.parseInt(book.getSlotId()));
+                        System.out.println("BookingId : "+book.getBookingId()+" Date : "+sb.getDate()+" Time : "+sb.getStartTime());
+                    }
+                    System.out.println("Enter BookingId");
+                    String delBookId=in.next();
+                    b.deleteBookingId(delBookId);
+                case 6:
                     System.out.println("Function to Log out");
                     loopFlag = 1;
                     break;
 
-                case 6:
+                case 7:
                     loopFlag = 1;
                     break;
 

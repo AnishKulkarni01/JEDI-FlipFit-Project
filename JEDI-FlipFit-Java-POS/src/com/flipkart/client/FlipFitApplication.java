@@ -122,9 +122,7 @@ public class FlipFitApplication {
                     String emailO=sc.next();
                     System.out.println("Enter contact");
                     String contactO=sc.next();
-                    System.out.println("Enter address");
-                    String addressO=sc.next();
-                    gymOwnerService.register(username, passcode,emailO,contactO,addressO);
+                    gymOwnerService.register(username, passcode,emailO,contactO);
 
                     break;
 
