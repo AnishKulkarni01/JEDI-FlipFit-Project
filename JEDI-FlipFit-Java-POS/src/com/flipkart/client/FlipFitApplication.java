@@ -1,6 +1,6 @@
 package com.flipkart.client;
 
-import com.flipkart.dao.UserDAO;
+import com.flipkart.dao.*;
 import com.flipkart.service.CustomerService;
 import com.flipkart.service.GymOwnerService;
 import com.flipkart.service.UserService;
@@ -9,9 +9,24 @@ import java.util.Scanner;
 
 public class FlipFitApplication {
     public static void main(String[] args) {
+        SlotDAO s=SlotDAO.getInstance();
+        GymDAO gymDao= GymDAO.getInstance();
         CustomerService customerService = new CustomerService();
         UserService userService = new UserService();
         GymOwnerService gymOwnerService = new GymOwnerService();
+        AdminDAO adminDAO=AdminDAO.getInstance();
+
+        adminDAO.registerAdmin("abc","123");
+
+//        s.createSlot("1 Jan", "2", "2");
+//        s.createSlot("2 Jan", "4", "2");
+//        s.createSlot("3 Jan", "6", "1");
+//        s.createSlot("4 Jan", "8", "1");
+//        s.createSlot("5 Jan", "9", "3");
+//        s.createSlot("5 Jan", "10", "3");
+//        gymDao.sendOnboardReq("Gym1", "123", "Marathalli", 10,1) ;
+//        gymDao.sendOnboardReq("Gym2", "456", "Bellandur", 10,1) ;
+//        gymDao.sendOnboardReq("Gym3", "789", "Whitefield", 10,1) ;
 
         int loopFlag=0;
         while(loopFlag==0){
@@ -87,8 +102,12 @@ public class FlipFitApplication {
                     username = sc.next();
                     System.out.println("Enter customer passcode");
                     passcode = sc.next();
+                    System.out.println("Enter email");
+                    String email=sc.next();
+                    System.out.println("Enter contact");
+                    String contact=sc.next();
 
-                    customerService.register(username, passcode);
+                    customerService.register(username, passcode,email,contact);
 
                     break;
 
@@ -99,7 +118,13 @@ public class FlipFitApplication {
                     username = sc.next();
                     System.out.println("Enter gym owner passcode");
                     passcode = sc.next();
-                    gymOwnerService.register(username, passcode);
+                    System.out.println("Enter email");
+                    String emailO=sc.next();
+                    System.out.println("Enter contact");
+                    String contactO=sc.next();
+                    System.out.println("Enter address");
+                    String addressO=sc.next();
+                    gymOwnerService.register(username, passcode,emailO,contactO,addressO);
 
                     break;
 

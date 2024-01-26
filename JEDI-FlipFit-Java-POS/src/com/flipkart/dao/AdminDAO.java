@@ -1,16 +1,31 @@
 package com.flipkart.dao;
 
-public class AdminDAO {
-    public boolean makeAdmin(String adminID)
-    {
-        //Provides admin privileges to a user
-        return false;
-    }
+import com.flipkart.bean.Admin;
 
-    public boolean removeAdmin(String adminID)
+import java.util.ArrayList;
+import java.util.List;
+
+public class AdminDAO {
+    static AdminDAO adminDao=null;
+    UserDAO userDao=UserDAO.getInstance();
+
+    List<Admin> adminList=new ArrayList<Admin>();
+    private int id= 1;
+    public static synchronized AdminDAO getInstance()
     {
-        //Revokes admin privileges from a user
-        return false;
+        if(adminDao==null)
+        {
+            adminDao=new AdminDAO();
+        }
+        return adminDao;
     }
-    
+    public void registerAdmin(String username, String password){
+        Admin ad = new Admin();
+        ad.setAdminID(id++);
+        ad.setUsername(username);
+        ad.setPassword(password);
+        adminList.add(ad); //first check if in list
+        userDao.addUser(username,password,"ADMIN");
+
+    }
 }

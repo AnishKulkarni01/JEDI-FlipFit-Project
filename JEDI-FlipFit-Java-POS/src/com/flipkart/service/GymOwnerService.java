@@ -16,8 +16,8 @@ public class GymOwnerService {
     }
 
     // Register
-    public void register(String username, String password) {
+    public void register(String username, String password, String email, String contact,String address) {
         // Implementation to register a new gym owner
-        gymOwnerDAO.registerGymOwner(username, password);
+        gymOwnerDAO.registerGymOwner(username, password,email,contact,address);
     }
 }

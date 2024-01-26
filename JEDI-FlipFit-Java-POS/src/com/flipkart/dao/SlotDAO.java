@@ -2,6 +2,7 @@
 package com.flipkart.dao;
 
 import com.flipkart.bean.Customer;
+import com.flipkart.bean.Gym;
 import com.flipkart.bean.Slot;
 
 import java.util.ArrayList;
@@ -54,8 +55,21 @@ public class SlotDAO {
         return s;
     }
 
-    public boolean updateSlot(String slotId) {
-        return false;
+    public void updateSlot(String updatedVal,String attr,int slotId)
+    {
+        for(Slot s:slotList)
+        {
+            if(s.getSlotId()==slotId)
+            {
+                if(attr.equals("date"))
+                {
+                    s.setDate(updatedVal);
+                };
+                if(attr.equals("startTime")){
+                    s.setStartTime(updatedVal);
+                };
+            }
+        }
     }
 
     public boolean deleteSlot(String slotId) {

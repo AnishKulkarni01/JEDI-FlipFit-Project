@@ -1,14 +1,33 @@
 package com.flipkart.bean;
 
 public class Admin {
-    public String getAdminID() {
+    public int getAdminID() {
         return AdminID;
     }
 
-    public void setAdminID(String adminID) {
+    public void setAdminID(int adminID) {
         AdminID = adminID;
     }
 
-    String AdminID;
+    int AdminID;
+    String username;
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    String password;
 
 }

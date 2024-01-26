@@ -12,7 +12,9 @@ public class GymDAO {
 
     static GymDAO gymdao = null;
     List<Gym> gymList = new ArrayList<Gym>();
-    private int id = 0;
+    List<Gym>reqList=new ArrayList<>();
+
+    private int id = 1;
 
 
     public static synchronized GymDAO getInstance() {
@@ -23,24 +25,52 @@ public class GymDAO {
     }
 
 
-    public boolean onBoardGym(String gymName, String gstin, String city, int seats) {
+    public boolean sendOnboardReq(String gymName, String gstin, String city, int seats,int gymOwnerId) {
         Gym gym = new Gym();
         gym.setGymId(id++);
         gym.setName(gymName);
         gym.setGstin(gstin);
         gym.setCity(city);
         gym.setSeats(seats);
-        gymList.add(gym);
-
-        //for (Gym gym1 : gymList) {
-        //    System.out.println(gym1.getName());
-        //}
+        gym.setGymOwnerId(gymOwnerId);
+        reqList.add(gym);
 
         return true;
     }
-    public void updateGym(String gymname,String gstin,String city,int seats)
+    public void onBoardGym(int gymId)
     {
-
+        for(int i=0;i<reqList.size();i++)
+        {
+            if(reqList.get(i).getGymId()==gymId)
+            {
+                gymList.add(reqList.get(i));
+                reqList.remove(i);
+                return;
+            }
+        }
+    }
+    public void deleteGymRequest(int gymId)
+    {
+        for(int i=0;i<reqList.size();i++)
+        {
+            if(reqList.get(i).getGymId()==gymId)
+            {
+                reqList.remove(i);
+                return;
+            }
+        }
+    }
+    public List<Gym> viewPendingRequests(int gymOwnerId)
+    {
+      List<Gym> pr=new ArrayList<>();
+      for(Gym g:reqList)
+      {
+          if(g.getGymOwnerId()==gymOwnerId)
+          {
+              pr.add(g);
+          }
+      }
+      return pr;
     }
 
     public boolean deleteGym(int gymId) {
@@ -79,6 +109,44 @@ public class GymDAO {
 
         return gyms;
 
+    }
+    public List<Gym> getGymsByOwner(int gymOwnerId) {
+
+        List<Gym> gyms = new ArrayList<>();
+
+        for (Gym gym : gymList)
+            if (gym.getGymOwnerId()==gymOwnerId)
+                gyms.add(gym);
+
+        return gyms;
+
+    }
+    public List<Gym> viewRequests() {
+
+        return reqList;
+
+    }
+    public void updateGym(String updatedVal,String attr,int gymId)
+    {
+        for(Gym g:gymList)
+        {
+            if(g.getGymId()==gymId)
+            {
+                if(attr.equals("name"))
+                {
+                    g.setName(updatedVal);
+                };
+                if(attr.equals("gstin")){
+                    g.setGstin(updatedVal);
+                };
+                if(attr.equals("city")){
+                    g.setCity(updatedVal);
+                };
+                if(attr.equals("seats")){
+                    g.setSeats(Integer.parseInt(updatedVal));
+                }
+            }
+        }
     }
 
 

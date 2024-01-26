@@ -1,6 +1,7 @@
 package com.flipkart.dao;
 
 import com.flipkart.bean.Customer;
+import com.flipkart.bean.Slot;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,10 +20,12 @@ public class CustomerDAO {
         }
         return custDao;
     }
-    public void registerCustomer(String username, String password){
+    public void registerCustomer(String username, String password,String email,String contact){
         Customer customer = new Customer();
         customer.setCustomerID(id++);
         customer.setName(username);
+        customer.setContact(contact);
+        customer.setEmail(email);
         customer.setPassword(password);
         customerList.add(customer); //first check if in list
         userDao.addUser(username,password,"GYM_CUSTOMER");
@@ -42,16 +45,22 @@ public class CustomerDAO {
         return null;
     }
 
-    public boolean updateCustomerDetails(int customerId,String password){
+
+    public void updateCustomerDetails(String updatedVal,String attr,int customerId)
+    {
         for(Customer c:customerList)
         {
             if(c.getCustomerID()==customerId)
             {
-                c.setPassword(password);
-                return true;
+                if(attr.equals("email"))
+                {
+                    c.setEmail(updatedVal);
+                };
+                if(attr.equals("contact")){
+                    c.setContact(updatedVal);
+                };
             }
         }
-        return false;
     }
 
     public boolean deleteCustomer(int customerId){

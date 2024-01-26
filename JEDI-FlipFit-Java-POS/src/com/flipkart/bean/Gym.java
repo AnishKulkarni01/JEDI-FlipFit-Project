@@ -3,6 +3,16 @@ package com.flipkart.bean;
 public class Gym {
     private int GymId;
 
+    public int getGymOwnerId() {
+        return GymOwnerId;
+    }
+
+    public void setGymOwnerId(int gymOwnerId) {
+        GymOwnerId = gymOwnerId;
+    }
+
+    private int GymOwnerId;
+
     public int getGymId() {
         return GymId;
     }

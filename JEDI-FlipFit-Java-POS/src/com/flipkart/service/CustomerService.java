@@ -27,15 +27,15 @@ public class CustomerService implements CustomerServiceInterface{
     }
 
     //edit profile
-    public void editProfile(int custId,String password) {
-        customerDAO.updateCustomerDetails(custId,password);
-        userDAO.updatePassword(password);
+    public void updateCustomerDetails(String updatedVal,String attr,int custId) {
+        customerDAO.updateCustomerDetails(updatedVal,attr,custId);
+        //userDAO.updatePassword(password);
         return;
     }
 
     //register
-    public void register(String name, String password) {
-        customerDAO.registerCustomer(name, password);
+    public void register(String name, String password,String email,String contact) {
+        customerDAO.registerCustomer(name, password,email,contact);
     }
 
     public void viewProfile() {

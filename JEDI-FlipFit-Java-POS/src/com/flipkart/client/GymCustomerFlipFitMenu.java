@@ -17,15 +17,7 @@ public class GymCustomerFlipFitMenu
         SlotDAO s=SlotDAO.getInstance();
         GymDAO gymDao= GymDAO.getInstance();
 
-        s.createSlot("1 Jan", "2", "2");
-        s.createSlot("2 Jan", "4", "2");
-        s.createSlot("3 Jan", "6", "1");
-        s.createSlot("4 Jan", "8", "1");
-        s.createSlot("5 Jan", "9", "3");
-        s.createSlot("5 Jan", "10", "3");
-        gymDao.onBoardGym("Gym1", "123", "Marathalli", 10) ;
-        gymDao.onBoardGym("Gym2", "456", "Bellandur", 10) ;
-        gymDao.onBoardGym("Gym3", "789", "Whitefield", 10) ;
+
 
 
             int loopFlag = 0;
@@ -43,9 +35,15 @@ public class GymCustomerFlipFitMenu
             switch(choice){
                 case 1:
                     System.out.println("Function to edit profile");
-                    System.out.println("Enter new password");
-                    String newPassword=in.next();
-                    customerService.editProfile(Integer.parseInt(custId),newPassword);
+                    System.out.println("1. Email\n2. Contact");
+                    int updOpt=in.nextInt();
+                    System.out.println("Enter updated value");
+                    String newVal=in.next();
+                    if(updOpt==1)
+                        customerService.updateCustomerDetails(newVal,"email", Integer.parseInt(custId));
+                    if(updOpt==2)
+                        customerService.updateCustomerDetails(newVal,"contact", Integer.parseInt(custId));
+
 
                     break;
 

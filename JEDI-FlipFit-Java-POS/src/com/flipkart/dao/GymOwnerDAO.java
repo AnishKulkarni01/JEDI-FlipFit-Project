@@ -1,5 +1,6 @@
 package com.flipkart.dao;
 
+import com.flipkart.bean.Customer;
 import com.flipkart.bean.GymOwner;
 
 import java.util.ArrayList;
@@ -22,11 +23,14 @@ public class GymOwnerDAO {
         return gymOwnerDAO;
     }
 
-    public boolean registerGymOwner(String name, String password) {
+    public boolean registerGymOwner(String name, String password,String email,String contact, String address) {
         GymOwner gymOwner = new GymOwner();
         gymOwner.setGymOwnerID(id++);
         gymOwner.setName(name);
         gymOwner.setPassword(password);
+        gymOwner.setAddress(address);
+        gymOwner.setContact(contact);
+        gymOwner.setEmail(email);
         gymOwnerList.add(gymOwner);
         for (GymOwner owner : gymOwnerList) {
             System.out.println(owner.getName());
@@ -67,5 +71,12 @@ public class GymOwnerDAO {
             }
         }
         return false; // Return false if GymOwner with given ID is not found
+    }
+    public int getIdFromName(String username){
+        for(GymOwner cust : gymOwnerList){
+            if(cust.getName().equals(username)) return cust.getGymOwnerID();
+        }
+
+        return -1;
     }
 }
