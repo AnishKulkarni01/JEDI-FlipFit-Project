@@ -108,7 +108,8 @@ public class GymDAO {
             conn = Utils.connect();
             System.out.println("Fetching gym centres..");
 
-            stmt = conn.prepareStatement(FETCH_ALL_PENDING_GYM_REQUESTS);
+            stmt = conn.prepareStatement(FETCH_ALL_PENDING_GYM_REQUESTS_BY_GYMOWNERID);
+            stmt.setString(1, Integer.toString(gymOwnerId));
 
             ResultSet rs = stmt.executeQuery();
             while(rs.next()) {
@@ -186,31 +187,68 @@ public class GymDAO {
 
     }
     public List<Gym> viewRequests() {
+        List<Gym> pendingList = new ArrayList<>();
+        try {
+            conn = Utils.connect();
+            System.out.println("Fetching gym centres..");
 
-        return reqList;
+            stmt = conn.prepareStatement(FETCH_ALL_PENDING_GYM_REQUESTS);
+
+            ResultSet rs = stmt.executeQuery();
+            while(rs.next()) {
+                Gym g=new Gym();
+                g.setName(rs.getString("name"));
+                g.setCity(rs.getString("city"));
+                g.setSeats(Integer.parseInt(rs.getString("seats")));
+                g.setGstin(rs.getString("gstin"));
+                g.setGymId(Integer.parseInt(rs.getString("gymId")));
+                g.setIsApproved(rs.getString("isApproved"));
+                pendingList.add(g);
+            }
+            //conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return pendingList;
+        //return reqList;
 
     }
     public void updateGym(String updatedVal,String attr,int gymId)
     {
-        for(Gym g:gymList)
+        try{
+             conn = Utils.connect();
+             stmt = conn.prepareStatement(UPDATE_GYM_DETAILS);
+            stmt.setString(1, attr);
+            stmt.setString(2, updatedVal);
+            stmt.setString(3, Integer.toString(gymId));
+
+            ResultSet rs = stmt.executeQuery();
+            rs.next();
+
+            stmt.close();
+        }catch (SQLException e)
         {
-            if(g.getGymId()==gymId)
-            {
-                if(attr.equals("name"))
-                {
-                    g.setName(updatedVal);
-                };
-                if(attr.equals("gstin")){
-                    g.setGstin(updatedVal);
-                };
-                if(attr.equals("city")){
-                    g.setCity(updatedVal);
-                };
-                if(attr.equals("seats")){
-                    g.setSeats(Integer.parseInt(updatedVal));
-                }
-            }
+            System.out.println(e);
         }
+//        for(Gym g:gymList)
+//        {
+//            if(g.getGymId()==gymId)
+//            {
+//                if(attr.equals("name"))
+//                {
+//                    g.setName(updatedVal);
+//                };
+//                if(attr.equals("gstin")){
+//                    g.setGstin(updatedVal);
+//                };
+//                if(attr.equals("city")){
+//                    g.setCity(updatedVal);
+//                };
+//                if(attr.equals("seats")){
+//                    g.setSeats(Integer.parseInt(updatedVal));
+//                }
+//            }
+//        }
     }
 
 
