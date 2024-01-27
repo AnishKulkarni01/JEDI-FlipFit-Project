@@ -94,15 +94,26 @@ public class GymOwnerDAO {
     {
         try{
             Connection conn = Utils.connect();
-            PreparedStatement stmt = conn.prepareStatement(UPDATE_CUSTOMER_DETAILS);
-            stmt.setString(1, attr);
-            stmt.setString(2, updatedVal);
-            stmt.setString(3, Integer.toString(gymOwnerId));
+            PreparedStatement stmt1 = conn.prepareStatement(UPDATE_GYM_OWNER_DETAILS_EMAIL);
 
-            ResultSet rs = stmt.executeQuery();
-            rs.next();
+            PreparedStatement stmt2 = conn.prepareStatement(UPDATE_GYM_OWNER_DETAILS_CONTACT);
 
-            stmt.close();
+
+            //stmt.setString(1, attr);
+            if(attr.equals("email")) {
+                stmt1.setString(1, updatedVal);
+                stmt1.setString(2, Integer.toString(gymOwnerId));
+                stmt1.executeUpdate();
+                stmt1.close();
+
+            }
+            else if(attr.equals("contact")){
+                stmt2.setString(1, updatedVal);
+                stmt2.setString(2, Integer.toString(gymOwnerId));
+                stmt2.executeUpdate();
+                stmt2.close();
+            }
+
         }catch (SQLException e)
         {
             System.out.println(e);

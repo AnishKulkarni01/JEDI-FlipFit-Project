@@ -21,7 +21,9 @@ public class Constants {
         public static final String REGISTER_GYM_OWNER = "Insert into GymOwner values (?,?,?,?,?,?,?);";
         public static final String LOGIN_GYM_OWNER = "Select * from GymOwner where name=? and password=?;";
         public static final String SQL_APPROVE_GYM_OWNER_BY_ID_QUERY="Update GymOwner Set isApproved=? WHERE Id=?;";
-        public static final String UPDATE_GYM_OWNER_DETAILS = "UPDATE jedi_flipfit_schema.GymOwner SET ? = ? WHERE gymOwnerId =?;";
+        public static final String UPDATE_GYM_OWNER_DETAILS_EMAIL = "UPDATE jedi_flipfit_schema.GymOwner SET email = ? WHERE gymOwnerId =?;";
+        public static final String UPDATE_GYM_OWNER_DETAILS_CONTACT = "UPDATE jedi_flipfit_schema.GymOwner SET contact = ? WHERE gymOwnerId =?;";
+
         public static final String GET_GYM_OWNER_BY_ID = "SELECT * FROM jedi_flipfit_schema.GymOwner WHERE gymOwnerId = ?;";
         public static final String ADD_NEW_GYM_OWNER = "INSERT INTO jedi_flipfit_schema.GymOwner (username,password,email,contact) VALUES ( ?, ?, ?, ?);";
         public static final String GET_GYM_OWNER_BY_USERNAME = "SELECT * FROM jedi_flipfit_schema.GymOwner WHERE username = ?;";
@@ -40,7 +42,7 @@ public class Constants {
         public static final String APPROVE_GYM_BY_ID="Update Gym Set isApproved=? WHERE gymId=?;";
         public static final String FETCH_GYM_CENTRES_BY_CITY = "SELECT * FROM jedi_flipfit_schema.GymCentre where city = ?;";
         public static final String SEND_GYM_ONBOARD_REQUEST = "INSERT INTO jedi_flipfit_schema.Gym (name,city,gstin,seats,gymOwnerId) VALUES ( ?, ?, ?, ?,?);";
-        public static final String UPDATE_GYM_DETAILS = "UPDATE jedi_flipfit_schema.Gym SET ? = ? WHERE gymId =?;";
+        public static final String UPDATE_GYM_DETAILS_ = "UPDATE jedi_flipfit_schema.Gym SET ? = ? WHERE gymId =?;";
         public static final String FETCH_ALL_AREAS = "SELECT DISTINCT city FROM jedi_flipfit_schema.Gym;";
         public static final String FETCH_GYMS_BY_OWNER = "SELECT * FROM jedi_flipfit_schema.Gym WHERE gymOwnerId = ? AND isApproved=\"true\"";
         public static final String FETCH_GYMS_BY_AREA = "SELECT * FROM jedi_flipfit_schema.Gym WHERE city = ? AND isApproved=\"true\"";
@@ -64,7 +66,8 @@ public class Constants {
         public static final String ADD_NEW_CUSTOMER = "INSERT INTO jedi_flipfit_schema.Customer (username,password,email,contact) VALUES ( ?, ?, ?, ?);";
         public static final String GET_CUSTOMER_BY_ID = "SELECT * FROM jedi_flipfit_schema.Customer WHERE customerId = ?;";
         public static final String GET_CUSTOMER_BY_USERNAME = "SELECT * FROM jedi_flipfit_schema.Customer WHERE username = ?;";
-        public static final String UPDATE_CUSTOMER_DETAILS = "UPDATE jedi_flipfit_schema.Customer SET ? = ? WHERE customerId =?;";
+        public static final String UPDATE_CUSTOMER_DETAILS_EMAIL = "UPDATE jedi_flipfit_schema.Customer SET email = ? WHERE customerId =?;";
+        public static final String UPDATE_CUSTOMER_DETAILS_CONTACT = "UPDATE jedi_flipfit_schema.Customer SET contact = ? WHERE customerId =?;";
 
 
 

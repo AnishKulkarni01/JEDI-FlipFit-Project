@@ -108,7 +108,7 @@ public class SlotDAO {
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
                 String date=rs.getString("date");
-                String gymId = rs.getString("centreId");
+                String gymId = rs.getString("gymId");
                 String startTime = rs.getString("startTime");
                 String availabilityStatus=rs.getString("availabilityStatus");
                 slot.setDate(date);

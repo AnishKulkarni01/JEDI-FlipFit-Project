@@ -91,14 +91,24 @@ public class CustomerDAO {
     {
         try{
             Connection conn = Utils.connect();
-            PreparedStatement stmt = conn.prepareStatement(UPDATE_CUSTOMER_DETAILS);
-            stmt.setString(1, attr);
-            stmt.setString(2, updatedVal);
-            stmt.setString(3, Integer.toString(customerId));
+            PreparedStatement stmt1 = conn.prepareStatement(UPDATE_CUSTOMER_DETAILS_EMAIL);
+            PreparedStatement stmt2 = conn.prepareStatement(UPDATE_CUSTOMER_DETAILS_CONTACT);
 
-         stmt.executeUpdate();
+            //stmt.setString(1, attr);
+            if(attr.equals("email")) {
+                stmt1.setString(1, updatedVal);
+                stmt1.setString(2, Integer.toString(customerId));
+                stmt1.executeUpdate();
+                stmt1.close();
 
-            stmt.close();
+            }
+            else if(attr.equals("contact")){
+                stmt2.setString(1, updatedVal);
+                stmt2.setString(2, Integer.toString(customerId));
+                stmt2.executeUpdate();
+                stmt2.close();
+            }
+
         }catch (SQLException e)
         {
             System.out.println(e);

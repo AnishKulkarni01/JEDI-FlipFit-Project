@@ -92,7 +92,7 @@ public class GymCustomerFlipFitMenu
                     System.out.println("Booking added.");
                     break;
                 case 5:
-                    System.out.println("Cancel Booking");
+                    //System.out.println("Cancel Booking");
                     List<Booking>canBl=b.getBookingbyCustId(custId);
                     for(Booking book:canBl)
                     {

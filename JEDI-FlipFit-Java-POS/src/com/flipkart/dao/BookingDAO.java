@@ -63,11 +63,12 @@ public class BookingDAO {
             while(rs.next()) {
                 Booking booking = new Booking();
                 booking.setBookingId(rs.getString("bookingId"));
-                rs.getString("userID");
-                rs.getString("slotId");
+                booking.setCustomerId(rs.getString("customerId"));
+                booking.setSlotId(rs.getString("slotId"));
                 l.add(booking);
             }
         } catch(Exception e) {
+            System.out.println(e);
             System.out.println("Oops! An error occurred. Try again later.");
         }
         return l;
