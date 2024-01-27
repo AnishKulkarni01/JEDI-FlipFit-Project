@@ -174,9 +174,8 @@ public class GymDAO {
             conn = Utils.connect();
             System.out.println("Fetching gym centres..");
 
-            stmt = conn.prepareStatement(FETCH_FILTERED_GYMS);
-            stmt.setString(1, "gymId");
-            stmt.setString(2, Integer.toString(id));
+            stmt = conn.prepareStatement(FETCH_GYMS_BY_ID);
+            stmt.setString(1, Integer.toString(id));
 
             ResultSet rs = stmt.executeQuery();
             while(rs.next()) {
@@ -201,9 +200,8 @@ public class GymDAO {
             conn = Utils.connect();
             System.out.println("Fetching gym centres..");
 
-            stmt = conn.prepareStatement(FETCH_FILTERED_GYMS);
-            stmt.setString(1, "city");
-            stmt.setString(2, area);
+            stmt = conn.prepareStatement(FETCH_GYMS_BY_AREA);
+            stmt.setString(1, area);
 
             ResultSet rs = stmt.executeQuery();
             while(rs.next()) {
@@ -229,9 +227,8 @@ public class GymDAO {
             conn = Utils.connect();
             System.out.println("Fetching gym centres.."+gymOwnerId);
 
-            stmt = conn.prepareStatement(FETCH_FILTERED_GYMS);
-            stmt.setString(1, "gymOwnerId");
-            stmt.setString(2, Integer.toString(gymOwnerId));
+            stmt = conn.prepareStatement(FETCH_GYMS_BY_OWNER);
+            stmt.setString(1, Integer.toString(gymOwnerId));
 
             ResultSet rs = stmt.executeQuery();
             while(rs.next()) {

@@ -36,8 +36,7 @@ public class SlotDAO {
         try {
             Connection conn = Utils.connect();
             PreparedStatement stmt = conn.prepareStatement(ADD_SLOT);
-            ResultSet rs = stmt.executeQuery();
-            rs.next();
+
             stmt.setString(1, gymId);
             stmt.setString(2, date);
             stmt.setString(3, startTime);
@@ -142,8 +141,7 @@ public class SlotDAO {
             stmt.setString(2, updatedVal);
             stmt.setString(3, Integer.toString(slotId));
 
-            ResultSet rs = stmt.executeQuery();
-            rs.next();
+          stmt.executeUpdate();
 
             stmt.close();
         }catch (SQLException e)

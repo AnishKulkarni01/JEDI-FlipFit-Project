@@ -42,7 +42,9 @@ public class Constants {
         public static final String SEND_GYM_ONBOARD_REQUEST = "INSERT INTO jedi_flipfit_schema.Gym (name,city,gstin,seats,gymOwnerId) VALUES ( ?, ?, ?, ?,?);";
         public static final String UPDATE_GYM_DETAILS = "UPDATE jedi_flipfit_schema.Gym SET ? = ? WHERE gymId =?;";
         public static final String FETCH_ALL_AREAS = "SELECT DISTINCT city FROM jedi_flipfit_schema.Gym;";
-        public static final String FETCH_FILTERED_GYMS = "SELECT * FROM jedi_flipfit_schema.Gym WHERE ? = ? AND isApproved=\"true\"";
+        public static final String FETCH_GYMS_BY_OWNER = "SELECT * FROM jedi_flipfit_schema.Gym WHERE gymOwnerId = ? AND isApproved=\"true\"";
+        public static final String FETCH_GYMS_BY_AREA = "SELECT * FROM jedi_flipfit_schema.Gym WHERE city = ? AND isApproved=\"true\"";
+        public static final String FETCH_GYMS_BY_ID = "SELECT * FROM jedi_flipfit_schema.Gym WHERE gymId = ? AND isApproved=\"true\"";
 
 
 //    public static final String SQL_APPROVE_GYM_CENTRE_BY_ID_QUERY = "Update GymCentre Set isApproved=? WHERE centreId=?";
