@@ -149,43 +149,109 @@ public class GymDAO {
 
     public List<String> getAllAreas()
     {
-        Set<String> areas = new HashSet<>();
-        for (Gym gym : gymList)
-            areas.add(gym.getCity());
+        List<String> areas = new ArrayList<>();
+        try{
+            conn = Utils.connect();
+            System.out.println("Fetching gym centres..");
 
-        return new ArrayList<String>(areas);
+            stmt = conn.prepareStatement(FETCH_ALL_AREAS);
+            ResultSet rs = stmt.executeQuery();
+
+            while(rs.next()){
+                areas.add(rs.getString("city"));
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return areas;
     }
 
     public Gym getGymById(int id)
     {
-        for (Gym gym : gymList)
-            if (gym.getGymId() == id)
-                return gym;
-        return null;
+        Gym g=new Gym();
+        try {
+            conn = Utils.connect();
+            System.out.println("Fetching gym centres..");
+
+            stmt = conn.prepareStatement(FETCH_FILTERED_GYMS);
+            stmt.setString(1, "gymId");
+            stmt.setString(2, Integer.toString(id));
+
+            ResultSet rs = stmt.executeQuery();
+            while(rs.next()) {
+                g.setName(rs.getString("name"));
+                g.setCity(rs.getString("city"));
+                g.setSeats(Integer.parseInt(rs.getString("seats")));
+                g.setGstin(rs.getString("gstin"));
+                g.setGymId(Integer.parseInt(rs.getString("gymId")));
+                g.setIsApproved(rs.getString("isApproved"));
+            }
+            //conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return g;
     }
 
     public List<Gym> getGymsByArea(String area) {
+        List<Gym> gymList = new ArrayList<>();
+        try {
+            conn = Utils.connect();
+            System.out.println("Fetching gym centres..");
 
-        List<Gym> gyms = new ArrayList<>();
+            stmt = conn.prepareStatement(FETCH_FILTERED_GYMS);
+            stmt.setString(1, "city");
+            stmt.setString(2, area);
 
-        for (Gym gym : gymList)
-            if (gym.getCity().equals(area))
-                gyms.add(gym);
+            ResultSet rs = stmt.executeQuery();
+            while(rs.next()) {
+                Gym g = new Gym();
+                g.setName(rs.getString("name"));
+                g.setCity(rs.getString("city"));
+                g.setSeats(Integer.parseInt(rs.getString("seats")));
+                g.setGstin(rs.getString("gstin"));
+                g.setGymId(Integer.parseInt(rs.getString("gymId")));
+                g.setIsApproved(rs.getString("isApproved"));
+                gymList.add(g);
+            }
+            //conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
-        return gyms;
-
+        return gymList;
     }
     public List<Gym> getGymsByOwner(int gymOwnerId) {
+        List<Gym> gymList = new ArrayList<>();
+        try {
+            conn = Utils.connect();
+            System.out.println("Fetching gym centres..");
 
-        List<Gym> gyms = new ArrayList<>();
+            stmt = conn.prepareStatement(FETCH_FILTERED_GYMS);
+            stmt.setString(1, "gymOwnerId");
+            stmt.setString(2, Integer.toString(gymOwnerId));
 
-        for (Gym gym : gymList)
-            if (gym.getGymOwnerId()==gymOwnerId)
-                gyms.add(gym);
+            ResultSet rs = stmt.executeQuery();
+            while(rs.next()) {
+                Gym g = new Gym();
+                g.setName(rs.getString("name"));
+                g.setCity(rs.getString("city"));
+                g.setSeats(Integer.parseInt(rs.getString("seats")));
+                g.setGstin(rs.getString("gstin"));
+                g.setGymId(Integer.parseInt(rs.getString("gymId")));
+                g.setIsApproved(rs.getString("isApproved"));
+                gymList.add(g);
+            }
+            //conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
-        return gyms;
-
+        return gymList;
     }
+
     public List<Gym> viewRequests() {
         List<Gym> pendingList = new ArrayList<>();
         try {
@@ -213,6 +279,7 @@ public class GymDAO {
         //return reqList;
 
     }
+
     public void updateGym(String updatedVal,String attr,int gymId)
     {
         try{
@@ -250,7 +317,4 @@ public class GymDAO {
 //            }
 //        }
     }
-
-
-
 }

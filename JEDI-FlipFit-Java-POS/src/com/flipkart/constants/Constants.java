@@ -37,6 +37,8 @@ public class Constants {
         public static final String FETCH_GYM_CENTRES_BY_CITY = "SELECT * FROM jedi_flipfit_schema.GymCentre where city = ?";
         public static final String SEND_GYM_ONBOARD_REQUEST = "INSERT INTO jedi_flipfit_schema.Gym (name,city,gstin,seats,gymOwnerId) VALUES ( ?, ?, ?, ?,?);";
         public static final String UPDATE_GYM_DETAILS = "UPDATE jedi_flipfit_schema.Gym SET ? = ? WHERE gymId =?;";
+        public static final String FETCH_ALL_AREAS = "SELECT DISTINCT city FROM jedi_flipfit_schema.Gym";
+        public static final String FETCH_FILTERED_GYMS = "SELECT * FROM jedi_flipfit_scehma.Gym WHERE ? = ?";
 
 
 //    public static final String SQL_APPROVE_GYM_CENTRE_BY_ID_QUERY = "Update GymCentre Set isApproved=? WHERE centreId=?";
