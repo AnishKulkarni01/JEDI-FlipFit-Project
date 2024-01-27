@@ -1,8 +1,6 @@
 
 package com.flipkart.dao;
 
-import com.flipkart.bean.Customer;
-import com.flipkart.bean.Gym;
 import com.flipkart.bean.Slot;
 import com.flipkart.utils.Utils;
 
@@ -13,26 +11,19 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.flipkart.constants.Constants.*;
+import static com.flipkart.constants.SQLConstants.*;
 
 public class SlotDAO {
-    static SlotDAO slotDao=null;
-    UserDAO userDao=UserDAO.getInstance();
+    static SlotDAO slotDAO = null;
 
-    List<Slot> slotList=new ArrayList<>();
-
-    private int id= 1;
-    public static synchronized SlotDAO getInstance()
-    {
-        if(slotDao==null)
-        {
-            slotDao=new SlotDAO();
+    public static synchronized SlotDAO getInstance() {
+        if(slotDAO == null) {
+            slotDAO = new SlotDAO();
         }
-        return slotDao;
+        return slotDAO;
     }
-    public void createSlot(String date,String startTime,String gymId) {
-        //Registers a new slot in the database
-        //Slot slt=new Slot();
+
+    public void createSlot(String date, String startTime, String gymId) {
         try {
             Connection conn = Utils.connect();
             PreparedStatement stmt = conn.prepareStatement(ADD_SLOT);
@@ -43,39 +34,29 @@ public class SlotDAO {
 
             stmt.executeUpdate();
             stmt.close();
-        } catch (SQLException exp) {
-            exp.printStackTrace();
-        } catch (Exception exp) {
-            exp.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-
-//        Slot slt=new Slot();
-//        slt.setDate(date);
-//        slt.setGymId(gymId);
-//        slt.setStartTime(startTime);
-//        slt.setSlotId(id++);
-//        slt.setAvailabilityStatus(true);
-//        slotList.add(slt);
-//        return true;
     }
 
     public List<Slot> getSlotsByGymId(String gymId) {
-
         List<Slot> slotList = new ArrayList<>();
-        try{
+
+        try {
             Connection conn = Utils.connect();
             PreparedStatement ps = conn.prepareStatement(FETCH_SLOT_BY_GYMID);
-            ps.setString(1,gymId);
+
+            ps.setString(1, gymId);
+
             ResultSet rs = ps.executeQuery();
-            while(rs.next()){
-                Slot slt=new Slot();
-                String slotId = rs.getString("slotId");
-                String date = rs.getString("date");
-                String startTime = rs.getString("startTime");
+            while (rs.next()) {
+                Slot slt = new Slot();
+
                 slt.setGymId(gymId);
-                slt.setSlotId(Integer.parseInt(slotId));
-                slt.setDate(date);
-                slt.setStartTime(startTime);
+                slt.setSlotId(rs.getString("slotId"));
+                slt.setDate(rs.getString("date"));
+                slt.setStartTime(rs.getString("startTime"));
+
                 slotList.add(slt);
             }
         } catch (SQLException e) {
@@ -83,106 +64,56 @@ public class SlotDAO {
         }
 
         return slotList;
-//        List<Slot> l=new ArrayList<>();
-//        for(Slot slt:slotList)
-//        {
-//            if(slt.getGymId().equals(gymId) && slt.isAvailabilityStatus())l.add(slt);
-//        }
-//        return l;
     }
-//    public Slot getSlotbySlotId(int slotId)
-//    {
-//        for(Slot slot:slotList)
-//        {
-//            if(slot.getSlotId()==slotId)return slot;
-//        }
-//        return new Slot();
-//    }
 
     public Slot getSlotBySlotId(String slotId) {
         Slot slot = new Slot();
         try{
             Connection conn = Utils.connect();
             PreparedStatement ps = conn.prepareStatement(FETCH_SLOT_BY_ID);
-            ps.setString(1,slotId);
+
+            ps.setString(1, slotId);
+
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
-                String date=rs.getString("date");
-                String gymId = rs.getString("gymId");
-                String startTime = rs.getString("startTime");
-                String availabilityStatus=rs.getString("availabilityStatus");
-                slot.setDate(date);
-                slot.setStartTime(startTime);
-                slot.setGymId(gymId);
-                boolean stat=availabilityStatus.equals("true")?true:false;
+                boolean stat = rs.getString("availabilityStatus").equals("true");
+
+                slot.setDate(rs.getString("date"));
+                slot.setStartTime(rs.getString("gymId"));
+                slot.setGymId(rs.getString("availabilityStatus"));
                 slot.setAvailabilityStatus(stat);
+
                 return slot;
             }
-
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
         return slot;
-//        Slot s = new Slot();
-//        for(Slot slt:slotList)
-//        {
-//            if(Integer.toString(slt.getSlotId()).equals(slotId)) s=slt;
-//        }
-//        return s;
     }
 
-    public void updateSlot(String updatedVal,String attr,int slotId)
-    {
+    public void updateSlot(String updatedVal, String attr, String slotId) {
         try{
             Connection conn = Utils.connect();
-            PreparedStatement stmt1 = conn.prepareStatement(UPDATE_SLOT_DETAILS_DATE);
-            PreparedStatement stmt2 = conn.prepareStatement(UPDATE_SLOT_DETAILS_STARTTIME);
 
-            //stmt.setString(1, attr);
             if(attr.equals("date")) {
+                PreparedStatement stmt1 = conn.prepareStatement(UPDATE_SLOT_DETAILS_DATE);
+
                 stmt1.setString(1, updatedVal);
-                stmt1.setString(2, Integer.toString(slotId));
+                stmt1.setString(2, slotId);
                 stmt1.executeUpdate();
                 stmt1.close();
 
             }
             else if(attr.equals("startTime")){
+                PreparedStatement stmt2 = conn.prepareStatement(UPDATE_SLOT_DETAILS_STARTTIME);
                 stmt2.setString(1, updatedVal);
-                stmt2.setString(2, Integer.toString(slotId));
+                stmt2.setString(2, slotId);
                 stmt2.executeUpdate();
                 stmt2.close();
             }
-        }catch (SQLException e)
-        {
-            System.out.println(e);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-//        for(Slot s:slotList)
-//        {
-//            if(s.getSlotId()==slotId)
-//            {
-//                if(attr.equals("date"))
-//                {
-//                    s.setDate(updatedVal);
-//                };
-//                if(attr.equals("startTime")){
-//                    s.setStartTime(updatedVal);
-//                };
-//            }
-//        }
     }
-
-    public boolean deleteSlot(String slotId) {
-        for(int i=0;i<slotList.size();i++)
-        {
-            if(slotList.get(i).getSlotId()==Integer.parseInt(slotId))
-            {
-                slotList.remove(i);
-                return true;
-            }
-        }
-        System.out.println("Slot DNE");
-        return false;
-    }
-
 }

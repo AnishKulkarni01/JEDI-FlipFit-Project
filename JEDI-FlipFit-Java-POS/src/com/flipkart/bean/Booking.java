@@ -1,8 +1,9 @@
 package com.flipkart.bean;
 
 public class Booking {
-private String customerId;
-private String bookingId;
+    private String customerId;
+    private String bookingId;
+    private String slotId;
 
     public String getCustomerId() {
         return customerId;
@@ -27,7 +28,4 @@ private String bookingId;
     public void setSlotId(String slotId) {
         this.slotId = slotId;
     }
-
-    private String slotId;
-
 }

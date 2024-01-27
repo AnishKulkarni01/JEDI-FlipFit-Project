@@ -6,26 +6,27 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AdminDAO {
-    static AdminDAO adminDao=null;
-    UserDAO userDao=UserDAO.getInstance();
+    static AdminDAO adminDAO = null;
+    UserDAO userDAO = UserDAO.getInstance();
+    List<Admin> adminList=new ArrayList<>();
+    private int id = 1;
 
-    List<Admin> adminList=new ArrayList<Admin>();
-    private int id= 1;
-    public static synchronized AdminDAO getInstance()
-    {
-        if(adminDao==null)
-        {
-            adminDao=new AdminDAO();
+    public static synchronized AdminDAO getInstance() {
+        if(adminDAO == null) {
+            adminDAO =new AdminDAO();
         }
-        return adminDao;
+
+        return adminDAO;
     }
+
     public void registerAdmin(String username, String password){
         Admin ad = new Admin();
+
         ad.setAdminID(id++);
         ad.setUsername(username);
         ad.setPassword(password);
-        adminList.add(ad); //first check if in list
-        userDao.addUser(username,password,"ADMIN");
 
+        adminList.add(ad); //first check if in list
+        userDAO.addUser(username,password,"ADMIN");
     }
 }

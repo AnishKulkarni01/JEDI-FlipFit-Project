@@ -4,118 +4,142 @@ import com.flipkart.bean.Slot;
 import com.flipkart.dao.*;
 import com.flipkart.service.CustomerService;
 
-import java.awt.print.Book;
 import java.util.*;
-public class GymCustomerFlipFitMenu
-{
-    CustomerService customerService=new CustomerService();
-    public void showCustomerMenu(){
-        UserDAO userDao= UserDAO.getInstance();
-        CustomerDAO custDao = CustomerDAO.getInstance();
-        BookingDAO b=BookingDAO.getInstance();
-        String custId = Integer.toString(custDao.getIdFromName(userDao.getCurrentUser().get(0)));
-        SlotDAO s=SlotDAO.getInstance();
-        GymDAO gymDao= GymDAO.getInstance();
 
+public class GymCustomerFlipFitMenu {
+    CustomerService customerService=new CustomerService();UserDAO userDao= UserDAO.getInstance();
+    CustomerDAO customerDAO = CustomerDAO.getInstance();
+    BookingDAO bookingDAO =BookingDAO.getInstance();
+    String customerId = customerDAO.getIdFromName(userDao.getCurrentUser().get(0));
+    SlotDAO slotDAO =SlotDAO.getInstance();
+    GymDAO gymDao= GymDAO.getInstance();
+    Scanner scanner = new Scanner(System.in);
 
-
-
-            int loopFlag = 0;
-        while(loopFlag == 0) {
-            System.out.println("1. Edit Profile\n" +
-                    "2. View Profile\n" +
+    private void showMenuOptions() {
+        System.out.println("1. Edit Profile\n" +
+                "2. View Profile\n" +
                 "3. View Bookings\n" +
-                "4. Book Slot\n"+
-                "5. Cancel Booking\n"+
-                    "6. Log out\n" +
+                "4. Book Slot\n" +
+                "5. Cancel Booking\n" +
+                "6. Log out\n" +
                 "7. Back");
+    }
 
-            Scanner in = new Scanner(System.in);
-            int choice = in.nextInt();
+    private void listSlots(){
+        List<String> areas = gymDao.getAllAreas();
+        for(String area : areas){
+            System.out.println(areas.indexOf(area) + ". " + area);
+        }
+
+        int areaOption = scanner.nextInt();
+        String selectedArea = areas.get(areaOption-1);
+
+        System.out.println("Choose a slot at " + selectedArea);
+        List<Slot> slotList = slotDAO.getSlotsByGymId(Integer.toString(areaOption));
+        for(Slot slot: slotList) {
+            System.out.println("Slot Id : " + slot.getSlotId() +" Date : "+slot.getDate()+"\n Time : "+slot.getStartTime());
+        }
+    }
+
+    private void viewBookings(){
+        System.out.println("Function to View Booking");
+
+        //booking.toString() later
+        for(Booking booking : bookingDAO.getBookingbyCustId(customerId)){
+            Slot slot = slotDAO.getSlotBySlotId(booking.getSlotId());
+            System.out.println("BookingId : "+booking.getBookingId()+" Gym : " + slot.getGymId() + " Time : " + slot.getStartTime()+" Date : "+slot.getDate());
+        }
+    }
+
+    private void bookSlot(){
+        System.out.println("Book your Slot");
+        System.out.println("Select an area where you'd like to book a slot.");
+
+        listSlots();
+
+        String slotId = scanner.next();
+
+        bookingDAO.addBooking(customerId, slotId);
+        System.out.println("Booking added.");
+    }
+
+    private void cancelSlot(){
+        for(Booking booking : bookingDAO.getBookingbyCustId(customerId)) {
+            Slot slot = slotDAO.getSlotBySlotId(booking.getSlotId());
+            System.out.println("BookingId : "+booking.getBookingId()+" Date : "+slot.getDate()+" Time : "+slot.getStartTime());
+        }
+
+        System.out.println("Enter BookingId");
+        String deleteBookingId = scanner.next();
+        bookingDAO.deleteBookingId(deleteBookingId);
+    }
+
+    private void viewProfile(){
+        System.out.println("Function to View profile");
+        customerService.viewProfile();
+    }
+
+    private void editProfile() {
+        while(true) {
+            System.out.println("Function to edit profile");
+            System.out.println("1. Email\n2. Contact");
+            int updateColumn = scanner.nextInt();
+
+            System.out.println("Enter updated value");
+            String newValue = scanner.next();
+
+            switch (updateColumn) {
+                case 1:
+                    customerService.updateCustomerDetails(newValue, "email", customerId);
+                    return;
+
+                case 2:
+                    customerService.updateCustomerDetails(newValue, "contact", customerId);
+                    return;
+
+                default:
+                    System.out.println("Please select a valid option");
+            }
+        }
+    }
+
+    public void showCustomerMenu(){
+        while(true){
+            showMenuOptions();
+
+            int choice = scanner.nextInt();
 
             switch(choice){
                 case 1:
-                    System.out.println("Function to edit profile");
-                    System.out.println("1. Email\n2. Contact");
-                    int updOpt=in.nextInt();
-                    System.out.println("Enter updated value");
-                    String newVal=in.next();
-                    if(updOpt==1)
-                        customerService.updateCustomerDetails(newVal,"email", Integer.parseInt(custId));
-                    if(updOpt==2)
-                        customerService.updateCustomerDetails(newVal,"contact", Integer.parseInt(custId));
-
-
+                    editProfile();
                     break;
 
                 case 2:
-                    System.out.println("Function to View profile");
-                    customerService.viewProfile();
+                    viewProfile();
                     break;
 
                 case 3:
-                    System.out.println("Function to View Booking");
-                    //System.out.println("cust: " + custId);
-                    List<Booking> lb =  b.getBookingbyCustId(custId);
-                    for(Booking b1 : lb){
-                        Slot sl = s.getSlotBySlotId(b1.getSlotId());
-                        System.out.println("BookingId : "+b1.getBookingId()+" Gym : " + sl.getGymId() + " Time : " + sl.getStartTime()+" Date : "+sl.getDate());
-                    }
+                    viewBookings();
                     break;
 
                 case 4:
-                    System.out.println("Book your Slot");
-                    System.out.println("Select an area where you'd like to book a slot.");
-                    List<String> areas=new ArrayList<>();
-                    areas=gymDao.getAllAreas();
-                    int idx=1;
-                    for(String area:areas)
-                    {
-                        System.out.println(idx+". "+area);
-                        idx++;
-                    }
-
-                    int gymOpt=in.nextInt();
-                    List<Slot> l;
-                    String selectedArea=areas.get(gymOpt-1);
-
-                    System.out.println("Choose a slot at " + selectedArea);
-                    l=s.getSlotsByGymId(Integer.toString(gymOpt));
-                    for(Slot slt:l)
-                    {
-                        System.out.println("Slot Id : " + slt.getSlotId() +" Date : "+slt.getDate()+"\n Time : "+slt.getStartTime());
-                    }
-
-                    String slotId = in.next();
-
-                    b.addBooking(custId, slotId);
-                    System.out.println("Booking added.");
+                    bookSlot();
                     break;
+
                 case 5:
-                    //System.out.println("Cancel Booking");
-                    List<Booking>canBl=b.getBookingbyCustId(custId);
-                    for(Booking book:canBl)
-                    {
-                        Slot sb=s.getSlotBySlotId(book.getSlotId());
-                        System.out.println("BookingId : "+book.getBookingId()+" Date : "+sb.getDate()+" Time : "+sb.getStartTime());
-                    }
-                    System.out.println("Enter BookingId");
-                    String delBookId=in.next();
-                    b.deleteBookingId(delBookId);
+                    cancelSlot();
                     break;
+
                 case 6:
                     System.out.println("Function to Log out");
-                    loopFlag = 1;
-                    break;
+                    return;
 
                 case 7:
-                    loopFlag = 1;
-                    break;
+                    return;
 
                 default:
                     throw new IllegalStateException("Unexpected value: " + choice);
             }
         }
-
     }
 }

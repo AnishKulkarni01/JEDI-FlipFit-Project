@@ -1,23 +1,14 @@
 package com.flipkart.service;
 
 import com.flipkart.dao.GymOwnerDAO;
+import com.flipkart.dao.UserDAO;
 
-public class GymOwnerService {
-
+public class GymOwnerService implements GymOwnerServiceInterface {
     GymOwnerDAO gymOwnerDAO = GymOwnerDAO.getInstance();
-    // Add gym request
-    public void addGymRequest(String gymName, String location, int capacity) {
-        // Implementation to add a gym request
-    }
+    UserDAO userDAO = UserDAO.getInstance();
 
-    // Update profile
-    public void updateProfile(String newName, String newAddress, String newContact) {
-        // Implementation to update the gym owner's profile
-    }
-
-    // Register
     public void register(String username, String password, String email, String contact) {
-        // Implementation to register a new gym owner
         gymOwnerDAO.registerGymOwner(username, password,email,contact);
+        userDAO.addUser(username, password, "GYM_OWNER");
     }
 }

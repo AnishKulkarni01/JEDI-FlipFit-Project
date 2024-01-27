@@ -1,29 +1,28 @@
 package com.flipkart.dao;
 
-import com.flipkart.bean.Customer;
-import com.flipkart.bean.User;
 import com.flipkart.utils.Utils;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.*;
 
-import static com.flipkart.constants.Constants.*;
+import static com.flipkart.constants.SQLConstants.*;
 
 public class UserDAO {
-    static UserDAO userDao = null;
+    static UserDAO userDAO = null;
     private Connection conn = null;
     private PreparedStatement stmt = null;
     private String currentUsername;
 
     public static synchronized UserDAO getInstance() {
-        if(userDao == null) userDao = new UserDAO();
-        return userDao;
+        if(userDAO == null) {
+            userDAO = new UserDAO();
+        }
+        return userDAO;
     }
 
-    public boolean check(String username,String password,String role){
+    public boolean check(String username, String password, String role){
         boolean isRegisteredUser = true;
         try{
             conn = Utils.connect();
@@ -44,7 +43,7 @@ public class UserDAO {
         return isRegisteredUser;
     }
 
-    public void addUser(String username,String password,String role) {
+    public void addUser(String username, String password, String role) {
         try{
             conn = Utils.connect();
             stmt = conn.prepareStatement(ADD_USER);
@@ -70,6 +69,7 @@ public class UserDAO {
             return null;
         } else{
             List<String> userDetailList = new ArrayList<>();
+
             try{
                 conn = Utils.connect();
                 stmt = conn.prepareStatement(GET_USER);

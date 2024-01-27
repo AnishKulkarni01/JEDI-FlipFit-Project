@@ -1,24 +1,29 @@
 package com.flipkart.bean;
 
 public class Gym {
-    private int GymId;
+    private String GymId;
+    private String GymOwnerId;
+    private String name;
+    private String city;
+    private String gstin;
+    private int seats;
+    private String isApproved;
 
-    public int getGymOwnerId() {
-        return GymOwnerId;
-    }
 
-    public void setGymOwnerId(int gymOwnerId) {
-        GymOwnerId = gymOwnerId;
-    }
-
-    private int GymOwnerId;
-
-    public int getGymId() {
+    public String getGymId() {
         return GymId;
     }
 
-    public void setGymId(int gymId) {
+    public void setGymId(String gymId) {
         GymId = gymId;
+    }
+
+    public String getGymOwnerId() {
+        return GymOwnerId;
+    }
+
+    public void setGymOwnerId(String gymOwnerId) {
+        GymOwnerId = gymOwnerId;
     }
 
     public String getName() {
@@ -53,11 +58,6 @@ public class Gym {
         this.seats = seats;
     }
 
-    private String name;
-    private String city;
-    private String gstin;
-    private int seats;
-
     public String getIsApproved() {
         return isApproved;
     }
@@ -66,12 +66,10 @@ public class Gym {
         this.isApproved = isApproved;
     }
 
-    private String isApproved;
-
     @Override
     public String toString() {
-        return "Gym{" +
-                "GymId=" + GymId +
+        return "Gym {" +
+                "GymId=" + GymId + '\'' +
                 ", name='" + name + '\'' +
                 ", city='" + city + '\'' +
                 ", gstin='" + gstin + '\'' +

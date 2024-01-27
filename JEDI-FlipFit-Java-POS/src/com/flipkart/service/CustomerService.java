@@ -1,41 +1,22 @@
-
 package com.flipkart.service;
 
-import com.flipkart.bean.Slot;
 import com.flipkart.dao.CustomerDAO;
 import com.flipkart.dao.UserDAO;
 
-import java.util.ArrayList;
 import java.util.List;
+import static com.flipkart.constants.Constants.*;
 
 public class CustomerService implements CustomerServiceInterface{
     CustomerDAO customerDAO =CustomerDAO.getInstance();
     UserDAO userDAO = UserDAO.getInstance();
 
-    public boolean bookSlot() {
-        return false;
+    public void updateCustomerDetails(String updatedVal,String attr,String customerId) {
+        customerDAO.updateCustomerDetails(updatedVal, attr, customerId);
     }
 
-    //view slot
-     public List<Slot> viewSlots() {
-         return new ArrayList<>();
-     }
-
-    //get added to wait list
-    public boolean joinWaitList() {
-        return false;
-    }
-
-    //edit profile
-    public void updateCustomerDetails(String updatedVal,String attr,int custId) {
-        customerDAO.updateCustomerDetails(updatedVal,attr,custId);
-        //userDAO.updatePassword(password);
-        return;
-    }
-
-    //register
-    public void register(String name, String password,String email,String contact) {
-        customerDAO.registerCustomer(name, password,email,contact);
+    public void register(String name, String password, String email, String contact) {
+        customerDAO.registerCustomer(name, password, email, contact);
+        userDAO.addUser(name, password, ROLE_GYM_CUSTOMER);
     }
 
     public void viewProfile() {

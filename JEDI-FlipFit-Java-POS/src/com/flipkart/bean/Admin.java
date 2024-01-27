@@ -1,6 +1,10 @@
 package com.flipkart.bean;
 
 public class Admin {
+    int AdminID;
+    String username;
+    String password;
+
     public int getAdminID() {
         return AdminID;
     }
@@ -8,9 +12,6 @@ public class Admin {
     public void setAdminID(int adminID) {
         AdminID = adminID;
     }
-
-    int AdminID;
-    String username;
 
     public String getUsername() {
         return username;
@@ -27,7 +28,4 @@ public class Admin {
     public void setPassword(String password) {
         this.password = password;
     }
-
-    String password;
-
 }
