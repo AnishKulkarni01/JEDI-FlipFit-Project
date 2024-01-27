@@ -286,8 +286,7 @@ public class GymDAO {
             stmt.setString(2, updatedVal);
             stmt.setString(3, Integer.toString(gymId));
 
-            ResultSet rs = stmt.executeQuery();
-            rs.next();
+            stmt.executeUpdate();
 
             stmt.close();
         }catch (SQLException e)

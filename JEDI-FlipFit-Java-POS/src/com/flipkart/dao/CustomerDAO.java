@@ -96,8 +96,7 @@ public class CustomerDAO {
             stmt.setString(2, updatedVal);
             stmt.setString(3, Integer.toString(customerId));
 
-            ResultSet rs = stmt.executeQuery();
-            rs.next();
+         stmt.executeUpdate();
 
             stmt.close();
         }catch (SQLException e)

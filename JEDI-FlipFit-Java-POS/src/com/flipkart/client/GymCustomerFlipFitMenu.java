@@ -102,6 +102,7 @@ public class GymCustomerFlipFitMenu
                     System.out.println("Enter BookingId");
                     String delBookId=in.next();
                     b.deleteBookingId(delBookId);
+                    break;
                 case 6:
                     System.out.println("Function to Log out");
                     loopFlag = 1;
