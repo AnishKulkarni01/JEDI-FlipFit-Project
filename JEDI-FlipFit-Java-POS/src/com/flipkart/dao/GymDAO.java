@@ -280,15 +280,39 @@ public class GymDAO {
     public void updateGym(String updatedVal,String attr,int gymId)
     {
         try{
-             conn = Utils.connect();
-             stmt = conn.prepareStatement(UPDATE_GYM_DETAILS);
-            stmt.setString(1, attr);
-            stmt.setString(2, updatedVal);
-            stmt.setString(3, Integer.toString(gymId));
+            Connection conn = Utils.connect();
+            PreparedStatement stmt1 = conn.prepareStatement(UPDATE_GYM_DETAILS_NAME);
+            PreparedStatement stmt2 = conn.prepareStatement(UPDATE_GYM_DETAILS_CITY);
+            PreparedStatement stmt3 = conn.prepareStatement(UPDATE_GYM_DETAILS_SEATS);
+            PreparedStatement stmt4 = conn.prepareStatement(UPDATE_GYM_DETAILS_GSTIN);
 
-            stmt.executeUpdate();
+            //stmt.setString(1, attr);
+            if(attr.equals("name")) {
+                stmt1.setString(1, updatedVal);
+                stmt1.setString(2, Integer.toString(gymId));
+                stmt1.executeUpdate();
+                stmt1.close();
 
-            stmt.close();
+            }
+            else if(attr.equals("city")){
+                stmt2.setString(1, updatedVal);
+                stmt2.setString(2, Integer.toString(gymId));
+                stmt2.executeUpdate();
+                stmt2.close();
+            }
+            else if(attr.equals("seats")){
+                stmt3.setString(1, updatedVal);
+                stmt3.setString(2, Integer.toString(gymId));
+                stmt3.executeUpdate();
+                stmt3.close();
+            }
+            else if(attr.equals("gstin")){
+                stmt4.setString(1, updatedVal);
+                stmt4.setString(2, Integer.toString(gymId));
+                stmt4.executeUpdate();
+                stmt4.close();
+            }
+
         }catch (SQLException e)
         {
             System.out.println(e);

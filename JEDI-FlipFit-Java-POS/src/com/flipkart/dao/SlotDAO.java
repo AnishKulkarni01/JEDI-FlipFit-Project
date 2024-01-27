@@ -136,14 +136,23 @@ public class SlotDAO {
     {
         try{
             Connection conn = Utils.connect();
-            PreparedStatement stmt = conn.prepareStatement(UPDATE_SLOT_DETAILS);
-            stmt.setString(1, attr);
-            stmt.setString(2, updatedVal);
-            stmt.setString(3, Integer.toString(slotId));
+            PreparedStatement stmt1 = conn.prepareStatement(UPDATE_SLOT_DETAILS_DATE);
+            PreparedStatement stmt2 = conn.prepareStatement(UPDATE_SLOT_DETAILS_STARTTIME);
 
-          stmt.executeUpdate();
+            //stmt.setString(1, attr);
+            if(attr.equals("date")) {
+                stmt1.setString(1, updatedVal);
+                stmt1.setString(2, Integer.toString(slotId));
+                stmt1.executeUpdate();
+                stmt1.close();
 
-            stmt.close();
+            }
+            else if(attr.equals("startTime")){
+                stmt2.setString(1, updatedVal);
+                stmt2.setString(2, Integer.toString(slotId));
+                stmt2.executeUpdate();
+                stmt2.close();
+            }
         }catch (SQLException e)
         {
             System.out.println(e);

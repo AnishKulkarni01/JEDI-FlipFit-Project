@@ -42,11 +42,19 @@ public class Constants {
         public static final String APPROVE_GYM_BY_ID="Update Gym Set isApproved=? WHERE gymId=?;";
         public static final String FETCH_GYM_CENTRES_BY_CITY = "SELECT * FROM jedi_flipfit_schema.GymCentre where city = ?;";
         public static final String SEND_GYM_ONBOARD_REQUEST = "INSERT INTO jedi_flipfit_schema.Gym (name,city,gstin,seats,gymOwnerId) VALUES ( ?, ?, ?, ?,?);";
-        public static final String UPDATE_GYM_DETAILS_ = "UPDATE jedi_flipfit_schema.Gym SET ? = ? WHERE gymId =?;";
         public static final String FETCH_ALL_AREAS = "SELECT DISTINCT city FROM jedi_flipfit_schema.Gym;";
         public static final String FETCH_GYMS_BY_OWNER = "SELECT * FROM jedi_flipfit_schema.Gym WHERE gymOwnerId = ? AND isApproved=\"true\"";
         public static final String FETCH_GYMS_BY_AREA = "SELECT * FROM jedi_flipfit_schema.Gym WHERE city = ? AND isApproved=\"true\"";
         public static final String FETCH_GYMS_BY_ID = "SELECT * FROM jedi_flipfit_schema.Gym WHERE gymId = ? AND isApproved=\"true\"";
+        public static final String UPDATE_GYM_DETAILS_NAME = "UPDATE jedi_flipfit_schema.Gym SET name = ? WHERE gymId =?;";
+        public static final String UPDATE_GYM_DETAILS_CITY = "UPDATE jedi_flipfit_schema.Gym SET city = ? WHERE gymId =?;";
+
+        public static final String UPDATE_GYM_DETAILS_SEATS = "UPDATE jedi_flipfit_schema.Gym SET seats = ? WHERE gymId =?;";
+
+        public static final String UPDATE_GYM_DETAILS_GSTIN = "UPDATE jedi_flipfit_schema.Gym SET gstin = ? WHERE gymId =?;";
+
+
+
 
 
 //    public static final String SQL_APPROVE_GYM_CENTRE_BY_ID_QUERY = "Update GymCentre Set isApproved=? WHERE centreId=?";
@@ -87,7 +95,8 @@ public class Constants {
         public static final String FETCH_SLOT_BY_GYMID ="SELECT * FROM jedi_flipfit_schema.Slot WHERE gymId=?;";
         public static final String ADD_SLOT ="INSERT INTO jedi_flipfit_schema.Slot( gymId,date, startTime) values (?, ?, ?);";
         public static final String FETCH_SLOT_BY_ID = "SELECT * FROM jedi_flipfit_schema.Slot WHERE slotId=?;";
-        public static final String UPDATE_SLOT_DETAILS = "UPDATE jedi_flipfit_schema.Slot SET ? = ? WHERE slotId =?;";
+        public static final String UPDATE_SLOT_DETAILS_DATE = "UPDATE jedi_flipfit_schema.Slot SET date = ? WHERE slotId =?;";
+        public static final String UPDATE_SLOT_DETAILS_STARTTIME = "UPDATE jedi_flipfit_schema.Slot SET startTime = ? WHERE slotId =?;";
 
         public static final String FETCH_SLOT_BY_ID_AND_CENTRE_ID = "SELECT * FROM jedi_flipfit_schema.Slot WHERE slotId=? AND centreId=?;";
 
