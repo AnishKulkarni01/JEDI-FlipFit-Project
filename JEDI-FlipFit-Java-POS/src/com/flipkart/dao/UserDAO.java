@@ -34,7 +34,7 @@ public class UserDAO {
             stmt.setString(3, role);
 
             ResultSet rs = stmt.executeQuery();
-            if(Integer.parseInt(rs.getString("count"))==0) isRegisteredUser = false;
+            if(!rs.next()) isRegisteredUser = false;
 
             stmt.close();
         } catch(Exception e){
@@ -77,6 +77,7 @@ public class UserDAO {
                 stmt.setString(1, this.currentUsername);
 
                 ResultSet rs = stmt.executeQuery();
+                rs.next();
 
                 userDetailList.add(rs.getString("username"));
                 userDetailList.add(rs.getString("role"));

@@ -227,7 +227,7 @@ public class GymDAO {
         List<Gym> gymList = new ArrayList<>();
         try {
             conn = Utils.connect();
-            System.out.println("Fetching gym centres..");
+            System.out.println("Fetching gym centres.."+gymOwnerId);
 
             stmt = conn.prepareStatement(FETCH_FILTERED_GYMS);
             stmt.setString(1, "gymOwnerId");

@@ -133,23 +133,23 @@ public class CustomerDAO {
     }
 
     public int getIdFromName(String username){
+        int ans=0;
         try {
             Connection conn = Utils.connect();
             PreparedStatement stmt = conn.prepareStatement(GET_CUSTOMER_BY_USERNAME);
             stmt.setString(1, username);
             ResultSet rs = stmt.executeQuery();
             rs.next();
+
+            ans= Integer.parseInt(rs.getString("customerId"));
             stmt.close();
-
-            return Integer.parseInt(rs.getString("customerId"));
-
         } catch (SQLException exp) {
             exp.printStackTrace();
         } catch (Exception exp) {
             exp.printStackTrace();
         }
+        return ans;
 
-        return -1;
 //        for(Customer cust : customerList){
 //            if(cust.getName().equals(username)) return cust.getCustomerID();
 //        }

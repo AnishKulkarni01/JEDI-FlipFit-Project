@@ -134,24 +134,23 @@ public class GymOwnerDAO {
         return false; // Return false if GymOwner with given ID is not found
     }
     public int getIdFromName(String username){
-
+        int ans=0;
         try {
             Connection conn = Utils.connect();
             PreparedStatement stmt = conn.prepareStatement(GET_GYM_OWNER_BY_USERNAME);
             stmt.setString(1, username);
             ResultSet rs = stmt.executeQuery();
             rs.next();
+
+            ans= Integer.parseInt(rs.getString("gymOwnerId"));
             stmt.close();
-
-            return Integer.parseInt(rs.getString("customerId"));
-
         } catch (SQLException exp) {
             exp.printStackTrace();
         } catch (Exception exp) {
             exp.printStackTrace();
         }
+        return ans;
 
-        return -1;
 //        for(GymOwner cust : gymOwnerList){
 //            if(cust.getName().equals(username)) return cust.getGymOwnerId();
 //        }

@@ -14,7 +14,7 @@ public class AdminFlipFitMenu {
     SlotDAO s=SlotDAO.getInstance();
     GymDAO gymDao= GymDAO.getInstance();
     GymOwnerDAO ownDao=GymOwnerDAO.getInstance();
-    String ownId = Integer.toString(ownDao.getIdFromName(userDao.getCurrentUser().get(0)));
+    //String ownId = Integer.toString(ownDao.getIdFromName(userDao.getCurrentUser().get(0)));
     public void showAdminFlipFitMenu(){
         int loopFlag=0;
         while(loopFlag==0)
