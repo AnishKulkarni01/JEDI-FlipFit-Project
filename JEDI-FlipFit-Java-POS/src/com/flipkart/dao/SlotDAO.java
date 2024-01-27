@@ -79,9 +79,9 @@ public class SlotDAO {
                 boolean stat = rs.getString("availabilityStatus").equals("true");
 
                 slot.setDate(rs.getString("date"));
-                slot.setStartTime(rs.getString("gymId"));
-                slot.setGymId(rs.getString("availabilityStatus"));
-                slot.setAvailabilityStatus(stat);
+                slot.setStartTime(rs.getString("startTime"));
+                slot.setGymId(rs.getString("gymId"));
+                slot.setAvailabilityStatus(Boolean.parseBoolean(rs.getString("availabilityStatus")));
 
                 return slot;
             }

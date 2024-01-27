@@ -25,8 +25,8 @@ public class SQLConstants {
 
         // ------------------------ GYM CENTRE ------------------------
         public static final String FETCH_GYM_CENTRES_BY_OWNER_ID = "SELECT * FROM jedi_flipfit_schema.GymCentre where ownerId = ?;";
-        public static final String FETCH_ALL_PENDING_GYM_REQUESTS = "SELECT * FROM jedi_flipfit_schema.Gym where isApproved = false;";
-        public static final String FETCH_ALL_PENDING_GYM_REQUESTS_BY_GYMOWNERID = "SELECT * FROM jedi_flipfit_schema.Gym where gymOwnerId = ?;";
+        public static final String FETCH_ALL_PENDING_GYM_REQUESTS = "SELECT * FROM jedi_flipfit_schema.Gym where isApproved = \"false\";";
+        public static final String FETCH_ALL_PENDING_GYM_REQUESTS_BY_GYMOWNERID = "SELECT * FROM jedi_flipfit_schema.Gym where gymOwnerId = ? AND isAvailable=\"true\"1;";
         public static final String APPROVE_GYM_BY_ID="Update Gym Set isApproved=? WHERE gymId=?;";
         public static final String FETCH_GYM_CENTRES_BY_CITY = "SELECT * FROM jedi_flipfit_schema.GymCentre where city = ?;";
         public static final String SEND_GYM_ONBOARD_REQUEST = "INSERT INTO jedi_flipfit_schema.Gym (name,city,gstin,seats,gymOwnerId) VALUES ( ?, ?, ?, ?,?);";

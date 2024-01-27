@@ -109,49 +109,51 @@ public class FlipFitApplication {
     }
 
     private static void mainPage(){
-        showMenuOptions();
+        while(true){
+            showMenuOptions();
 
-        int option = scanner.nextInt();
-        String username, passcode, role;
+            int option = scanner.nextInt();
+            String username, passcode, role;
 
-        switch(option) {
-            case 1:
-                role = chooseRole();
+            switch(option) {
+                case 1:
+                    role = chooseRole();
 
-                System.out.println("Enter Username : ");
-                username = scanner.next();
-                System.out.println("Enter Passcode : ");
-                passcode = scanner.next();
+                    System.out.println("Enter Username : ");
+                    username = scanner.next();
+                    System.out.println("Enter Passcode : ");
+                    passcode = scanner.next();
 
-                if(!userService.authenticate(username, passcode, role)) {
-                    System.out.println("Wrong credentials");
+                    if (!userService.authenticate(username, passcode, role)) {
+                        System.out.println("Wrong credentials");
+                        break;
+                    } else {
+                        System.out.println("Successfully logged in");
+                    }
+
+                    userService.login(username);
+                    showClientMenu(role);
+
                     break;
-                } else {
-                    System.out.println("Successfully logged in");
-                }
 
-                userService.login(username);
-                showClientMenu(role);
+                case 2:
+                    registerGymCustomer();
+                    break;
 
-                break;
+                case 3:
+                    registerGymOwner();
+                    break;
 
-            case 2:
-                registerGymCustomer();
-                break;
+                case 4:
+                    userService.updatePassword();
+                    break;
 
-            case 3:
-                registerGymOwner();
-                break;
+                case 5:
+                    return;
 
-            case 4:
-                userService.updatePassword();
-                break;
-
-            case 5:
-                return;
-
-            default:
-                throw new IllegalStateException("Unexpected value: " + option);
+                default:
+                    throw new IllegalStateException("Unexpected value: " + option);
+            }
         }
     }
 

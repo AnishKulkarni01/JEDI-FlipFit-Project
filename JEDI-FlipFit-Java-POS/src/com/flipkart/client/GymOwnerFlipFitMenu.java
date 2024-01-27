@@ -4,6 +4,8 @@ import com.flipkart.bean.Gym;
 import com.flipkart.bean.Slot;
 import com.flipkart.dao.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class GymOwnerFlipFitMenu {
@@ -83,7 +85,7 @@ public class GymOwnerFlipFitMenu {
         String gymId = scanner.next();
         System.out.println("Date : ");
         String date = scanner.next();
-        System.out.println(" StartTime : ");
+        System.out.println("StartTime : ");
         String time = scanner.next();
 
         slotDAO.createSlot(date, time, gymId);
@@ -123,7 +125,13 @@ public class GymOwnerFlipFitMenu {
         int viewSlotGymId= scanner.nextInt();
 
         //need slot.toString()
-        for(Slot slot : slotDAO.getSlotsByGymId(Integer.toString(viewSlotGymId))) {
+        List<Slot> slotList=slotDAO.getSlotsByGymId(Integer.toString(viewSlotGymId));
+        if(slotList.isEmpty())
+        {
+            System.out.println("Enter correect gymId");
+            return;
+        }
+        for(Slot slot : slotList) {
             System.out.println("SlotId : "+slot.getSlotId()+" StartTime : "+slot.getStartTime()+" Date : "+slot.getDate());
         }
     }
