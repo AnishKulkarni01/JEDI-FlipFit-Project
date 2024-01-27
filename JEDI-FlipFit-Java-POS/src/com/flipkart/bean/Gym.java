@@ -58,6 +58,16 @@ public class Gym {
     private String gstin;
     private int seats;
 
+    public String getIsApproved() {
+        return isApproved;
+    }
+
+    public void setIsApproved(String isApproved) {
+        this.isApproved = isApproved;
+    }
+
+    private String isApproved;
+
     @Override
     public String toString() {
         return "Gym{" +

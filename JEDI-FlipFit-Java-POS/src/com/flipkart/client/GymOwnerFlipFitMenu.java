@@ -64,7 +64,7 @@ public class GymOwnerFlipFitMenu {
                     System.out.println("Enter GymId");
                     int updGymId= sc.nextInt();
                     System.out.println("Select Option to Update");
-                    System.out.println("1. Name\n 2. City\n3. Seats\n4. GSTIN");
+                    System.out.println("1. Name\n2. City\n3. Seats\n4. GSTIN");
                     int updOpt=sc.nextInt();
                     System.out.println("Enter new value");
                     String newVal=sc.next();
@@ -92,7 +92,7 @@ public class GymOwnerFlipFitMenu {
                     System.out.println("Enter SlotId");
                     int updSlotId= sc.nextInt();
                     System.out.println("Select Option to Update");
-                    System.out.println("1. Date\n 2. Start Time");
+                    System.out.println("1. Date\n2. Start Time");
                     int updSlotOpt=sc.nextInt();
                     System.out.println("Enter new value");
                     String newSlotVal=sc.next();
@@ -108,7 +108,7 @@ public class GymOwnerFlipFitMenu {
                     sltl=s.getSlotsByGymId(Integer.toString(viewSlotGymId));
                     for(Slot s:sltl)
                     {
-                        System.out.println("SlotId : "+s.getSlotId()+"StartTime : "+s.getStartTime()+" Date : "+s.getDate());
+                        System.out.println("SlotId : "+s.getSlotId()+" StartTime : "+s.getStartTime()+" Date : "+s.getDate());
                     }
                     break;
 

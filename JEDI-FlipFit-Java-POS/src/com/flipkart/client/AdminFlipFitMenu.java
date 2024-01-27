@@ -34,7 +34,7 @@ public class AdminFlipFitMenu {
                     r=gymDao.viewRequests();
                     for(Gym g:r)
                     {
-                        System.out.println("\nGymId : "+g.getGymId()+",GymName : "+g.getName()+",GSTIN : "+g.getGstin()+",City : "+g.getCity()+",Seats : "+g.getSeats()+", GymOwnerId : "+g.getGymOwnerId());
+                        System.out.println("GymId : "+g.getGymId()+",GymName : "+g.getName()+",GSTIN : "+g.getGstin()+",City : "+g.getCity()+",Seats : "+g.getSeats()+", GymOwnerId : "+g.getGymOwnerId());
                     }
                     break;
                 case 2:
@@ -57,7 +57,7 @@ public class AdminFlipFitMenu {
                     req=gymDao.viewRequests();
                     for(Gym g:req)
                     {
-                        System.out.println("\nGymId : "+g.getGymId()+",GymName : "+g.getName()+",GSTIN : "+g.getGstin()+",City : "+g.getCity()+",Seats : "+g.getSeats());
+                        System.out.println("GymId : "+g.getGymId()+",GymName : "+g.getName()+",GSTIN : "+g.getGstin()+",City : "+g.getCity()+",Seats : "+g.getSeats());
                     }
                     int rejectGymId=sc.nextInt();
                     gymDao.deleteGymRequest(rejectGymId);

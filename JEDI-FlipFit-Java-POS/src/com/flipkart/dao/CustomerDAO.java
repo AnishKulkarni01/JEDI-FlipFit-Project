@@ -5,6 +5,14 @@ import com.flipkart.bean.Slot;
 
 import java.util.ArrayList;
 import java.util.List;
+import com.flipkart.utils.Utils;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import static com.flipkart.constants.Constants.*;
 
 public class CustomerDAO {
     static CustomerDAO custDao=null;
@@ -22,45 +30,93 @@ public class CustomerDAO {
     }
     public void registerCustomer(String username, String password,String email,String contact){
         Customer customer = new Customer();
-        customer.setCustomerID(id++);
-        customer.setName(username);
-        customer.setContact(contact);
-        customer.setEmail(email);
-        customer.setPassword(password);
-        customerList.add(customer); //first check if in list
+
+        try {
+            Connection conn = Utils.connect();
+            PreparedStatement stmt = conn.prepareStatement(ADD_NEW_CUSTOMER);
+            stmt.setString(1, username);
+            stmt.setString(2, password);
+            stmt.setString(3, email);
+            stmt.setString(4, contact);
+            stmt.executeUpdate();
+            stmt.close();
+        }  catch (Exception e) {
+            System.out.println(e);
+            System.out.println("Oops! An error occurred. Try again later.");
+        }
+//        customer.setCustomerID(id++);
+//        customer.setName(username);
+//        customer.setContact(contact);
+//        customer.setEmail(email);
+//        customer.setPassword(password);
+//        customerList.add(customer); //first check if in list
         userDao.addUser(username,password,"GYM_CUSTOMER");
-        for(Customer cust : customerList)
-            System.out.println(cust.getName());
+        //for(Customer cust : customerList)
+        //    System.out.println(cust.getName());
     }
 
     public Customer getCustomer(int customerId){
-        for(Customer c:customerList)
-        {
-            if(c.getCustomerID()==customerId)
-            {
-                return c;
-            }
+        Customer customer = new Customer();
+        try {
+            Connection conn = Utils.connect();
+            PreparedStatement stmt = conn.prepareStatement(GET_CUSTOMER_BY_ID);
+            stmt.setString(1, Integer.toString(customerId));
+            ResultSet rs = stmt.executeQuery();
+            rs.next();
+            customer.setEmail(rs.getString("email"));
+            customer.setCustomerID(Integer.parseInt(rs.getString("customerId")));
+            customer.setPassword(rs.getString("password"));
+            customer.setUsername(rs.getString("username"));
+            customer.setContact(rs.getString("contact"));
+
+            stmt.close();
+        } catch (SQLException exp) {
+            exp.printStackTrace();
         }
-        System.out.println("Customer DNE");
-        return null;
+
+        return customer;
+//        for(Customer c:customerList)
+//        {
+//            if(c.getCustomerID()==customerId)
+//            {
+//                return c;
+//            }
+//        }
+//        System.out.println("Customer DNE");
+//        return null;
     }
 
 
     public void updateCustomerDetails(String updatedVal,String attr,int customerId)
     {
-        for(Customer c:customerList)
+        try{
+            Connection conn = Utils.connect();
+            PreparedStatement stmt = conn.prepareStatement(UPDATE_CUSTOMER_DETAILS);
+            stmt.setString(1, attr);
+            stmt.setString(2, updatedVal);
+            stmt.setString(3, Integer.toString(customerId));
+
+            ResultSet rs = stmt.executeQuery();
+            rs.next();
+
+            stmt.close();
+        }catch (SQLException e)
         {
-            if(c.getCustomerID()==customerId)
-            {
-                if(attr.equals("email"))
-                {
-                    c.setEmail(updatedVal);
-                };
-                if(attr.equals("contact")){
-                    c.setContact(updatedVal);
-                };
-            }
+            System.out.println(e);
         }
+//        for(Customer c:customerList)
+//        {
+//            if(c.getCustomerID()==customerId)
+//            {
+//                if(attr.equals("email"))
+//                {
+//                    c.setEmail(updatedVal);
+//                };
+//                if(attr.equals("contact")){
+//                    c.setContact(updatedVal);
+//                };
+//            }
+//        }
     }
 
     public boolean deleteCustomer(int customerId){
@@ -77,10 +133,27 @@ public class CustomerDAO {
     }
 
     public int getIdFromName(String username){
-        for(Customer cust : customerList){
-            if(cust.getName().equals(username)) return cust.getCustomerID();
+        try {
+            Connection conn = Utils.connect();
+            PreparedStatement stmt = conn.prepareStatement(GET_CUSTOMER_BY_USERNAME);
+            stmt.setString(1, username);
+            ResultSet rs = stmt.executeQuery();
+            rs.next();
+            stmt.close();
+
+            return Integer.parseInt(rs.getString("customerId"));
+
+        } catch (SQLException exp) {
+            exp.printStackTrace();
+        } catch (Exception exp) {
+            exp.printStackTrace();
         }
 
         return -1;
+//        for(Customer cust : customerList){
+//            if(cust.getName().equals(username)) return cust.getCustomerID();
+//        }
+//
+//        return -1;
     }
 }

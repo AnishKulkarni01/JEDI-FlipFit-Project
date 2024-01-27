@@ -1,7 +1,7 @@
 package com.flipkart.bean;
 
 public class GymOwner {
-    private int gymOwnerID;
+    private int gymOwnerId;
     private String password;
     private String name;
     private String contact;
@@ -33,12 +33,12 @@ public class GymOwner {
 
     private String address;
 
-    public int getGymOwnerID() {
-        return gymOwnerID;
+    public int getGymOwnerId() {
+        return gymOwnerId;
     }
 
-    public void setGymOwnerID(int gymOwnerID) {
-        this.gymOwnerID = gymOwnerID;
+    public void setGymOwnerId(int gymOwnerId) {
+        this.gymOwnerId = gymOwnerId;
     }
 
     public String getPassword() {

@@ -55,7 +55,7 @@ public class GymCustomerFlipFitMenu
 
                 case 3:
                     System.out.println("Function to View Booking");
-                    System.out.println("cust: " + custId);
+                    //System.out.println("cust: " + custId);
                     List<Booking> lb =  b.getBookingbyCustId(custId);
                     for(Booking b1 : lb){
                         Slot sl = s.getSlotsBySlotId(b1.getSlotId());

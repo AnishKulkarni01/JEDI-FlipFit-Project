@@ -2,8 +2,15 @@ package com.flipkart.dao;
 
 import com.flipkart.bean.Customer;
 import com.flipkart.bean.Gym;
+import com.flipkart.utils.Utils;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.*;
+import static com.flipkart.constants.Constants.*;
+
 
 import static com.flipkart.dao.CustomerDAO.custDao;
 
@@ -15,7 +22,8 @@ public class GymDAO {
     List<Gym>reqList=new ArrayList<>();
 
     private int id = 1;
-
+    private Connection conn = null;
+    private PreparedStatement stmt = null;
 
     public static synchronized GymDAO getInstance() {
         if (gymdao == null) {
@@ -25,29 +33,62 @@ public class GymDAO {
     }
 
 
-    public boolean sendOnboardReq(String gymName, String gstin, String city, int seats,int gymOwnerId) {
-        Gym gym = new Gym();
-        gym.setGymId(id++);
-        gym.setName(gymName);
-        gym.setGstin(gstin);
-        gym.setCity(city);
-        gym.setSeats(seats);
-        gym.setGymOwnerId(gymOwnerId);
-        reqList.add(gym);
+    public boolean sendOnboardReq(String name, String gstin, String city, int seats,int gymOwnerId) {
+
+        try{
+             conn= Utils.connect();
+             stmt = conn.prepareStatement(SEND_GYM_ONBOARD_REQUEST);
+            stmt.setString(1, name);
+            stmt.setString(2, city);
+            stmt.setString(3, gstin);
+            stmt.setString(4, Integer.toString(seats));
+            stmt.setString(5, Integer.toString(gymOwnerId));
+
+            stmt.executeUpdate();
+            stmt.close();
+
+        }catch(SQLException e)
+        {
+            System.out.println(e);
+        }
+//        Gym gym = new Gym();
+//        gym.setGymId(id++);
+//        gym.setName(name);
+//        gym.setGstin(gstin);
+//        gym.setCity(city);
+//        gym.setSeats(seats);
+//        gym.setGymOwnerId(gymOwnerId);
+//        reqList.add(gym);
 
         return true;
     }
     public void onBoardGym(int gymId)
     {
-        for(int i=0;i<reqList.size();i++)
-        {
-            if(reqList.get(i).getGymId()==gymId)
-            {
-                gymList.add(reqList.get(i));
-                reqList.remove(i);
-                return;
-            }
+        try {
+            conn = Utils.connect();
+            //System.out.println("Fetching gyms centres..");
+
+            stmt = conn.prepareStatement(APPROVE_GYM_BY_ID);
+            stmt.setString(1, "true");
+            stmt.setString(2, Integer.toString(gymId));
+            stmt.executeUpdate();
+//            System.out.println("The gym centre has been approved!");
+        } catch (SQLException se) {
+            // Handle errors for JDBC
+            se.printStackTrace();
+        } catch (Exception e) {
+            // Handle errors for Class.forName
+            e.printStackTrace();
         }
+//        for(int i=0;i<reqList.size();i++)
+//        {
+//            if(reqList.get(i).getGymId()==gymId)
+//            {
+//                gymList.add(reqList.get(i));
+//                reqList.remove(i);
+//                return;
+//            }
+//        }
     }
     public void deleteGymRequest(int gymId)
     {
@@ -62,15 +103,38 @@ public class GymDAO {
     }
     public List<Gym> viewPendingRequests(int gymOwnerId)
     {
-      List<Gym> pr=new ArrayList<>();
-      for(Gym g:reqList)
-      {
-          if(g.getGymOwnerId()==gymOwnerId)
-          {
-              pr.add(g);
-          }
-      }
-      return pr;
+        List<Gym> pendingList = new ArrayList<>();
+        try {
+            conn = Utils.connect();
+            System.out.println("Fetching gym centres..");
+
+            stmt = conn.prepareStatement(FETCH_ALL_PENDING_GYM_REQUESTS);
+
+            ResultSet rs = stmt.executeQuery();
+            while(rs.next()) {
+                Gym g=new Gym();
+                     g.setName(rs.getString("name"));
+                        g.setCity(rs.getString("city"));
+                        g.setSeats(Integer.parseInt(rs.getString("seats")));
+                        g.setGstin(rs.getString("gstin"));
+                        g.setGymId(Integer.parseInt(rs.getString("gymId")));
+                        g.setIsApproved(rs.getString("isApproved"));
+                pendingList.add(g);
+            }
+            //conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return pendingList;
+//      List<Gym> pr=new ArrayList<>();
+//      for(Gym g:reqList)
+//      {
+//          if(g.getGymOwnerId()==gymOwnerId)
+//          {
+//              pr.add(g);
+//          }
+//      }
+//      return pr;
     }
 
     public boolean deleteGym(int gymId) {
