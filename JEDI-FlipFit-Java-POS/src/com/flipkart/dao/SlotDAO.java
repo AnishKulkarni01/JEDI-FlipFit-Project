@@ -91,16 +91,16 @@ public class SlotDAO {
 //        }
 //        return l;
     }
-    public Slot getSlotbySlotId(int slotId)
-    {
-        for(Slot slot:slotList)
-        {
-            if(slot.getSlotId()==slotId)return slot;
-        }
-        return new Slot();
-    }
+//    public Slot getSlotbySlotId(int slotId)
+//    {
+//        for(Slot slot:slotList)
+//        {
+//            if(slot.getSlotId()==slotId)return slot;
+//        }
+//        return new Slot();
+//    }
 
-    public Slot getSlotsBySlotId(String slotId) {
+    public Slot getSlotBySlotId(String slotId) {
         Slot slot = new Slot();
         try{
             Connection conn = Utils.connect();

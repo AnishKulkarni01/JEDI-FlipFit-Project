@@ -58,7 +58,7 @@ public class GymCustomerFlipFitMenu
                     //System.out.println("cust: " + custId);
                     List<Booking> lb =  b.getBookingbyCustId(custId);
                     for(Booking b1 : lb){
-                        Slot sl = s.getSlotsBySlotId(b1.getSlotId());
+                        Slot sl = s.getSlotBySlotId(b1.getSlotId());
                         System.out.println("BookingId : "+b1.getBookingId()+" Gym : " + sl.getGymId() + " Time : " + sl.getStartTime()+" Date : "+sl.getDate());
                     }
                     break;
@@ -96,7 +96,7 @@ public class GymCustomerFlipFitMenu
                     List<Booking>canBl=b.getBookingbyCustId(custId);
                     for(Booking book:canBl)
                     {
-                        Slot sb=s.getSlotbySlotId(Integer.parseInt(book.getSlotId()));
+                        Slot sb=s.getSlotBySlotId(book.getSlotId());
                         System.out.println("BookingId : "+book.getBookingId()+" Date : "+sb.getDate()+" Time : "+sb.getStartTime());
                     }
                     System.out.println("Enter BookingId");
