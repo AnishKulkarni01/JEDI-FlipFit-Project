@@ -1,5 +1,6 @@
 package com.flipkart.client;
 import com.flipkart.bean.Booking;
+import com.flipkart.bean.Gym;
 import com.flipkart.bean.Slot;
 import com.flipkart.dao.*;
 import com.flipkart.service.CustomerService;
@@ -30,12 +31,19 @@ public class GymCustomerFlipFitMenu {
         for(String area : areas){
             System.out.println(areas.indexOf(area)+1 + ". " + area);
         }
-
         int areaOption = scanner.nextInt();
         String selectedArea = areas.get(areaOption-1);
+        List<Gym>gymList=gymDao.getGymsByArea(selectedArea);
+        System.out.println("Choose GymId : ");
+        for(int i=0;i<gymList.size();i++)
+        {
+            System.out.println("GymId : "+gymList.get(i).getGymId()+",GymName : "+gymList.get(i).getName());
+        }
+        System.out.println("Enter GymId");
+        String gymId=scanner.next();
 
         System.out.println("Choose a slot at " + selectedArea);
-        List<Slot> slotList = slotDAO.getSlotsByGymId(Integer.toString(areaOption));
+        List<Slot> slotList = slotDAO.getSlotsByGymId(gymId);
         for(Slot slot: slotList) {
             System.out.println("Slot Id : " + slot.getSlotId() +" Date : "+slot.getDate()+"\n Time : "+slot.getStartTime());
         }
@@ -47,7 +55,7 @@ public class GymCustomerFlipFitMenu {
         //booking.toString() later
         for(Booking booking : bookingDAO.getBookingbyCustId(customerId)){
             Slot slot = slotDAO.getSlotBySlotId(booking.getSlotId());
-            System.out.println("BookingId : "+booking.getBookingId()+" Gym : " + slot.getGymId() + " Time : " + slot.getStartTime()+" Date : "+slot.getDate());
+            System.out.println("BookingId : "+booking.getBookingId()+" Gym : " + gymDao.getGymById(slot.getGymId()).getName() + " Time : " + slot.getStartTime()+" Date : "+slot.getDate());
         }
     }
 

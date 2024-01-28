@@ -2,6 +2,7 @@ package com.flipkart.dao;
 
 import com.flipkart.utils.Utils;
 
+import java.io.PushbackReader;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -78,9 +79,22 @@ public class UserDAO {
 
                 ResultSet rs = stmt.executeQuery();
                 rs.next();
-
+                String role=rs.getString("role");
                 userDetailList.add(rs.getString("username"));
                 userDetailList.add(rs.getString("role"));
+                if(role.equals("GYM_CUSTOMER")) {
+                    stmt = conn.prepareStatement(GET_CUSTOMER_BY_USERNAME);
+                }
+                else if(role.equals("GYM_OWNER"))
+                {
+                    stmt = conn.prepareStatement(GET_GYM_OWNER_BY_USERNAME);
+                }
+                stmt.setString(1, this.currentUsername);
+                rs=stmt.executeQuery();
+                rs.next();
+                userDetailList.add(rs.getString("password"));
+                userDetailList.add(rs.getString("contact"));
+                userDetailList.add(rs.getString("email"));
             } catch(Exception e){
                 e.printStackTrace();;
             }

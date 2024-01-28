@@ -21,6 +21,6 @@ public class CustomerService implements CustomerServiceInterface{
 
     public void viewProfile() {
         List<String> userDetails = userDAO.getCurrentUser();
-        System.out.println("Current user is " + userDetails.get(0) + " as a " + userDetails.get(1));
+        System.out.println("Username : " + userDetails.get(0) + "\nRole : " + userDetails.get(1)+"\nPassword : "+userDetails.get(2)+"\nContact : "+userDetails.get(3)+"\nEmail : "+userDetails.get(4));
     }
 }

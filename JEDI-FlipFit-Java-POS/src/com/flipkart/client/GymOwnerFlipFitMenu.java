@@ -3,6 +3,8 @@ package com.flipkart.client;
 import com.flipkart.bean.Gym;
 import com.flipkart.bean.Slot;
 import com.flipkart.dao.*;
+import com.flipkart.service.GymOwnerService;
+import com.flipkart.service.GymOwnerService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,18 +17,20 @@ public class GymOwnerFlipFitMenu {
     GymOwnerDAO ownDao = GymOwnerDAO.getInstance();
     String gymOwnerId = ownDao.getIdFromName(userDao.getCurrentUser().get(0));
     Scanner scanner= new Scanner(System.in);
+    GymOwnerService gymOwnerService=new GymOwnerService();
 
     private void showMenuOptions(){
         System.out.println("1. Request Gym Onboarding\n" +
                 "2. Gym Details Update\n" +
                 "3. Add Slot\n" +
                 "4. Update Slot\n"+
-                "5. ViewSlots\n"+
-                "6. Edit Profile\n" +
-                "7. View Gyms\n"+
-                "8. View Pending Requests\n"+
-                "9. Log out\n" +
-                "10. Back");
+                "5. View Slots\n"+
+                        "6. View Profile\n"+
+                "7. Edit Profile\n" +
+                "8. View Gyms\n"+
+                "9. View Pending Requests\n"+
+                "10. Log out\n" +
+                "11. Back");
     }
 
     private void sendOnboardingRequest(){
@@ -76,7 +80,33 @@ public class GymOwnerFlipFitMenu {
             }
         }
     }
+    private void viewProfile(){
+        System.out.println("Function to View profile");
+        gymOwnerService.viewProfile();
+    }
+    private void editProfile() {
+        while(true) {
+            System.out.println("Function to edit profile");
+            System.out.println("1. Email\n2. Contact");
+            int updateColumn = scanner.nextInt();
 
+            System.out.println("Enter updated value");
+            String newValue = scanner.next();
+
+            switch (updateColumn) {
+                case 1:
+                    gymOwnerService.updateGymOwnerDetails(newValue, "email", gymOwnerId);
+                    return;
+
+                case 2:
+                    gymOwnerService.updateGymOwnerDetails(newValue, "contact", gymOwnerId);
+                    return;
+
+                default:
+                    System.out.println("Please select a valid option");
+            }
+        }
+    }
     private void addSlot(){
         System.out.println("Add Slots");
 
@@ -179,24 +209,26 @@ public class GymOwnerFlipFitMenu {
                 case 5:
                     viewSlots();
                     break;
-
                 case 6:
-                    System.out.println("Profile Edited");
+                    viewProfile();
                     break;
-
                 case 7:
-                    viewGyms();
+                    editProfile();
                     break;
 
                 case 8:
-                    viewPendingRequests();
+                    viewGyms();
                     break;
 
                 case 9:
+                    viewPendingRequests();
+                    break;
+
+                case 10:
                     System.out.println("Logging out");
                     return;
 
-                case 10:
+                case 11:
                     return;
 
                 default:
