@@ -8,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.*;
 
+import static com.flipkart.constants.Constants.ROLE_GYM_OWNER;
 import static com.flipkart.constants.SQLConstants.*;
 
 public class UserDAO {
@@ -25,6 +26,12 @@ public class UserDAO {
 
     public boolean check(String username, String password, String role){
         boolean isRegisteredUser = true;
+        GymOwnerDAO gymOwnerDAO = GymOwnerDAO.getInstance();
+
+        if(Objects.equals(role, ROLE_GYM_OWNER) && Objects.equals(gymOwnerDAO.getIdFromName(username).get(1), "false")){
+            return false;
+        }
+
         try{
             conn = Utils.connect();
             stmt = conn.prepareStatement(AUTHENTICATE_USER);

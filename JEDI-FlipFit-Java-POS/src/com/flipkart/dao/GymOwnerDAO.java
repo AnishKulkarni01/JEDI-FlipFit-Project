@@ -3,10 +3,7 @@ package com.flipkart.dao;
 import com.flipkart.bean.GymOwner;
 import com.flipkart.utils.Utils;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -94,8 +91,8 @@ public class GymOwnerDAO {
         }
     }
 
-    public String getIdFromName(String username){
-        String gymOwnerId = "";
+    public List<String> getIdFromName(String username){
+        List<String> gymOwnerDetails = new ArrayList<>();
 
         try {
             Connection conn = Utils.connect();
@@ -106,12 +103,74 @@ public class GymOwnerDAO {
             ResultSet rs = stmt.executeQuery();
             rs.next();
 
-            gymOwnerId = rs.getString("gymOwnerId");
+            gymOwnerDetails.add(rs.getString("gymOwnerId"));
+            gymOwnerDetails.add(rs.getString("isApproved"));
 
             stmt.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return gymOwnerId;
+
+        return gymOwnerDetails;
+    }
+
+    public List<GymOwner> getPendingGymOwners(){
+        List<GymOwner> gymOwnerList = new ArrayList<>();
+
+        try{
+            System.out.println("Fetching gym owner requests..");
+
+            Connection conn = Utils.connect();
+            PreparedStatement stmt = conn.prepareStatement(FETCH_ALL_PENDING_GYM_OWNERS_QUERY);
+
+            ResultSet rs = stmt.executeQuery();
+
+            while(rs.next()){
+                GymOwner gymOwner = new GymOwner();
+
+                gymOwner.setGymOwnerId(rs.getString("gymOwnerId"));
+                gymOwner.setName(rs.getString("name"));
+                gymOwner.setContact(rs.getString("contact"));
+                gymOwner.setEmail(rs.getString("email"));
+
+                gymOwnerList.add(gymOwner);
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return gymOwnerList;
+    }
+
+    public void approveGymOwner(String gymOwnerId){
+        try{
+            System.out.println("Approving...");
+
+            Connection conn = Utils.connect();
+            PreparedStatement stmt = conn.prepareStatement(SQL_APPROVE_GYM_OWNER_BY_ID_QUERY);
+
+            stmt.setString(1, gymOwnerId);
+
+            stmt.executeUpdate();
+            stmt.close();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public void rejectGymOwner(String gymOwnerId){
+        try{
+            System.out.println("Rejecting...");
+
+            Connection conn = Utils.connect();
+            PreparedStatement stmt = conn.prepareStatement(SQL_REJECT_GYM_OWNER_BY_ID_QUERY);
+
+            stmt.setString(1, gymOwnerId);
+
+            stmt.executeUpdate();
+            stmt.close();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
     }
 }

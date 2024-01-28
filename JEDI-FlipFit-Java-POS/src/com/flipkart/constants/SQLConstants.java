@@ -9,15 +9,16 @@ public class SQLConstants {
 
         // ------------------------ GYM OWNER ------------------------
         public static final String FETCH_ALL_GYM_OWNERS_QUERY = "SELECT * FROM jedi_flipfit_schema.GymOwner;";
-        public static final String FETCH_ALL_PENDING_GYM_OWNERS_QUERY = "SELECT * FROM jedi_flipfit_schema.GymOwner where isApproved = 2;";
+        public static final String FETCH_ALL_PENDING_GYM_OWNERS_QUERY = "SELECT * FROM jedi_flipfit_schema.GymOwner where isApproved = \"false\";";
         public static final String SEND_GYM_OWNER_APPROVAL_REQ_QUERY = "UPDATE jedi_flipfit_schema.GymOwner SET isApproved = 2 WHERE Id =?;";
         public static final String ADD_GYM_CENTRE_QUERY = "INSERT INTO jedi_flipfit_schema.GymCentre (centreId, ownerId, centreName, gstin, city, capacity, price, isApproved) VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
 
         //  ------------ GYM OWNER ------------
         public static final String REGISTER_GYM_OWNER = "Insert into GymOwner values (?,?,?,?,?,?,?);";
         public static final String LOGIN_GYM_OWNER = "Select * from GymOwner where name=? and password=?;";
-        public static final String SQL_APPROVE_GYM_OWNER_BY_ID_QUERY="Update GymOwner Set isApproved=? WHERE Id=?;";
+        public static final String SQL_APPROVE_GYM_OWNER_BY_ID_QUERY="Update GymOwner Set isApproved=\"true\" WHERE Id=?;";
         public static final String UPDATE_GYM_OWNER_DETAILS_EMAIL = "UPDATE jedi_flipfit_schema.GymOwner SET email = ? WHERE gymOwnerId =?;";
+        public static final String SQL_REJECT_GYM_OWNER_BY_ID_QUERY = "DELETE FROM jedi_flipfit_schema where gymOwnerId = ?;";
         public static final String UPDATE_GYM_OWNER_DETAILS_CONTACT = "UPDATE jedi_flipfit_schema.GymOwner SET contact = ? WHERE gymOwnerId =?;";
         public static final String GET_GYM_OWNER_BY_ID = "SELECT * FROM jedi_flipfit_schema.GymOwner WHERE gymOwnerId = ?;";
         public static final String ADD_NEW_GYM_OWNER = "INSERT INTO jedi_flipfit_schema.GymOwner (username,password,email,contact) VALUES ( ?, ?, ?, ?);";

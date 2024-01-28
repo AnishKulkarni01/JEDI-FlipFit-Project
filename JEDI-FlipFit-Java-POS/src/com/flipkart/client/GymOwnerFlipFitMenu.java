@@ -15,7 +15,7 @@ public class GymOwnerFlipFitMenu {
     SlotDAO slotDAO = SlotDAO.getInstance();
     GymDAO gymDao = GymDAO.getInstance();
     GymOwnerDAO ownDao = GymOwnerDAO.getInstance();
-    String gymOwnerId = ownDao.getIdFromName(userDao.getCurrentUser().get(0));
+    String gymOwnerId = ownDao.getIdFromName(userDao.getCurrentUser().get(0)).get(0);
     Scanner scanner= new Scanner(System.in);
     GymOwnerService gymOwnerService=new GymOwnerService();
 
@@ -25,7 +25,7 @@ public class GymOwnerFlipFitMenu {
                 "3. Add Slot\n" +
                 "4. Update Slot\n"+
                 "5. View Slots\n"+
-                        "6. View Profile\n"+
+                "6. View Profile\n"+
                 "7. Edit Profile\n" +
                 "8. View Gyms\n"+
                 "9. View Pending Requests\n"+
