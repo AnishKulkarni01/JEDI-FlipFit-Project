@@ -218,6 +218,7 @@ public class GymOwnerFlipFitMenu {
                     break;
                 case 6:
                     deleteSlot();
+                    break;
                 case 7:
                     viewProfile();
                     break;

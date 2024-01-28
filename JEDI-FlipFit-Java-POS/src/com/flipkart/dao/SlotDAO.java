@@ -4,10 +4,7 @@ package com.flipkart.dao;
 import com.flipkart.bean.Slot;
 import com.flipkart.utils.Utils;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -142,11 +139,15 @@ public class SlotDAO {
         try {
             Connection conn = Utils.connect();
             PreparedStatement stmt = conn.prepareStatement(DELETE_SLOT_BY_ID);
-
             stmt.setString(1, slotId);
-
             stmt.executeUpdate();
-        } catch(Exception e) {
+            System.out.println("Slot Deleted Successfully");
+        }catch(SQLIntegrityConstraintViolationException e) {
+            System.out.println("Slot already booked by Customers");
+            System.out.println("Delete Failed");
+        }
+        catch(Exception e) {
+            System.out.println(e);
             System.out.println("Oops! An error occurred. Try again later.");
         }
     }

@@ -6,6 +6,7 @@ import com.flipkart.utils.Utils;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -72,8 +73,8 @@ public class BookingDAO {
             stmt.setString(1, bookingId);
 
             stmt.executeUpdate();
-        } catch(Exception e) {
-            System.out.println("Oops! An error occurred. Try again later.");
+        }  catch (Exception e){
+            e.printStackTrace();
         }
     }
 }
