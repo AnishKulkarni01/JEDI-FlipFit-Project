@@ -99,7 +99,7 @@ public class GymDAO {
         List<String> areas = new ArrayList<>();
 
         try{
-            System.out.println("Fetching gym centres..");
+            System.out.println(" fetching cities..");
 
             conn = Utils.connect();
             stmt = conn.prepareStatement(FETCH_ALL_AREAS);
@@ -175,7 +175,7 @@ public class GymDAO {
         List<Gym> gymList = new ArrayList<>();
 
         try {
-            System.out.println("Fetching gym centres.."+gymOwnerId);
+            System.out.println("Fetching gym centres..");
 
             conn = Utils.connect();
             stmt = conn.prepareStatement(FETCH_GYMS_BY_OWNER);

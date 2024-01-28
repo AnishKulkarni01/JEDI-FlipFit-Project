@@ -59,10 +59,7 @@ public class GymCustomerFlipFitMenu {
             System.out.println("BookingId : "+booking.getBookingId()+" Gym : " + gymDao.getGymById(slot.getGymId()).getName() + " Time : " + slot.getStartTime()+" Date : "+slot.getDate());
         }
     }
-    private Set<String>getBookedSlotIds(String customerId)
-    {
 
-    }
 
     private void bookSlot(){
         System.out.println("Book your Slot");

@@ -68,23 +68,23 @@ public class SlotDAO {
         return slotList;
     }
     public Set<String> getSlotsByCustomerId(String customerId) {
-        Set<String> slotList = new HashSet<>();
+        Set<String> slotIdList = new HashSet<>();
 
         try {
             Connection conn = Utils.connect();
-            PreparedStatement ps = conn.prepareStatement(FETCH_SLOT_BY_CUSTOMERID);
+            PreparedStatement ps = conn.prepareStatement(GET_BOOKING_BY_CUSTOMER_ID);
 
             ps.setString(1, customerId);
 
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                slotList.add(rs.getString("slotId"));
+                slotIdList.add(rs.getString("slotId"));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
 
-        return slotList;
+        return slotIdList;
     }
 
     public Slot getSlotBySlotId(String slotId) {

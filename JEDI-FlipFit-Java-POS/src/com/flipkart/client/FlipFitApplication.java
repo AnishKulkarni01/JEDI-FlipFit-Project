@@ -160,7 +160,7 @@ public class FlipFitApplication {
     public static void main(String[] args) {
         //Ideally remove this
         AdminDAO adminDAO = AdminDAO.getInstance();
-        adminDAO.registerAdmin("abc","123");
+        //adminDAO.registerAdmin("abc","123");
 
         mainPage();
     }
