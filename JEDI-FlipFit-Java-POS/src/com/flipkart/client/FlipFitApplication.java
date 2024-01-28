@@ -28,7 +28,7 @@ public class FlipFitApplication {
     }
 
     private static String chooseRole(){
-        System.out.println("Choose role : \n" + " 1. "+ YELLOW_COLOR + "Gym Customer\n" + RESET_COLOR + " 2. " + YELLOW_COLOR + "Gym Owner\n" + RESET_COLOR + " 3. " + YELLOW_COLOR + "Gym Admin" + RESET_COLOR);
+        System.out.println("Choose role : \n" + " 1. "+ YELLOW_COLOR + "Gym Customer\n" + RESET_COLOR + " 2. " + YELLOW_COLOR + "Gym Owner\n" + RESET_COLOR + " 3. " + YELLOW_COLOR + "Gym Admin" + RESET_COLOR + "\n");
         int role;
         role = scanner.nextInt();
 
@@ -69,7 +69,7 @@ public class FlipFitApplication {
 
     private static void registerGymCustomer(){
         String username, passcode, email, contact;
-        System.out.println(GREEN_COLOR + "Registering Gym Customer." + RESET_COLOR);
+        System.out.println(GREEN_COLOR + "Registering Gym Customer." + RESET_COLOR + "\n");
 
         System.out.println("Enter customer name:");
         username = scanner.next();
@@ -85,7 +85,7 @@ public class FlipFitApplication {
 
     private static void registerGymOwner(){
         String username, passcode, email, contact;
-        System.out.println(GREEN_COLOR + "Registering Gym Owner." + RESET_COLOR);
+        System.out.println(GREEN_COLOR + "Registering Gym Owner." + RESET_COLOR + "\n");
 
         System.out.println("Enter gym owner name: ");
         username = scanner.next();
