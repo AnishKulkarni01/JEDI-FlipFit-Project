@@ -28,6 +28,8 @@ public class UserDAO {
         boolean isRegisteredUser = true;
         GymOwnerDAO gymOwnerDAO = GymOwnerDAO.getInstance();
 
+        //System.out.println(role + " " + gymOwnerDAO.getIdFromName(username).get(1));
+
         if(Objects.equals(role, ROLE_GYM_OWNER) && Objects.equals(gymOwnerDAO.getIdFromName(username).get(1), "false")){
             return false;
         }

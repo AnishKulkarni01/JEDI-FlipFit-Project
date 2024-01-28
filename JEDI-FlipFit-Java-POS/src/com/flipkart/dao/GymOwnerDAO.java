@@ -129,7 +129,7 @@ public class GymOwnerDAO {
                 GymOwner gymOwner = new GymOwner();
 
                 gymOwner.setGymOwnerId(rs.getString("gymOwnerId"));
-                gymOwner.setName(rs.getString("name"));
+                gymOwner.setName(rs.getString("username"));
                 gymOwner.setContact(rs.getString("contact"));
                 gymOwner.setEmail(rs.getString("email"));
 
