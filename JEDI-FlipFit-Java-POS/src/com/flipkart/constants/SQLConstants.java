@@ -71,5 +71,7 @@ public class SQLConstants {
         public static final String FETCH_SLOT_BY_ID_AND_CENTRE_ID = "SELECT * FROM jedi_flipfit_schema.Slot WHERE slotId=? AND centreId=?;";
         public static final String GET_BOOKING_BY_BOOKING_ID ="Select * From jedi_flipfit_schema.Booking where bookingId = ?;";
         public static final String GET_USERPLAN_BY_CUSTOMER_ID = "select * from slot join schedule where slot.slotId=schedule.slotId and schedule.scheduleId=?;";public static final String UPDATE_SLOT_DETAILS_DATE = "UPDATE jedi_flipfit_schema.Slot SET date = ? WHERE slotId =?;";
+        public static final String DELETE_SLOT_BY_ID= "Delete from jedi_flipfit_schema.Slot where slotId = ?;";
+
         public static final String UPDATE_SLOT_DETAILS_STARTTIME = "UPDATE jedi_flipfit_schema.Slot SET startTime = ? WHERE slotId =?;";
 }

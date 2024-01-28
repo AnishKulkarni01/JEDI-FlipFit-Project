@@ -137,4 +137,17 @@ public class SlotDAO {
             e.printStackTrace();
         }
     }
+    public void deleteSlotById(String slotId)
+    {
+        try {
+            Connection conn = Utils.connect();
+            PreparedStatement stmt = conn.prepareStatement(DELETE_SLOT_BY_ID);
+
+            stmt.setString(1, slotId);
+
+            stmt.executeUpdate();
+        } catch(Exception e) {
+            System.out.println("Oops! An error occurred. Try again later.");
+        }
+    }
 }

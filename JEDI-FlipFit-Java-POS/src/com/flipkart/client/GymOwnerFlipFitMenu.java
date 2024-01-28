@@ -25,12 +25,13 @@ public class GymOwnerFlipFitMenu {
                 "3. Add Slot\n" +
                 "4. Update Slot\n"+
                 "5. View Slots\n"+
-                "6. View Profile\n"+
-                "7. Edit Profile\n" +
-                "8. View Gyms\n"+
-                "9. View Pending Requests\n"+
-                "10. Log out\n" +
-                "11. Back");
+                "6. Delete Slot\n"+
+                "7. View Profile\n"+
+                "8. Edit Profile\n" +
+                "9. View Gyms\n"+
+                "10. View Pending Requests\n"+
+                "11. Log out\n" +
+                "12. Back");
     }
 
     private void sendOnboardingRequest(){
@@ -165,6 +166,12 @@ public class GymOwnerFlipFitMenu {
             System.out.println("SlotId : "+slot.getSlotId()+" StartTime : "+slot.getStartTime()+" Date : "+slot.getDate());
         }
     }
+    private void deleteSlot()
+    {
+        System.out.println("Enter SlotId : ");
+        int delSlotId=scanner.nextInt();
+        slotDAO.deleteSlotById(Integer.toString(delSlotId));
+    }
 
     private void viewGyms(){
         System.out.println("Viewing Gyms");
@@ -210,25 +217,27 @@ public class GymOwnerFlipFitMenu {
                     viewSlots();
                     break;
                 case 6:
+                    deleteSlot();
+                case 7:
                     viewProfile();
                     break;
-                case 7:
+                case 8:
                     editProfile();
                     break;
 
-                case 8:
+                case 9:
                     viewGyms();
                     break;
 
-                case 9:
+                case 10:
                     viewPendingRequests();
                     break;
 
-                case 10:
+                case 11:
                     System.out.println("Logging out");
                     return;
 
-                case 11:
+                case 12:
                     return;
 
                 default:
