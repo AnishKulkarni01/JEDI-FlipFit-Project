@@ -5,6 +5,8 @@ import com.flipkart.dao.UserDAO;
 import java.util.List;
 import java.util.Scanner;
 
+import static com.flipkart.constants.Constants.*;
+
 public class UserService implements UserServiceInterface {
     UserDAO userDAO = UserDAO.getInstance();
     Scanner scanner = new Scanner(System.in);
@@ -26,7 +28,7 @@ public class UserService implements UserServiceInterface {
 
         String newPassword, newPasswordConfirmation;
 
-        System.out.println("Updating Password");
+        System.out.println(BLUE_COLOR + "Updating Password" + RESET_COLOR);
         System.out.println("Enter the new password");
         newPassword = scanner.nextLine();
 
@@ -36,11 +38,11 @@ public class UserService implements UserServiceInterface {
         while(true){
             if(newPassword.equals(newPasswordConfirmation)){
                 userDAO.updatePassword(newPassword);
-                System.out.println("Password has been successfully updated for the user " + currentUserDetails.get(0));
+                System.out.println(GREEN_COLOR + "Password has been successfully updated for the user " + currentUserDetails.get(0) + RESET_COLOR);
 
                 return;
             } else {
-                System.out.println("Password didn't match");
+                System.out.println(RED_COLOR + "Password didn't match" + RESET_COLOR);
                 System.out.println("Enter the new password");
                 newPassword = scanner.nextLine();
                 

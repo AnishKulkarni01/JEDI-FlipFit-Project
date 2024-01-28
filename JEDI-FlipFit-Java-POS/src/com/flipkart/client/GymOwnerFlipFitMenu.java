@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import static com.flipkart.constants.Constants.*;
+
 public class GymOwnerFlipFitMenu {
     UserDAO userDao = UserDAO.getInstance();
     SlotDAO slotDAO = SlotDAO.getInstance();
@@ -20,22 +22,22 @@ public class GymOwnerFlipFitMenu {
     GymOwnerService gymOwnerService=new GymOwnerService();
 
     private void showMenuOptions(){
-        System.out.println("1. Request Gym Onboarding\n" +
-                "2. Gym Details Update\n" +
-                "3. Add Slot\n" +
-                "4. Update Slot\n"+
-                "5. View Slots\n"+
-                "6. Delete Slot\n"+
-                "7. View Profile\n"+
-                "8. Edit Profile\n" +
-                "9. View Gyms\n"+
-                "10. View Pending Requests\n"+
-                "11. Log out\n" +
-                "12. Back");
+        System.out.println("1. " + YELLOW_COLOR + "Request Gym Onboarding\n" + RESET_COLOR +
+                "2. " + YELLOW_COLOR + "Gym Details Update\n" + RESET_COLOR  +
+                "3. " + YELLOW_COLOR + "Add Slot\n" + RESET_COLOR +
+                "4. " + YELLOW_COLOR + "Update Slot\n" + RESET_COLOR +
+                "5. " + YELLOW_COLOR + "View Slots\n" + RESET_COLOR +
+                "6. " + YELLOW_COLOR + "Delete Slot\n" + RESET_COLOR +
+                "7. " + YELLOW_COLOR + "View Profile\n" + RESET_COLOR +
+                "8. " + YELLOW_COLOR + "Edit Profile\n" + RESET_COLOR +
+                "9. " + YELLOW_COLOR + "View Gyms\n" + RESET_COLOR +
+                "10. " + YELLOW_COLOR + "View Pending Requests\n" + RESET_COLOR +
+                "11. " + YELLOW_COLOR + "Log Out\n" + RESET_COLOR +
+                "12. " + YELLOW_COLOR + "Back" + RESET_COLOR);
     }
 
     private void sendOnboardingRequest(){
-        System.out.println("Enter Gym Details");
+        System.out.println("Enter Gym Details - ");
 
         System.out.println("Enter Gym Name : ");
         String gymName = scanner.next();
@@ -47,13 +49,16 @@ public class GymOwnerFlipFitMenu {
         int seats = scanner.nextInt();
 
         gymDao.sendOnboardReq(gymName, gstin, city, seats, gymOwnerId);
-        System.out.println("Request Sent Successfully");
+        System.out.println(GREEN_COLOR + "Request Sent Successfully" + RESET_COLOR);
     }
 
     private void updateGym(String gymId){
         while(true) {
-            System.out.println("Select Option to Update");
-            System.out.println("1. Name\n2. City\n3. Seats\n4. GSTIN");
+            System.out.println("Select Option to Update - ");
+            System.out.println("1. " + YELLOW_COLOR + "Name\n" + RESET_COLOR +
+                    "2. " + YELLOW_COLOR + "City\n" + RESET_COLOR +
+                    "3. " + YELLOW_COLOR + "Seats\n" + RESET_COLOR +
+                    "4. " + YELLOW_COLOR + "GSTIN" + RESET_COLOR);
             int updateColumn = scanner.nextInt();
 
             System.out.println("Enter new value");
@@ -63,55 +68,53 @@ public class GymOwnerFlipFitMenu {
                 case 1:
                     gymDao.updateGym(newValue, "name", gymId);
                     return;
-
                 case 2:
                     gymDao.updateGym(newValue, "city", gymId);
                     return;
-
                 case 3:
                     gymDao.updateGym(newValue, "seats", gymId);
                     return;
-
                 case 4:
                     gymDao.updateGym(newValue, "gstin", gymId);
                     return;
-
                 default:
-                    System.out.println("Please select a valid option");
+                    System.out.println(RED_COLOR + "Please select a valid option" + RESET_COLOR);
             }
         }
     }
     private void viewProfile(){
-        System.out.println("Function to View profile");
+        System.out.println("Profile details are as follows - ");
         gymOwnerService.viewProfile();
     }
     private void editProfile() {
         while(true) {
-            System.out.println("Function to edit profile");
-            System.out.println("1. Email\n2. Contact");
+            System.out.println("Choose an appropriate option to update the value - ");
+            System.out.println("1. " + YELLOW_COLOR + "Email\n" + RESET_COLOR +
+                    "2. " + YELLOW_COLOR + "Contact" + RESET_COLOR);
             int updateColumn = scanner.nextInt();
-
-            System.out.println("Enter updated value");
-            String newValue = scanner.next();
 
             switch (updateColumn) {
                 case 1:
+                    System.out.println("Enter the updated email");
+                    String newValue = scanner.next();
                     gymOwnerService.updateGymOwnerDetails(newValue, "email", gymOwnerId);
+                    System.out.println(GREEN_COLOR + "Email has been updated successfully." + RESET_COLOR);
                     return;
-
                 case 2:
-                    gymOwnerService.updateGymOwnerDetails(newValue, "contact", gymOwnerId);
+                    System.out.println("Enter the updated contact number - ");
+                    String newValue1 = scanner.next();
+                    gymOwnerService.updateGymOwnerDetails(newValue1, "contact", gymOwnerId);
+                    System.out.println(GREEN_COLOR + "Contact number has been updated successfully." + RESET_COLOR);
                     return;
-
                 default:
-                    System.out.println("Please select a valid option");
+                    System.out.println(RED_COLOR + "Please select a valid option" + RESET_COLOR);
             }
         }
     }
     private void addSlot(){
         System.out.println("Add Slots");
 
-        System.out.println("Enter the following details : ");
+        System.out.println(BLUE_COLOR + "Enter the following details - " + RESET_COLOR);
         System.out.println("GymId : ");
         String gymId = scanner.next();
         System.out.println("Date : ");
@@ -128,8 +131,9 @@ public class GymOwnerFlipFitMenu {
             System.out.println("Enter SlotId");
             String updateSlotId = scanner.next();
 
-            System.out.println("Select Option to Update");
-            System.out.println("1. Date\n2. Start Time");
+            System.out.println("Select Option to Update - ");
+            System.out.println("1. " + YELLOW_COLOR + "Date\n" + RESET_COLOR +
+                    "2. " + YELLOW_COLOR + "Start Time" + RESET_COLOR);
             int updateSlotColumn = scanner.nextInt();
 
             System.out.println("Enter new value");
@@ -139,13 +143,11 @@ public class GymOwnerFlipFitMenu {
                 case 1:
                     slotDAO.updateSlot(newValue, "date", updateSlotId);
                     return;
-
                 case 2:
                     slotDAO.updateSlot(newValue, "startTime", updateSlotId);
                     return;
-
                 default:
-                    System.out.println("Please select valid options.");
+                    System.out.println(RED_COLOR + "Please select valid option." + RESET_COLOR);
             }
         }
     }
@@ -196,23 +198,18 @@ public class GymOwnerFlipFitMenu {
                 case 1:
                     sendOnboardingRequest();
                     break;
-
                 case 2:
                     System.out.println("Gym Details Update");
                     System.out.println("Enter GymId");
                     String updateGymId = scanner.next();
-
                     updateGym(updateGymId);
                     break;
-
                 case 3:
                     addSlot();
                     break;
-
                 case 4:
                     updateSlot();
                     break;
-
                 case 5:
                     viewSlots();
                     break;
@@ -225,24 +222,19 @@ public class GymOwnerFlipFitMenu {
                 case 8:
                     editProfile();
                     break;
-
                 case 9:
                     viewGyms();
                     break;
-
                 case 10:
                     viewPendingRequests();
                     break;
-
                 case 11:
-                    System.out.println("Logging out");
+                    System.out.println(GREEN_COLOR + "Logged out successfully." + RESET_COLOR);
                     return;
-
                 case 12:
                     return;
-
                 default:
-                    throw new IllegalStateException("Unexpected value: " + opt);
+                    throw new IllegalStateException(RED_COLOR + "Unexpected value: " + opt + RESET_COLOR);
             }
         }
     }

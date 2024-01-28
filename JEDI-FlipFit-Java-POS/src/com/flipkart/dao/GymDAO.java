@@ -7,6 +7,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.*;
+
+import static com.flipkart.constants.Constants.*;
 import static com.flipkart.constants.SQLConstants.*;
 
 
@@ -51,6 +53,7 @@ public class GymDAO {
             stmt.setString(2, gymId);
 
             stmt.executeUpdate();
+            System.out.println(GREEN_COLOR + "Gym Onboarding request with " + gymId + " has been approved." + RESET_COLOR);
         } catch (Exception e) {
             // Handle errors for Class.forName
             e.printStackTrace();
@@ -99,20 +102,17 @@ public class GymDAO {
         List<String> areas = new ArrayList<>();
 
         try{
-            System.out.println(" fetching cities..");
-
+            System.out.println("Fetching areas...");
             conn = Utils.connect();
             stmt = conn.prepareStatement(FETCH_ALL_AREAS);
 
             ResultSet rs = stmt.executeQuery();
-
             while(rs.next()){
                 areas.add(rs.getString("city"));
             }
         } catch (Exception e){
             e.printStackTrace();
         }
-
         return areas;
     }
 
@@ -204,7 +204,7 @@ public class GymDAO {
         List<Gym> pendingList = new ArrayList<>();
 
         try {
-            System.out.println("Fetching gym centres..");
+            System.out.println(PURPLE_COLOR + "Fetching pending requests from database..." + RESET_COLOR);
 
             conn = Utils.connect();
             stmt = conn.prepareStatement(FETCH_ALL_PENDING_GYM_REQUESTS);
