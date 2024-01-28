@@ -18,7 +18,7 @@ public class SQLConstants {
         public static final String LOGIN_GYM_OWNER = "Select * from GymOwner where name=? and password=?;";
         public static final String SQL_APPROVE_GYM_OWNER_BY_ID_QUERY="Update GymOwner Set isApproved=\"true\" WHERE gymOwnerId=?;";
         public static final String UPDATE_GYM_OWNER_DETAILS_EMAIL = "UPDATE jedi_flipfit_schema.GymOwner SET email = ? WHERE gymOwnerId =?;";
-        public static final String SQL_REJECT_GYM_OWNER_BY_ID_QUERY = "DELETE FROM jedi_flipfit_schema where gymOwnerId = ?;";
+        public static final String SQL_REJECT_GYM_OWNER_BY_ID_QUERY = "DELETE FROM jedi_flipfit_schema.GymOwner where gymOwnerId = ?;";
         public static final String UPDATE_GYM_OWNER_DETAILS_CONTACT = "UPDATE jedi_flipfit_schema.GymOwner SET contact = ? WHERE gymOwnerId =?;";
         public static final String GET_GYM_OWNER_BY_ID = "SELECT * FROM jedi_flipfit_schema.GymOwner WHERE gymOwnerId = ?;";
         public static final String ADD_NEW_GYM_OWNER = "INSERT INTO jedi_flipfit_schema.GymOwner (username,password,email,contact) VALUES ( ?, ?, ?, ?);";
