@@ -9,7 +9,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import static com.flipkart.constants.SQLConstants.*;
 
@@ -58,6 +60,25 @@ public class SlotDAO {
                 slt.setStartTime(rs.getString("startTime"));
 
                 slotList.add(slt);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return slotList;
+    }
+    public Set<String> getSlotsByCustomerId(String customerId) {
+        Set<String> slotList = new HashSet<>();
+
+        try {
+            Connection conn = Utils.connect();
+            PreparedStatement ps = conn.prepareStatement(FETCH_SLOT_BY_CUSTOMERID);
+
+            ps.setString(1, customerId);
+
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                slotList.add(rs.getString("slotId"));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);

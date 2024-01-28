@@ -158,7 +158,7 @@ public class GymOwnerFlipFitMenu {
         List<Slot> slotList=slotDAO.getSlotsByGymId(Integer.toString(viewSlotGymId));
         if(slotList.isEmpty())
         {
-            System.out.println("Enter correect gymId");
+            System.out.println("Enter correct gymId");
             return;
         }
         for(Slot slot : slotList) {

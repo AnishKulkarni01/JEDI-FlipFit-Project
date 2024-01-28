@@ -41,11 +41,12 @@ public class GymCustomerFlipFitMenu {
         }
         System.out.println("Enter GymId");
         String gymId=scanner.next();
+        Set<String>st=slotDAO.getSlotsByCustomerId(customerId);
 
         System.out.println("Choose a slot at " + selectedArea);
         List<Slot> slotList = slotDAO.getSlotsByGymId(gymId);
         for(Slot slot: slotList) {
-            System.out.println("Slot Id : " + slot.getSlotId() +" Date : "+slot.getDate()+"\n Time : "+slot.getStartTime());
+            if(!st.contains(slot.getSlotId())) System.out.println("Slot Id : " + slot.getSlotId() +" Date : "+slot.getDate()+" Time : "+slot.getStartTime());
         }
     }
 
@@ -57,6 +58,10 @@ public class GymCustomerFlipFitMenu {
             Slot slot = slotDAO.getSlotBySlotId(booking.getSlotId());
             System.out.println("BookingId : "+booking.getBookingId()+" Gym : " + gymDao.getGymById(slot.getGymId()).getName() + " Time : " + slot.getStartTime()+" Date : "+slot.getDate());
         }
+    }
+    private Set<String>getBookedSlotIds(String customerId)
+    {
+
     }
 
     private void bookSlot(){
