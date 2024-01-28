@@ -4,6 +4,8 @@ import com.flipkart.bean.Gym;
 import com.flipkart.bean.GymOwner;
 import com.flipkart.dao.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import static com.flipkart.constants.Constants.*;
@@ -18,19 +20,19 @@ public class AdminFlipFitMenu {
     }
 
     private void printGymRequests(){
-        for(Gym gym : gymDao.viewRequests()){
+        List<Gym> requestDetails = gymDao.viewRequests();
+        String[] headers = {PURPLE_COLOR + "  GymId  " + RESET_COLOR, PURPLE_COLOR + "  Name   " + RESET_COLOR, PURPLE_COLOR + "  City   " + RESET_COLOR, PURPLE_COLOR + "  GSTIN  " + RESET_COLOR, PURPLE_COLOR + "  Seats   " + RESET_COLOR};
+        System.out.println("| " + String.join(" | ", headers) + " |");
+        for(Gym gym : requestDetails){
             String output = gym.toString();
-            System.out.println(output);
+//            System.out.println(output);
             String[] keyValuePairs = output
                     .replace("{", "")
                     .replace("}", "")
                     .split(",\\s*");
 
-            String[] headers = {PURPLE_COLOR + "  GymId  " + RESET_COLOR, PURPLE_COLOR + "  Name   " + RESET_COLOR, PURPLE_COLOR + "  City   " + RESET_COLOR, PURPLE_COLOR + "  GSTIN  " + RESET_COLOR, PURPLE_COLOR + "  Seats   " + RESET_COLOR};
-            System.out.println("| " + String.join(" | ", headers) + " |");
             for (String pair : keyValuePairs) {
                 String[] entry = pair.split("=");
-                String key = entry[0].trim();
                 String value = entry[1].trim();
                 String formatSpecifier = "%-10s";
                 System.out.printf("| " + formatSpecifier, value);
@@ -40,11 +42,32 @@ public class AdminFlipFitMenu {
     }
 
     private void printGymOwnerRequests(){
-        for(GymOwner gymOwner : gymOwnerDAO.getPendingGymOwners()){
-            System.out.println("Gym Owner Id: " + gymOwner.getGymOwnerId() + "\n" +
-                    "Gym Owner Name : " + gymOwner.getName() +"\n"+
-                    "Gym Owner Contact : " + gymOwner.getContact() + "\n" +
-                    "Gym Owner Email:" + gymOwner.getEmail() +"\n" );
+        List<GymOwner> gymOwnerList = gymOwnerDAO.getPendingGymOwners();
+        String[] headers = {PURPLE_COLOR + " Gym Owner Id " + RESET_COLOR, PURPLE_COLOR + " Gym Owner Name " + RESET_COLOR, PURPLE_COLOR + " Gym Owner Contact " + RESET_COLOR, PURPLE_COLOR + " Gym Owner Email " + RESET_COLOR};
+        System.out.println("| " + String.join(" | ", headers) + " |");
+        for(GymOwner gymOwner : gymOwnerList){
+            ArrayList<String> details = new ArrayList<>();
+            details.add(gymOwner.getGymOwnerId());
+            details.add(gymOwner.getName());
+            details.add(gymOwner.getContact());
+            details.add(gymOwner.getEmail());
+            String formatSpecifier;
+            for(int i=0; i< details.size(); i++){
+                if(i==0){
+                    formatSpecifier = "%-15s";
+                }
+                else if(i==1){
+                    formatSpecifier = "%-17s";
+                }
+                else if(i==2){
+                    formatSpecifier = "%-20s";
+                }
+                else{
+                    formatSpecifier = "%-17s";
+                }
+                System.out.printf("| " + formatSpecifier, details.get(i));
+            }
+            System.out.println(" |");
         }
     }
 
@@ -59,27 +82,26 @@ public class AdminFlipFitMenu {
                     printGymRequests();
                     break;
                 case 2:
-                    System.out.println(BLUE_COLOR + "Select GymId to Approve Request - " + RESET_COLOR);
                     printGymRequests();
-
+                    System.out.println(BLUE_COLOR + "Select GymId to Approve Request - " + RESET_COLOR);
                     int approvedGymId= scanner.nextInt();
                     gymDao.onBoardGym(String.valueOf(approvedGymId));
                     break;
                 case 3:
-                    System.out.println(BLUE_COLOR + "Select GymId to Reject Request - " + RESET_COLOR);
                     printGymRequests();
+                    System.out.println(BLUE_COLOR + "Select GymId to Reject Request - " + RESET_COLOR);
                     int rejectGymId= scanner.nextInt();
                     gymDao.deleteGymRequest(String.valueOf(rejectGymId));
                     break;
                 case 4:
-                    System.out.println(BLUE_COLOR + "Select GymOwnerId to approve request - " + RESET_COLOR);
                     printGymOwnerRequests();
+                    System.out.println(BLUE_COLOR + "Select GymOwnerId to approve request - " + RESET_COLOR);
                     int approveGymOwnerId = scanner.nextInt();
                     gymOwnerDAO.approveGymOwner(String.valueOf(approveGymOwnerId));
                     break;
                 case 5:
-                    System.out.println(BLUE_COLOR + "Select GymOwnerId to reject request - " + RESET_COLOR);
                     printGymOwnerRequests();
+                    System.out.println(BLUE_COLOR + "Select GymOwnerId to reject request - " + RESET_COLOR);
                     int rejectGymOwnerId = scanner.nextInt();
                     gymOwnerDAO.rejectGymOwner(String.valueOf(rejectGymOwnerId));
                     break;

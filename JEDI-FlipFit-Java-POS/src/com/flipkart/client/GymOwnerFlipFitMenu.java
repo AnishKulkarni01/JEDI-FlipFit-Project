@@ -164,8 +164,28 @@ public class GymOwnerFlipFitMenu {
             System.out.println("Enter correct gymId");
             return;
         }
+        String[] headers = {PURPLE_COLOR + " Slot Id " + RESET_COLOR, PURPLE_COLOR + " Start Time " + RESET_COLOR, PURPLE_COLOR + " Date " + RESET_COLOR};
+        System.out.println("| " + String.join(" | ", headers) + " |");
         for(Slot slot : slotList) {
-            System.out.println("SlotId : "+slot.getSlotId()+" StartTime : "+slot.getStartTime()+" Date : "+slot.getDate());
+            ArrayList<String> details = new ArrayList<>();
+            details.add(slot.getSlotId());
+            details.add(slot.getStartTime());
+            details.add(slot.getDate());
+            String formatSpecifier;
+            for(int i=0; i< details.size(); i++){
+                if(i==0){
+                    formatSpecifier = "%-10s";
+                }
+                else if(i==1){
+                    formatSpecifier = "%-13s";
+                }
+                else{
+                    formatSpecifier = "%-6s";
+                }
+                System.out.printf("| " + formatSpecifier, details.get(i));
+            }
+            System.out.println(" |");
+//            System.out.println("SlotId : "+slot.getSlotId()+" StartTime : "+slot.getStartTime()+" Date : "+slot.getDate());
         }
     }
     private void deleteSlot()
