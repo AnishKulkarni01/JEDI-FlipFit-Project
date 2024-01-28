@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import static com.flipkart.constants.Constants.GREEN_COLOR;
+import static com.flipkart.constants.Constants.RESET_COLOR;
 import static com.flipkart.constants.SQLConstants.*;
 
 public class GymOwnerDAO {
@@ -144,8 +146,7 @@ public class GymOwnerDAO {
 
     public void approveGymOwner(String gymOwnerId){
         try{
-            System.out.println("Approving...");
-
+//            System.out.println("Approving...");
             Connection conn = Utils.connect();
             PreparedStatement stmt = conn.prepareStatement(SQL_APPROVE_GYM_OWNER_BY_ID_QUERY);
 
@@ -153,6 +154,7 @@ public class GymOwnerDAO {
 
             stmt.executeUpdate();
             stmt.close();
+            System.out.println(GREEN_COLOR + "Gym Owner Request with GymOwnerId " + gymOwnerId + " has been successfully approved." + RESET_COLOR);
         } catch (Exception e){
             e.printStackTrace();
         }
@@ -160,8 +162,7 @@ public class GymOwnerDAO {
 
     public void rejectGymOwner(String gymOwnerId){
         try{
-            System.out.println("Rejecting...");
-
+//            System.out.println("Rejecting...");
             Connection conn = Utils.connect();
             PreparedStatement stmt = conn.prepareStatement(SQL_REJECT_GYM_OWNER_BY_ID_QUERY);
 
@@ -169,6 +170,7 @@ public class GymOwnerDAO {
 
             stmt.executeUpdate();
             stmt.close();
+            System.out.println(GREEN_COLOR + "Gym Owner Request with GymOwnerId " + gymOwnerId + " has been successfully rejected." + RESET_COLOR);
         } catch (Exception e){
             e.printStackTrace();
         }

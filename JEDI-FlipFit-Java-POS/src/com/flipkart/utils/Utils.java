@@ -1,6 +1,8 @@
 package com.flipkart.utils;
 import java.sql.*;
 
+import static com.flipkart.constants.Constants.*;
+
 public class Utils {
     static final String DB_URL = "jdbc:mysql://localhost:3306/jedi_flipfit_schema";
     static final String USER = "root";
@@ -17,15 +19,15 @@ public class Utils {
 
     public static Connection connect() throws SQLException {
         if (singleInstance == null || singleInstance.isClosed()) {
-            System.out.println("Creating a new connection to DB....");
+            System.out.println(PURPLE_COLOR + "Creating a new connection to DB...." + RESET_COLOR);
 
             try {
                 Connection connection = DriverManager.getConnection(DB_URL, USER, PASS);
-                System.out.println("Database Connected");
+                System.out.println(GREEN_COLOR + "Connection to database is successful." + RESET_COLOR);
                 singleInstance = connection;
                 return connection;
             } catch (SQLException e) {
-                throw new RuntimeException("Error establishing the database connection", e);
+                throw new RuntimeException(RED_COLOR + "Error in establishing the database connection - " + RESET_COLOR, e);
             }
         } else {
             return singleInstance;

@@ -10,6 +10,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import static com.flipkart.constants.Constants.*;
 import static com.flipkart.constants.SQLConstants.*;
 
 public class SlotDAO {
@@ -141,14 +142,14 @@ public class SlotDAO {
             PreparedStatement stmt = conn.prepareStatement(DELETE_SLOT_BY_ID);
             stmt.setString(1, slotId);
             stmt.executeUpdate();
-            System.out.println("Slot Deleted Successfully");
+            System.out.println(GREEN_COLOR + "Slot Deleted Successfully." + RESET_COLOR);
         }catch(SQLIntegrityConstraintViolationException e) {
-            System.out.println("Slot already booked by Customers");
-            System.out.println("Delete Failed");
+            System.out.println(YELLOW_COLOR + "Slot already booked by Customers" +  RESET_COLOR);
+            System.out.println(RED_COLOR + "Delete Failed" + RESET_COLOR);
         }
         catch(Exception e) {
             System.out.println(e);
-            System.out.println("Oops! An error occurred. Try again later.");
+            System.out.println(RED_COLOR + "Oops! An error occurred. Try again later." + RESET_COLOR);
         }
     }
 }

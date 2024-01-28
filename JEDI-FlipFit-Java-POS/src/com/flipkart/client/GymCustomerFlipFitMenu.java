@@ -7,6 +7,8 @@ import com.flipkart.service.CustomerService;
 
 import java.util.*;
 
+import static com.flipkart.constants.Constants.*;
+
 public class GymCustomerFlipFitMenu {
     CustomerService customerService=new CustomerService();UserDAO userDao= UserDAO.getInstance();
     CustomerDAO customerDAO = CustomerDAO.getInstance();
@@ -17,19 +19,13 @@ public class GymCustomerFlipFitMenu {
     Scanner scanner = new Scanner(System.in);
 
     private void showMenuOptions() {
-        System.out.println("1. Edit Profile\n" +
-                "2. View Profile\n" +
-                "3. View Bookings\n" +
-                "4. Book Slot\n" +
-                "5. Cancel Booking\n" +
-                "6. Log out\n" +
-                "7. Back");
+        System.out.println("1. " + YELLOW_COLOR + "Edit Profile\n" + RESET_COLOR + "2. " + YELLOW_COLOR + "View Profile\n" + RESET_COLOR + "3. " + YELLOW_COLOR + "View Bookings\n" + RESET_COLOR + "4. " + YELLOW_COLOR + "Book Slot\n" + RESET_COLOR + "5. " + YELLOW_COLOR + "Cancel Booking\n" + RESET_COLOR + "6. " + YELLOW_COLOR + "Log Out\n" + RESET_COLOR + "7. " + YELLOW_COLOR + "Back" + RESET_COLOR);
     }
 
     private void listSlots(){
         List<String> areas = gymDao.getAllAreas();
         for(String area : areas){
-            System.out.println(areas.indexOf(area)+1 + ". " + area);
+            System.out.println("    " + areas.indexOf(area)+1 + ". " + area);
         }
         int areaOption = scanner.nextInt();
         String selectedArea = areas.get(areaOption-1);
@@ -51,7 +47,7 @@ public class GymCustomerFlipFitMenu {
     }
 
     private void viewBookings(){
-        System.out.println("Function to View Booking");
+        System.out.println(BLUE_COLOR + "The bookings are as follows - " + RESET_COLOR);
 
         //booking.toString() later
         for(Booking booking : bookingDAO.getBookingbyCustId(customerId)){
@@ -62,7 +58,7 @@ public class GymCustomerFlipFitMenu {
 
 
     private void bookSlot(){
-        System.out.println("Book your Slot");
+        System.out.println(BLUE_COLOR + "Book your Slot :)" + RESET_COLOR);
         System.out.println("Select an area where you'd like to book a slot.");
 
         listSlots();
@@ -70,7 +66,7 @@ public class GymCustomerFlipFitMenu {
         String slotId = scanner.next();
 
         bookingDAO.addBooking(customerId, slotId);
-        System.out.println("Booking added.");
+        System.out.println(GREEN_COLOR + "Booking successfully added." + RESET_COLOR);
     }
 
     private void cancelSlot(){
@@ -85,30 +81,32 @@ public class GymCustomerFlipFitMenu {
     }
 
     private void viewProfile(){
-        System.out.println("Function to View profile");
+        System.out.println("Profile details are as follows - ");
         customerService.viewProfile();
     }
 
     private void editProfile() {
         while(true) {
-            System.out.println("Function to edit profile");
-            System.out.println("1. Email\n2. Contact");
+            System.out.println("Choose an appropriate option to update the value - ");
+            System.out.println("1. " + YELLOW_COLOR + "Email\n" + RESET_COLOR +
+                    "2. " + YELLOW_COLOR + "Contact" + RESET_COLOR);
             int updateColumn = scanner.nextInt();
-
-            System.out.println("Enter updated value");
-            String newValue = scanner.next();
 
             switch (updateColumn) {
                 case 1:
+                    System.out.println("Enter the updated email - ");
+                    String newValue = scanner.next();
                     customerService.updateCustomerDetails(newValue, "email", customerId);
+                    System.out.println(GREEN_COLOR + "Email has been updated successfully." + RESET_COLOR);
                     return;
-
                 case 2:
-                    customerService.updateCustomerDetails(newValue, "contact", customerId);
+                    System.out.println("Enter the updated contact number - ");
+                    String newValue1 = scanner.next();
+                    customerService.updateCustomerDetails(newValue1, "contact", customerId);
+                    System.out.println(GREEN_COLOR + "Contact number has been updated successfully." + RESET_COLOR);
                     return;
-
                 default:
-                    System.out.println("Please select a valid option");
+                    System.out.println(RED_COLOR + "Please select a valid option" + RESET_COLOR);
             }
         }
     }
@@ -116,39 +114,31 @@ public class GymCustomerFlipFitMenu {
     public void showCustomerMenu(){
         while(true){
             showMenuOptions();
-
             int choice = scanner.nextInt();
 
             switch(choice){
                 case 1:
                     editProfile();
                     break;
-
                 case 2:
                     viewProfile();
                     break;
-
                 case 3:
                     viewBookings();
                     break;
-
                 case 4:
                     bookSlot();
                     break;
-
                 case 5:
                     cancelSlot();
                     break;
-
                 case 6:
-                    System.out.println("Function to Log out");
+                    System.out.println(GREEN_COLOR + "Logged out successfully" + RESET_COLOR);
                     return;
-
                 case 7:
                     return;
-
                 default:
-                    throw new IllegalStateException("Unexpected value: " + choice);
+                    throw new IllegalStateException(RED_COLOR + "Unexpected value: " + choice + RESET_COLOR);
             }
         }
     }

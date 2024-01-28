@@ -17,36 +17,30 @@ public class FlipFitApplication {
     private static final Scanner scanner = new Scanner(System.in);
 
     private static void showMenuOptions(){
-        System.out.println("<-----Welcome to FlipFit Application----->");
-        System.out.println("Choice Menu");
-        System.out.println("1. Login");
-        System.out.println("2. Registration of Gym Customer");
-        System.out.println("3. Registration of Gym Owner");
-        System.out.println("4. Update Password");
-        System.out.println("5. Exit");
+        String WELCOME_MESSAGE = BOLD + GREEN_COLOR + "<-----Welcome to FlipFit Application----->" + RESET_COLOR;
+        System.out.println(WELCOME_MESSAGE);
+        System.out.println(PURPLE_COLOR + "<-Choice Menu->" + RESET_COLOR);
+        System.out.println("1. " + GREEN_COLOR  +  "Login" + RESET_COLOR);
+        System.out.println("2. " + BLUE_COLOR + "Registration of Gym Customer" + RESET_COLOR);
+        System.out.println("3. " + BLUE_COLOR + "Registration of Gym Owner" + RESET_COLOR);
+        System.out.println("4. " + BLUE_COLOR + "Update Password" + RESET_COLOR);
+        System.out.println("5. " + RED_COLOR + "Exit" + RESET_COLOR);
     }
 
     private static String chooseRole(){
-        System.out.println("Enter role : \n" +
-                "1. Gym Customer\n" +
-                "2. Gym Owner\n" +
-                "3. GymFlipFit Admin");
-
+        System.out.println("Choose role : \n" + " 1. "+ YELLOW_COLOR + "Gym Customer\n" + RESET_COLOR + " 2. " + YELLOW_COLOR + "Gym Owner\n" + RESET_COLOR + " 3. " + YELLOW_COLOR + "Gym Admin" + RESET_COLOR);
         int role;
         role = scanner.nextInt();
 
         switch(role){
             case 1:
                 return ROLE_GYM_CUSTOMER;
-
             case 2:
                 return ROLE_GYM_OWNER;
-
             case 3:
                 return ROLE_ADMIN;
-
             default:
-                System.out.println("Please select a valid role.");
+                System.out.println(RED_COLOR + "Please select a valid role." + RESET_COLOR);
                 return chooseRole();
         }
     }
@@ -54,31 +48,28 @@ public class FlipFitApplication {
     private static void showClientMenu(String role){
         switch(role) {
             case ROLE_GYM_CUSTOMER:
-                System.out.println("Gym Customer Menu");
+                System.out.println(BLUE_COLOR + "<-Gym Customer Menu->" + RESET_COLOR);
                 GymCustomerFlipFitMenu customerMenu = new GymCustomerFlipFitMenu();
                 customerMenu.showCustomerMenu();
                 break;
-
             case ROLE_GYM_OWNER:
-                System.out.println("Gym Owner Menu");
+                System.out.println(BLUE_COLOR + "<-Gym Owner Menu->" + RESET_COLOR);
                 GymOwnerFlipFitMenu ownerMenu = new GymOwnerFlipFitMenu();
                 ownerMenu.showGymOwnerFlipMenu();
                 break;
-
             case ROLE_ADMIN:
-                System.out.println("Gym Admin Menu\n");
+                System.out.println(BLUE_COLOR + "<-Gym Admin Menu->" + RESET_COLOR);
                 AdminFlipFitMenu adminMenu = new AdminFlipFitMenu();
                 adminMenu.showAdminFlipFitMenu();
                 break;
-
             default:
-                throw new IllegalStateException("Unexpected value: " + role);
+                throw new IllegalStateException(RED_COLOR + "Unexpected value: " + role + RESET_COLOR);
         }
     }
 
     private static void registerGymCustomer(){
         String username, passcode, email, contact;
-        System.out.println("Registering Gym Customer.");
+        System.out.println(GREEN_COLOR + "Registering Gym Customer." + RESET_COLOR);
 
         System.out.println("Enter customer name:");
         username = scanner.next();
@@ -94,7 +85,7 @@ public class FlipFitApplication {
 
     private static void registerGymOwner(){
         String username, passcode, email, contact;
-        System.out.println("Registering Gym Owner.");
+        System.out.println(GREEN_COLOR + "Registering Gym Owner." + RESET_COLOR);
 
         System.out.println("Enter gym owner name: ");
         username = scanner.next();
@@ -125,34 +116,27 @@ public class FlipFitApplication {
                     passcode = scanner.next();
 
                     if (!userService.authenticate(username, passcode, role)) {
-                        System.out.println("Wrong credentials");
+                        System.out.println(RED_COLOR + "Wrong credentials" + RESET_COLOR);
                         break;
                     } else {
-                        System.out.println("Successfully logged in");
+                        System.out.println(GREEN_COLOR + "Successfully logged in" + RESET_COLOR);
                     }
-
                     userService.login(username);
                     showClientMenu(role);
-
                     break;
-
                 case 2:
                     registerGymCustomer();
                     break;
-
                 case 3:
                     registerGymOwner();
                     break;
-
                 case 4:
                     userService.updatePassword();
                     break;
-
                 case 5:
                     return;
-
                 default:
-                    throw new IllegalStateException("Unexpected value: " + option);
+                    throw new IllegalStateException(RED_COLOR + "Unexpected value: " + option + RESET_COLOR);
             }
         }
     }
@@ -161,7 +145,6 @@ public class FlipFitApplication {
         //Ideally remove this
         AdminDAO adminDAO = AdminDAO.getInstance();
         //adminDAO.registerAdmin("abc","123");
-
         mainPage();
     }
 }

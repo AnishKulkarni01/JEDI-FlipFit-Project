@@ -8,7 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.*;
 
-import static com.flipkart.constants.Constants.ROLE_GYM_OWNER;
+import static com.flipkart.constants.Constants.*;
 import static com.flipkart.constants.SQLConstants.*;
 
 public class UserDAO {
@@ -75,7 +75,7 @@ public class UserDAO {
 
     public List<String> getCurrentUser() {
         if(currentUsername == null) {
-            System.out.println("Please login to the system");
+            System.out.println(RED_COLOR + "Please login to the system" + RESET_COLOR);
             return null;
         } else{
             List<String> userDetailList = new ArrayList<>();
