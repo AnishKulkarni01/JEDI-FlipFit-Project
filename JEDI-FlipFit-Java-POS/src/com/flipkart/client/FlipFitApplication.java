@@ -1,5 +1,6 @@
 package com.flipkart.client;
 
+import com.flipkart.exceptions.GymOwnerUpdateFailed;
 import com.flipkart.service.impl.CustomerServiceImpl;
 import com.flipkart.service.impl.GymOwnerServiceImpl;
 import com.flipkart.service.impl.UserServiceImpl;
@@ -44,7 +45,7 @@ public class FlipFitApplication {
         }
     }
 
-    private static void showClientMenu(String role){
+    private static void showClientMenu(String role) throws GymOwnerUpdateFailed {
         switch(role) {
             case ROLE_GYM_CUSTOMER:
                 System.out.println(BLUE_COLOR + "<-Gym Customer Menu->" + RESET_COLOR);
@@ -98,7 +99,7 @@ public class FlipFitApplication {
         gymOwnerServiceImpl.register(username, passcode, email, contact);
     }
 
-    private static void mainPage(){
+    private static void mainPage() throws GymOwnerUpdateFailed {
         while(true){
             showMenuOptions();
 
@@ -140,7 +141,7 @@ public class FlipFitApplication {
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws GymOwnerUpdateFailed {
         mainPage();
     }
 }

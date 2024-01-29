@@ -3,6 +3,7 @@ package com.flipkart.service.impl;
 import com.flipkart.bean.GymOwner;
 import com.flipkart.dao.GymOwnerDAO;
 import com.flipkart.dao.UserDAO;
+import com.flipkart.exceptions.GymOwnerUpdateFailed;
 import com.flipkart.service.GymOwnerServiceInterface;
 
 import java.util.ArrayList;
@@ -29,7 +30,7 @@ public class GymOwnerServiceImpl implements GymOwnerServiceInterface {
         System.out.println(PURPLE_COLOR + "Username : " + RESET_COLOR + userDetails.get(0) + "\n" + PURPLE_COLOR + "Role : " + RESET_COLOR + userDetails.get(1) + "\n" + PURPLE_COLOR + "Password : " + RESET_COLOR + userDetails.get(2) + "\n" + PURPLE_COLOR +"Contact : " + RESET_COLOR + userDetails.get(3) + "\n" + PURPLE_COLOR + "Email : " + RESET_COLOR + userDetails.get(4) + "\n");
     }
 
-    public void updateGymOwnerDetails(String updatedVal,String attr,String customerId) {
+    public void updateGymOwnerDetails(String updatedVal,String attr,String customerId) throws GymOwnerUpdateFailed {
         gymOwnerDAO.updateGymOwnerDetails(updatedVal, attr, customerId);
     }
 
