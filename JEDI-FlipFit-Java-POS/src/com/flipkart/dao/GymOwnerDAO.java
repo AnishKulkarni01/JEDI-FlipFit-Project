@@ -1,6 +1,8 @@
 package com.flipkart.dao;
 
 import com.flipkart.bean.GymOwner;
+import com.flipkart.exceptions.GymOwnerNotFoundException;
+import com.flipkart.exceptions.GymOwnerUpdateFailed;
 import com.flipkart.utils.DBUtils;
 
 import java.sql.*;
@@ -33,12 +35,12 @@ public class GymOwnerDAO {
 
             stmt.executeUpdate();
             stmt.close();
-        }  catch (Exception e) {
-            e.printStackTrace();
+        }  catch (SQLException e) {
+            System.out.println(e.getMessage());
         }
     }
 
-    public GymOwner getGymOwner(String gymOwnerId) {
+    public GymOwner getGymOwner(String gymOwnerId) throws SQLException, GymOwnerNotFoundException {
         GymOwner gymOwner = new GymOwner();
 
         try {
@@ -56,15 +58,21 @@ public class GymOwnerDAO {
             gymOwner.setName(rs.getString("username"));
             gymOwner.setContact(rs.getString("contact"));
 
-            stmt.close();
-        } catch (Exception e) {
-            e.printStackTrace();
+;            stmt.close();
+
+        } catch (SQLException e) {
+            throw new GymOwnerNotFoundException();
         }
+        catch (Exception e)
+        {
+            System.out.println("Oops !! An Error Occured. Please try again later. ");
+        }
+
 
         return gymOwner;
     }
 
-    public void updateGymOwnerDetails(String newValue, String updateColumn, String gymOwnerId) {
+    public void updateGymOwnerDetails(String newValue, String updateColumn, String gymOwnerId) throws GymOwnerUpdateFailed {
         try{
             Connection conn = DBUtils.connect();
 
@@ -87,9 +95,15 @@ public class GymOwnerDAO {
                 stmt2.close();
             }
 
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
+        catch (SQLException e) {
+            throw new GymOwnerUpdateFailed();
+        }
+        catch (Exception e)
+        {
+            System.out.println("Oops !! An Error Occured. Please try again later. ");
+        }
+
     }
 
     public List<String> getIdFromName(String username){
@@ -109,7 +123,7 @@ public class GymOwnerDAO {
 
             stmt.close();
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
 
         return gymOwnerDetails;
@@ -137,7 +151,7 @@ public class GymOwnerDAO {
                 gymOwnerList.add(gymOwner);
             }
         } catch (Exception e){
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
 
         return gymOwnerList;
@@ -171,7 +185,7 @@ public class GymOwnerDAO {
             stmt.close();
             System.out.println(GREEN_COLOR + "Gym Owner Request with GymOwnerId " + gymOwnerId + " has been successfully rejected." + RESET_COLOR);
         } catch (Exception e){
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
     }
 }

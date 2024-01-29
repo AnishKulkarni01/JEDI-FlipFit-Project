@@ -3,6 +3,7 @@ package com.flipkart.client;
 import com.flipkart.bean.Gym;
 import com.flipkart.bean.Slot;
 import com.flipkart.dao.*;
+import com.flipkart.exceptions.GymOwnerUpdateFailed;
 import com.flipkart.service.impl.GymOwnerServiceImpl;
 import com.flipkart.service.impl.GymServiceImpl;
 import com.flipkart.service.impl.SlotServiceImpl;
@@ -91,7 +92,7 @@ public class GymOwnerFlipFitMenu {
         System.out.println("Profile details are as follows - ");
         gymOwnerServiceImpl.viewProfile();
     }
-    private void editProfile() {
+    private void editProfile() throws GymOwnerUpdateFailed {
         while(true) {
             System.out.println("Choose an appropriate option to update the value - ");
             System.out.println("1. " + YELLOW_COLOR + "Email\n" + RESET_COLOR +
@@ -212,7 +213,7 @@ public class GymOwnerFlipFitMenu {
         }
     }
 
-    public void showGymOwnerFlipMenu() {
+    public void showGymOwnerFlipMenu() throws GymOwnerUpdateFailed {
         while(true) {
             showMenuOptions();
 
