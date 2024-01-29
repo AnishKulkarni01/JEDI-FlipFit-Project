@@ -122,9 +122,9 @@ public class GymOwnerFlipFitMenu {
         System.out.println(BLUE_COLOR + "Enter the following details - " + RESET_COLOR);
         System.out.println("GymId : ");
         String gymId = scanner.next();
-        System.out.println("Date : ");
+        System.out.println("Date (Enter in DD/MM/YYYY format) : ");
         String date = scanner.next();
-        System.out.println("StartTime : ");
+        System.out.println("StartTime (Enter in 24-hour format as HH:MM) : ");
         String time = scanner.next();
 
         slotServiceImpl.createSlot(date, time, gymId);
@@ -137,8 +137,8 @@ public class GymOwnerFlipFitMenu {
             String updateSlotId = scanner.next();
 
             System.out.println("Select Option to Update - ");
-            System.out.println("1. " + YELLOW_COLOR + "Date\n" + RESET_COLOR +
-                    "2. " + YELLOW_COLOR + "Start Time" + RESET_COLOR);
+            System.out.println("1. " + YELLOW_COLOR + "Date (Enter in DD/MM/YYYY format) : \n" + RESET_COLOR +
+                    "2. " + YELLOW_COLOR + "Start Time (Enter in 24-hour format as HH:MM) : " + RESET_COLOR);
             int updateSlotColumn = scanner.nextInt();
 
             System.out.println("Enter new value");
@@ -173,7 +173,7 @@ public class GymOwnerFlipFitMenu {
         for(Slot slot : slotList) {
             ArrayList<String> details = new ArrayList<>();
             details.add(slot.getSlotId());
-            details.add(slot.getStartTime());
+            details.add(slot.getStartTime()+":00");
             details.add(slot.getDate());
             String formatSpecifier;
             for(int i=0; i< details.size(); i++){

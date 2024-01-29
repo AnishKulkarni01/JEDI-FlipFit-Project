@@ -55,7 +55,7 @@ public class GymCustomerFlipFitMenu {
         System.out.println("Choose a slot at " + selectedArea);
         List<Slot> slotList = slotServiceImpl.getSlotsByGymId(gymId);
         for(Slot slot: slotList) {
-            if(!st.contains(slot.getSlotId())) System.out.println("Slot Id : " + slot.getSlotId() +" Date : "+slot.getDate()+" Time : "+slot.getStartTime());
+            if(!st.contains(slot.getSlotId())) System.out.println("Slot Id : " + slot.getSlotId() +" Date : "+slot.getDate()+" Time : "+slot.getStartTime() +":00\n");
         }
     }
 
@@ -70,7 +70,7 @@ public class GymCustomerFlipFitMenu {
             ArrayList<String> details = new ArrayList<>();
             details.add(booking.getBookingId());
             details.add(gymServiceImpl.getGymById(slot.getGymId()).getName());
-            details.add(slot.getStartTime());
+            details.add(slot.getStartTime()+":00");
             details.add(slot.getDate());
             String formatSpecifier;
             for(int i=0; i< details.size(); i++){
@@ -108,7 +108,7 @@ public class GymCustomerFlipFitMenu {
             ArrayList<String> details = new ArrayList<>();
             details.add(booking.getBookingId());
             details.add(slot.getDate());
-            details.add(slot.getStartTime());
+            details.add(slot.getStartTime()+":00");
             String formatSpecifier;
             for(int i=0; i< details.size(); i++){
                 if(i==0){

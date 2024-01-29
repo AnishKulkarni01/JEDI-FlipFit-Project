@@ -4,6 +4,8 @@ import com.flipkart.service.impl.CustomerServiceImpl;
 import com.flipkart.service.impl.GymOwnerServiceImpl;
 import com.flipkart.service.impl.UserServiceImpl;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 import static com.flipkart.constants.Constants.*;
@@ -118,7 +120,9 @@ public class FlipFitApplication {
                         System.out.println(RED_COLOR + "Wrong credentials" + RESET_COLOR);
                         break;
                     } else {
-                        System.out.println(GREEN_COLOR + "Successfully logged in" + RESET_COLOR);
+                        System.out.println(GREEN_COLOR + "Successfully logged in as " + role + " at "
+                                + LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MMM-yyyy HH:mm:ss"))
+                                + RESET_COLOR);
                     }
                     userService.login(username);
                     showClientMenu(role);
