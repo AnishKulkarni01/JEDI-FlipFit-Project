@@ -20,6 +20,10 @@ import static com.flipkart.constants.SQLConstants.*;
 public class SlotDAO {
     static SlotDAO slotDAO = null;
 
+    /**
+     *
+     * @return
+     */
     public static synchronized SlotDAO getInstance() {
         if(slotDAO == null) {
             slotDAO = new SlotDAO();
@@ -27,6 +31,13 @@ public class SlotDAO {
         return slotDAO;
     }
 
+    /**
+     *
+     * @param date
+     * @param startTime
+     * @param gymId
+     * @throws GymDneException
+     */
     public void createSlot(String date, String startTime, String gymId) throws GymDneException {
         try {
             Connection conn = DBUtils.connect();
@@ -48,6 +59,12 @@ public class SlotDAO {
         }
     }
 
+    /**
+     *
+     * @param gymId
+     * @return
+     * @throws GymDneException
+     */
     public List<Slot> getSlotsByGymId(String gymId) throws GymDneException {
         List<Slot> slotList = new ArrayList<>();
 
@@ -77,6 +94,13 @@ public class SlotDAO {
 
         return slotList;
     }
+
+    /**
+     *
+     * @param customerId
+     * @return
+     * @throws CustomerDneException
+     */
     public Set<String> getSlotsByCustomerId(String customerId) throws CustomerDneException {
         Set<String> slotIdList = new HashSet<>();
 
@@ -99,6 +123,12 @@ public class SlotDAO {
         return slotIdList;
     }
 
+    /**
+     *
+     * @param slotId
+     * @return
+     * @throws SlotDneException
+     */
     public Slot getSlotBySlotId(String slotId) throws SlotDneException {
         Slot slot = new Slot();
         try{
@@ -130,6 +160,13 @@ public class SlotDAO {
         return slot;
     }
 
+    /**
+     *
+     * @param updatedVal
+     * @param attr
+     * @param slotId
+     * @throws SlotDneException
+     */
     public void updateSlot(String updatedVal, String attr, String slotId) throws SlotDneException{
         try{
             Connection conn = DBUtils.connect();
@@ -158,6 +195,12 @@ public class SlotDAO {
             e.printStackTrace();
         }
     }
+
+    /**
+     *
+     * @param slotId
+     * @throws SlotDneException
+     */
     public void deleteSlotById(String slotId) throws SlotDneException
     {
         try {

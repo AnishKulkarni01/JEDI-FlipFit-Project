@@ -11,6 +11,10 @@ public class Slot {
         return gymId;
     }
 
+    /**
+     *
+     * @param gymId
+     */
     public void setGymId(String gymId) {
         this.gymId = gymId;
     }
@@ -19,6 +23,10 @@ public class Slot {
         return slotId;
     }
 
+    /**
+     *
+     * @param slotId
+     */
     public void setSlotId(String slotId) {
         this.slotId = slotId;
     }
@@ -27,6 +35,10 @@ public class Slot {
         return date;
     }
 
+    /**
+     *
+     * @param date
+     */
     public void setDate(String date) {
         this.date = date;
     }
@@ -35,6 +47,10 @@ public class Slot {
         return startTime;
     }
 
+    /**
+     *
+     * @param startTime
+     */
     public void setStartTime(String startTime) {
         this.startTime = startTime;
     }
@@ -43,6 +59,10 @@ public class Slot {
         return availabilityStatus;
     }
 
+    /**
+     *
+     * @param availabilityStatus
+     */
     public void setAvailabilityStatus(boolean availabilityStatus) {
         this.availabilityStatus = availabilityStatus;
     }

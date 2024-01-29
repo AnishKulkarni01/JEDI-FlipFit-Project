@@ -9,6 +9,10 @@ public class User {
         return username;
     }
 
+    /**
+     *
+     * @param username
+     */
     public void setUsername(String username) {
         this.username = username;
     }
@@ -17,6 +21,10 @@ public class User {
         return password;
     }
 
+    /**
+     *
+     * @param password
+     */
     public void setPassword(String password) {
         this.password = password;
     }
@@ -25,6 +33,10 @@ public class User {
         return role;
     }
 
+    /**
+     *
+     * @param role
+     */
     public void setRole(String role) {
         this.role = role;
     }

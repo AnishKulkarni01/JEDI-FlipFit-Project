@@ -25,7 +25,12 @@ public class BookingDAO {
         return bookingDAO;
     }
 
-
+    /**
+     *
+     * @param customerId
+     * @param slotId
+     * @throws SlotDneException
+     */
     public void addBooking(String customerId,String slotId) throws SlotDneException {
         try{
             Connection conn = DBUtils.connect();
@@ -45,6 +50,12 @@ public class BookingDAO {
         }
     }
 
+    /**
+     *
+     * @param customerId
+     * @return
+     * @throws CustomerDneException
+     */
     public List<Booking> getBookingbyCustId(String customerId) throws CustomerDneException {
         List<Booking> bookingList = new ArrayList<>();
 
@@ -74,6 +85,11 @@ public class BookingDAO {
         return bookingList;
     }
 
+    /**
+     *
+     * @param bookingId
+     * @throws BookingDneException
+     */
     public void deleteBookingId(String bookingId) throws BookingDneException {
         try {
             Connection conn = DBUtils.connect();

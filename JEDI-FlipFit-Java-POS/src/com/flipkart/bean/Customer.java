@@ -11,6 +11,10 @@ public class Customer {
         return customerId;
     }
 
+    /**
+     *
+     * @param customerId
+     */
     public void setCustomerId(String customerId) {
         this.customerId = customerId;
     }
@@ -19,6 +23,10 @@ public class Customer {
         return password;
     }
 
+    /**
+     *
+     * @param password
+     */
     public void setPassword(String password) {
         this.password = password;
     }
@@ -27,6 +35,10 @@ public class Customer {
         return username;
     }
 
+    /**
+     *
+     * @param username
+     */
     public void setUsername(String username) {
         this.username = username;
     }
@@ -35,6 +47,10 @@ public class Customer {
         return email;
     }
 
+    /**
+     *
+     * @param email
+     */
     public void setEmail(String email) {
         this.email = email;
     }
@@ -43,6 +59,10 @@ public class Customer {
         return contact;
     }
 
+    /**
+     *
+     * @param contact
+     */
     public void setContact(String contact) {
         this.contact = contact;
     }

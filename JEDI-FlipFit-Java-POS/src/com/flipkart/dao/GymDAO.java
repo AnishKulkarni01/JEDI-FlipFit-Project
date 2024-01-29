@@ -29,7 +29,14 @@ public class GymDAO {
         return gymDAO;
     }
 
-
+    /**
+     *
+     * @param name
+     * @param gstin
+     * @param city
+     * @param seats
+     * @param gymOwnerId
+     */
     public void sendOnboardReq(String name, String gstin, String city, int seats,String gymOwnerId) {
         try{
             conn= DBUtils.connect();
@@ -48,6 +55,10 @@ public class GymDAO {
         }
     }
 
+    /**
+     *
+     * @param gymId
+     */
     public void onBoardGym(String gymId) {
         try {
             conn = DBUtils.connect();
@@ -64,6 +75,10 @@ public class GymDAO {
         }
     }
 
+    /**
+     *
+     * @param gymId
+     */
     public void deleteGymRequest(String gymId) {
         for(int i=0;i<reqList.size();i++) {
             if(Objects.equals(reqList.get(i).getGymId(), gymId)) {
@@ -74,6 +89,12 @@ public class GymDAO {
 
     }
 
+    /**
+     *
+     * @param gymOwnerId
+     * @return
+     * @throws GymOwnerDneException
+     */
     public List<Gym> viewPendingRequests(String gymOwnerId) throws GymOwnerDneException {
         List<Gym> pendingList = new ArrayList<>();
 
@@ -106,6 +127,10 @@ public class GymDAO {
         return pendingList;
     }
 
+    /**
+     *
+     * @return
+     */
     public List<String> getAllAreas() {
         List<String> areas = new ArrayList<>();
 
@@ -124,6 +149,12 @@ public class GymDAO {
         return areas;
     }
 
+    /**
+     *
+     * @param gymId
+     * @return
+     * @throws GymDneException
+     */
     public Gym getGymById(String gymId) throws GymDneException {
         Gym gym = new Gym();
 
@@ -154,6 +185,12 @@ public class GymDAO {
         return gym;
     }
 
+    /**
+     *
+     * @param area
+     * @return
+     * @throws GymAreaDneException
+     */
     public List<Gym> getGymsByArea(String area) throws GymAreaDneException {
         List<Gym> gymList = new ArrayList<>();
 
@@ -187,6 +224,12 @@ public class GymDAO {
         return gymList;
     }
 
+    /**
+     *
+     * @param gymOwnerId
+     * @return
+     * @throws GymOwnerDneException
+     */
     public List<Gym> getGymsByOwner(String gymOwnerId) throws GymOwnerDneException {
         List<Gym> gymList = new ArrayList<>();
 
@@ -220,6 +263,10 @@ public class GymDAO {
         return gymList;
     }
 
+    /**
+     *
+     * @return
+     */
     public List<Gym> viewRequests() {
         List<Gym> pendingList = new ArrayList<>();
 
@@ -247,6 +294,13 @@ public class GymDAO {
         return pendingList;
     }
 
+    /**
+     *
+     * @param updatedVal
+     * @param attr
+     * @param gymId
+     * @throws GymDneException
+     */
     public void updateGym(String updatedVal, String attr, String gymId) throws GymDneException {
         try{
             Connection conn = DBUtils.connect();

@@ -24,6 +24,14 @@ public class CustomerDAO {
         return customerDAO;
     }
 
+    /**
+     *
+     * @param username
+     * @param password
+     * @param email
+     * @param contact
+     * @throws CustomerRegistrationFailedException
+     */
     public void registerCustomer(String username, String password, String email, String contact) throws CustomerRegistrationFailedException {
         try {
             Connection conn = DBUtils.connect();
@@ -45,6 +53,11 @@ public class CustomerDAO {
         }
     }
 
+    /**
+     *
+     * @param customerId
+     * @return
+     */
     public Customer getCustomer(String customerId){
         Customer customer = new Customer();
 
@@ -71,6 +84,13 @@ public class CustomerDAO {
         return customer;
     }
 
+    /**
+     *
+     * @param newValue
+     * @param updateColumn
+     * @param customerId
+     * @throws CustomerDneException
+     */
     public void updateCustomerDetails(String newValue, String updateColumn, String customerId) throws CustomerDneException {
         try{
             Connection conn = DBUtils.connect();
@@ -96,6 +116,11 @@ public class CustomerDAO {
         }
     }
 
+    /**
+     *
+     * @param username
+     * @return
+     */
     public String getIdFromName(String username){
         String customerId = "";
 

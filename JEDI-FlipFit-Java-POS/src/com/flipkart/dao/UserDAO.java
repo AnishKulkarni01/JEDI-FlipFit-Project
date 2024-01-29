@@ -17,6 +17,10 @@ public class UserDAO {
     private PreparedStatement stmt = null;
     private String currentUsername;
 
+    /**
+     *
+     * @return
+     */
     public static synchronized UserDAO getInstance() {
         if(userDAO == null) {
             userDAO = new UserDAO();
@@ -24,6 +28,13 @@ public class UserDAO {
         return userDAO;
     }
 
+    /**
+     *
+     * @param username
+     * @param password
+     * @param role
+     * @return
+     */
     public boolean check(String username, String password, String role){
         boolean isRegisteredUser = true;
         GymOwnerDAO gymOwnerDAO = GymOwnerDAO.getInstance();
@@ -56,6 +67,12 @@ public class UserDAO {
         return isRegisteredUser;
     }
 
+    /**
+     *
+     * @param username
+     * @param password
+     * @param role
+     */
     public void addUser(String username, String password, String role) {
         try{
             conn = DBUtils.connect();
@@ -77,10 +94,18 @@ public class UserDAO {
         }
     }
 
+    /**
+     *
+     * @param username
+     */
     public void setCurrentUser(String username){
         this.currentUsername = username;
     }
 
+    /**
+     *
+     * @return
+     */
     public List<String> getCurrentUser() {
         if(currentUsername == null) {
             System.out.println(RED_COLOR + "Please login to the system" + RESET_COLOR);
@@ -120,6 +145,10 @@ public class UserDAO {
         }
     }
 
+    /**
+     *
+     * @param newPassword
+     */
     public void updatePassword(String newPassword){
         try {
             conn = DBUtils.connect();

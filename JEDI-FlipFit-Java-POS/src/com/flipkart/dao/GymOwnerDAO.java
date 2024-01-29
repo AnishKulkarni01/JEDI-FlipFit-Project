@@ -22,6 +22,13 @@ public class GymOwnerDAO {
         return gymOwnerDAO;
     }
 
+    /**
+     *
+     * @param name
+     * @param password
+     * @param email
+     * @param contact
+     */
     public void registerGymOwner(String name, String password,String email,String contact) {
         try {
             Connection conn = DBUtils.connect();
@@ -39,6 +46,12 @@ public class GymOwnerDAO {
         }
     }
 
+    /**
+     *
+     * @param gymOwnerId
+     * @return
+     * @throws GymOwnerDneException
+     */
     public GymOwner getGymOwner(String gymOwnerId) throws GymOwnerDneException {
         GymOwner gymOwner = new GymOwner();
 
@@ -69,6 +82,13 @@ public class GymOwnerDAO {
         return gymOwner;
     }
 
+    /**
+     *
+     * @param newValue
+     * @param updateColumn
+     * @param gymOwnerId
+     * @throws GymOwnerDneException
+     */
     public void updateGymOwnerDetails(String newValue, String updateColumn, String gymOwnerId) throws GymOwnerDneException {
         try{
             Connection conn = DBUtils.connect();
@@ -98,6 +118,11 @@ public class GymOwnerDAO {
         }
     }
 
+    /**
+     *
+     * @param username
+     * @return
+     */
     public List<String> getIdFromName(String username){
         List<String> gymOwnerDetails = new ArrayList<>();
 
@@ -121,6 +146,10 @@ public class GymOwnerDAO {
         return gymOwnerDetails;
     }
 
+    /**
+     *
+     * @return
+     */
     public List<GymOwner> getPendingGymOwners(){
         List<GymOwner> gymOwnerList = new ArrayList<>();
 
@@ -149,6 +178,11 @@ public class GymOwnerDAO {
         return gymOwnerList;
     }
 
+    /**
+     *
+     * @param gymOwnerId
+     * @throws GymOwnerDneException
+     */
     public void approveGymOwner(String gymOwnerId) throws GymOwnerDneException{
         try{
 //            System.out.println("Approving...");
@@ -169,6 +203,11 @@ public class GymOwnerDAO {
         }
     }
 
+    /**
+     *
+     * @param gymOwnerId
+     * @throws GymOwnerDneException
+     */
     public void rejectGymOwner(String gymOwnerId) throws GymOwnerDneException{
         try{
 //            System.out.println("Rejecting...");

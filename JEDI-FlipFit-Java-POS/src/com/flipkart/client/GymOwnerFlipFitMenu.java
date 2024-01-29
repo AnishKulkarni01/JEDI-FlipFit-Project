@@ -57,6 +57,10 @@ public class GymOwnerFlipFitMenu {
         System.out.println(GREEN_COLOR + "Request Sent Successfully" + RESET_COLOR);
     }
 
+    /**
+     *
+     * @param gymId
+     */
     private void updateGym(String gymId){
         while(true) {
             System.out.println("Select Option to Update - ");

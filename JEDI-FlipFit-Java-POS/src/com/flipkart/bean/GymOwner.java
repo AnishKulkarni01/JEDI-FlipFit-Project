@@ -11,6 +11,10 @@ public class GymOwner {
         return gymOwnerId;
     }
 
+    /**
+     *
+     * @param gymOwnerId
+     */
     public void setGymOwnerId(String gymOwnerId) {
         this.gymOwnerId = gymOwnerId;
     }
@@ -19,6 +23,10 @@ public class GymOwner {
         return password;
     }
 
+    /**
+     *
+     * @param password
+     */
     public void setPassword(String password) {
         this.password = password;
     }
@@ -27,6 +35,10 @@ public class GymOwner {
         return name;
     }
 
+    /**
+     *
+     * @param name
+     */
     public void setName(String name) {
         this.name = name;
     }
@@ -35,6 +47,10 @@ public class GymOwner {
         return contact;
     }
 
+    /**
+     *
+     * @param contact
+     */
     public void setContact(String contact) {
         this.contact = contact;
     }
@@ -43,6 +59,10 @@ public class GymOwner {
         return email;
     }
 
+    /**
+     *
+     * @param email
+     */
     public void setEmail(String email) {
         this.email = email;
     }

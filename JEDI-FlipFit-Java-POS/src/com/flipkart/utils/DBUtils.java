@@ -6,7 +6,7 @@ import static com.flipkart.constants.Constants.*;
 public class DBUtils {
     static final String DB_URL = "jdbc:mysql://localhost:3306/jedi_flipfit_schema";
     static final String USER = "root";
-    static final String PASS = "$$Root1$$";
+    static final String PASS = "Abhishek@108";
     private static Connection singleInstance = null;
 
     static {
@@ -17,6 +17,11 @@ public class DBUtils {
         }
     }
 
+    /**
+     *
+     * @return
+     * @throws SQLException
+     */
     public static Connection connect() throws SQLException {
         if (singleInstance == null || singleInstance.isClosed()) {
             System.out.println(PURPLE_COLOR + "Creating a new connection to DB...." + RESET_COLOR);

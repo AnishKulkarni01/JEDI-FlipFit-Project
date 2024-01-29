@@ -46,6 +46,10 @@ public class FlipFitApplication {
         }
     }
 
+    /**
+     *
+     * @param role
+     */
     private static void showClientMenu(String role){
         switch(role) {
             case ROLE_GYM_CUSTOMER:

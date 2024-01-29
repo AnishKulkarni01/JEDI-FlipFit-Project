@@ -5,10 +5,18 @@ public class Booking {
     private String bookingId;
     private String slotId;
 
+    /**
+     *
+     * @return
+     */
     public String getCustomerId() {
         return customerId;
     }
 
+    /**
+     *
+     * @param customerId
+     */
     public void setCustomerId(String customerId) {
         this.customerId = customerId;
     }
@@ -17,6 +25,10 @@ public class Booking {
         return bookingId;
     }
 
+    /**
+     *
+     * @param bookingId
+     */
     public void setBookingId(String bookingId) {
         this.bookingId = bookingId;
     }
@@ -25,6 +37,10 @@ public class Booking {
         return slotId;
     }
 
+    /**
+     *
+     * @param slotId
+     */
     public void setSlotId(String slotId) {
         this.slotId = slotId;
     }

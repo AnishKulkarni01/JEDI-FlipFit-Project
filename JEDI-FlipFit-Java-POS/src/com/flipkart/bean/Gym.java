@@ -14,6 +14,10 @@ public class Gym {
         return GymId;
     }
 
+    /**
+     *
+     * @param gymId
+     */
     public void setGymId(String gymId) {
         GymId = gymId;
     }
@@ -22,6 +26,10 @@ public class Gym {
         return GymOwnerId;
     }
 
+    /**
+     *
+     * @param gymOwnerId
+     */
     public void setGymOwnerId(String gymOwnerId) {
         GymOwnerId = gymOwnerId;
     }
@@ -30,6 +38,10 @@ public class Gym {
         return name;
     }
 
+    /**
+     *
+     * @param name
+     */
     public void setName(String name) {
         this.name = name;
     }
@@ -38,6 +50,10 @@ public class Gym {
         return city;
     }
 
+    /**
+     *
+     * @param city
+     */
     public void setCity(String city) {
         this.city = city;
     }
@@ -46,6 +62,10 @@ public class Gym {
         return gstin;
     }
 
+    /**
+     *
+     * @param gstin
+     */
     public void setGstin(String gstin) {
         this.gstin = gstin;
     }
@@ -54,6 +74,10 @@ public class Gym {
         return seats;
     }
 
+    /**
+     *
+     * @param seats
+     */
     public void setSeats(int seats) {
         this.seats = seats;
     }
@@ -62,6 +86,10 @@ public class Gym {
         return isApproved;
     }
 
+    /**
+     *
+     * @param isApproved
+     */
     public void setIsApproved(String isApproved) {
         this.isApproved = isApproved;
     }

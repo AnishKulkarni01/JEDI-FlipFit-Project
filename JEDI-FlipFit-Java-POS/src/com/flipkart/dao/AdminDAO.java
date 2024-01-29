@@ -19,6 +19,11 @@ public class AdminDAO {
         return adminDAO;
     }
 
+    /**
+     *
+     * @param username
+     * @param password
+     */
     public void registerAdmin(String username, String password){
         Admin ad = new Admin();
 

@@ -9,6 +9,10 @@ public class Admin {
         return AdminID;
     }
 
+    /**
+     *
+     * @param adminID
+     */
     public void setAdminID(int adminID) {
         AdminID = adminID;
     }
@@ -17,6 +21,10 @@ public class Admin {
         return username;
     }
 
+    /**
+     *
+     * @param username
+     */
     public void setUsername(String username) {
         this.username = username;
     }
@@ -25,6 +33,10 @@ public class Admin {
         return password;
     }
 
+    /**
+     *
+     * @param password
+     */
     public void setPassword(String password) {
         this.password = password;
     }
