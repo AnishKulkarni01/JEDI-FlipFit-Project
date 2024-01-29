@@ -1,11 +1,15 @@
 package com.flipkart.dao;
 
 import com.flipkart.bean.Booking;
+import com.flipkart.exceptions.BookingDneException;
+import com.flipkart.exceptions.CustomerDneException;
+import com.flipkart.exceptions.SlotDneException;
 import com.flipkart.utils.DBUtils;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +25,8 @@ public class BookingDAO {
         return bookingDAO;
     }
 
-    public void addBooking(String customerId,String slotId) {
+
+    public void addBooking(String customerId,String slotId) throws SlotDneException {
         try{
             Connection conn = DBUtils.connect();
             PreparedStatement stmt = conn.prepareStatement(ADD_BOOKING);
@@ -31,13 +36,16 @@ public class BookingDAO {
 
             stmt.executeUpdate();
             stmt.close();
-        }
-        catch (Exception e) {
+        } catch(SQLException e)
+        {
+            throw new SlotDneException();
+            //System.out.println("SlotId does not exist");
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public List<Booking> getBookingbyCustId(String customerId) {
+    public List<Booking> getBookingbyCustId(String customerId) throws CustomerDneException {
         List<Booking> bookingList = new ArrayList<>();
 
         try {
@@ -57,14 +65,16 @@ public class BookingDAO {
 
                 bookingList.add(booking);
             }
-        } catch(Exception e) {
+        } catch(SQLException e)
+        {
+            throw new CustomerDneException();
+        } catch (Exception e) {
             e.printStackTrace();
         }
-
         return bookingList;
     }
 
-    public void deleteBookingId(String bookingId) {
+    public void deleteBookingId(String bookingId) throws BookingDneException {
         try {
             Connection conn = DBUtils.connect();
             PreparedStatement stmt = conn.prepareStatement(CANCEL_BOOKING_BY_ID);
@@ -72,7 +82,10 @@ public class BookingDAO {
             stmt.setString(1, bookingId);
 
             stmt.executeUpdate();
-        }  catch (Exception e){
+        } catch(SQLException e)
+        {
+            throw new BookingDneException();
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
