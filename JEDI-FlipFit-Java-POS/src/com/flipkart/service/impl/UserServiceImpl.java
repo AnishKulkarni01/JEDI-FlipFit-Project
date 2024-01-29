@@ -1,13 +1,14 @@
-package com.flipkart.service;
+package com.flipkart.service.impl;
 
 import com.flipkart.dao.UserDAO;
+import com.flipkart.service.UserServiceInterface;
 
 import java.util.List;
 import java.util.Scanner;
 
 import static com.flipkart.constants.Constants.*;
 
-public class UserService implements UserServiceInterface {
+public class UserServiceImpl implements UserServiceInterface {
     UserDAO userDAO = UserDAO.getInstance();
     Scanner scanner = new Scanner(System.in);
 

@@ -1,12 +1,13 @@
-package com.flipkart.service;
+package com.flipkart.service.impl;
 
 import com.flipkart.dao.CustomerDAO;
 import com.flipkart.dao.UserDAO;
+import com.flipkart.service.CustomerServiceInterface;
 
 import java.util.List;
 import static com.flipkart.constants.Constants.*;
 
-public class CustomerService implements CustomerServiceInterface{
+public class CustomerServiceImpl implements CustomerServiceInterface {
     CustomerDAO customerDAO =CustomerDAO.getInstance();
     UserDAO userDAO = UserDAO.getInstance();
 

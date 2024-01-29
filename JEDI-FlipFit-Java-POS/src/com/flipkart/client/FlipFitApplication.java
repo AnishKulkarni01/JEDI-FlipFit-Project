@@ -1,9 +1,8 @@
 package com.flipkart.client;
 
-import com.flipkart.dao.*;
-import com.flipkart.service.CustomerService;
-import com.flipkart.service.GymOwnerService;
-import com.flipkart.service.UserService;
+import com.flipkart.service.impl.CustomerServiceImpl;
+import com.flipkart.service.impl.GymOwnerServiceImpl;
+import com.flipkart.service.impl.UserServiceImpl;
 
 import java.util.Scanner;
 
@@ -11,9 +10,9 @@ import static com.flipkart.constants.Constants.*;
 
 public class FlipFitApplication {
 
-    private static final CustomerService customerService = new CustomerService();
-    private static final UserService userService = new UserService();
-    private static final GymOwnerService gymOwnerService = new GymOwnerService();
+    private static final CustomerServiceImpl customerService = new CustomerServiceImpl();
+    private static final UserServiceImpl userService = new UserServiceImpl();
+    private static final GymOwnerServiceImpl gymOwnerServiceImpl = new GymOwnerServiceImpl();
     private static final Scanner scanner = new Scanner(System.in);
 
     private static void showMenuOptions(){
@@ -96,7 +95,7 @@ public class FlipFitApplication {
         System.out.println("Enter contact: ");
         contact = scanner.next();
 
-        gymOwnerService.register(username, passcode, email, contact);
+        gymOwnerServiceImpl.register(username, passcode, email, contact);
     }
 
     private static void mainPage(){
@@ -142,9 +141,6 @@ public class FlipFitApplication {
     }
 
     public static void main(String[] args) {
-        //Ideally remove this
-        AdminDAO adminDAO = AdminDAO.getInstance();
-        //adminDAO.registerAdmin("abc","123");
         mainPage();
     }
 }

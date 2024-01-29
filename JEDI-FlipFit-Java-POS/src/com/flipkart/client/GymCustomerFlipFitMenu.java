@@ -3,14 +3,15 @@ import com.flipkart.bean.Booking;
 import com.flipkart.bean.Gym;
 import com.flipkart.bean.Slot;
 import com.flipkart.dao.*;
-import com.flipkart.service.CustomerService;
+import com.flipkart.service.impl.CustomerServiceImpl;
 
 import java.util.*;
 
 import static com.flipkart.constants.Constants.*;
 
 public class GymCustomerFlipFitMenu {
-    CustomerService customerService=new CustomerService();UserDAO userDao= UserDAO.getInstance();
+    CustomerServiceImpl customerService=new CustomerServiceImpl();
+    UserDAO userDao= UserDAO.getInstance();
     CustomerDAO customerDAO = CustomerDAO.getInstance();
     BookingDAO bookingDAO =BookingDAO.getInstance();
     String customerId = customerDAO.getIdFromName(userDao.getCurrentUser().get(0));

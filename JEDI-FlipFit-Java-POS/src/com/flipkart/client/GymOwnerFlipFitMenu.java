@@ -3,8 +3,7 @@ package com.flipkart.client;
 import com.flipkart.bean.Gym;
 import com.flipkart.bean.Slot;
 import com.flipkart.dao.*;
-import com.flipkart.service.GymOwnerService;
-import com.flipkart.service.GymOwnerService;
+import com.flipkart.service.impl.GymOwnerServiceImpl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +18,7 @@ public class GymOwnerFlipFitMenu {
     GymOwnerDAO ownDao = GymOwnerDAO.getInstance();
     String gymOwnerId = ownDao.getIdFromName(userDao.getCurrentUser().get(0)).get(0);
     Scanner scanner= new Scanner(System.in);
-    GymOwnerService gymOwnerService=new GymOwnerService();
+    GymOwnerServiceImpl gymOwnerServiceImpl =new GymOwnerServiceImpl();
 
     private void showMenuOptions(){
         System.out.println("1. " + YELLOW_COLOR + "Request Gym Onboarding\n" + RESET_COLOR +
@@ -84,7 +83,7 @@ public class GymOwnerFlipFitMenu {
     }
     private void viewProfile(){
         System.out.println("Profile details are as follows - ");
-        gymOwnerService.viewProfile();
+        gymOwnerServiceImpl.viewProfile();
     }
     private void editProfile() {
         while(true) {
@@ -97,13 +96,13 @@ public class GymOwnerFlipFitMenu {
                 case 1:
                     System.out.println("Enter the updated email");
                     String newValue = scanner.next();
-                    gymOwnerService.updateGymOwnerDetails(newValue, "email", gymOwnerId);
+                    gymOwnerServiceImpl.updateGymOwnerDetails(newValue, "email", gymOwnerId);
                     System.out.println(GREEN_COLOR + "Email has been updated successfully." + RESET_COLOR);
                     return;
                 case 2:
                     System.out.println("Enter the updated contact number - ");
                     String newValue1 = scanner.next();
-                    gymOwnerService.updateGymOwnerDetails(newValue1, "contact", gymOwnerId);
+                    gymOwnerServiceImpl.updateGymOwnerDetails(newValue1, "contact", gymOwnerId);
                     System.out.println(GREEN_COLOR + "Contact number has been updated successfully." + RESET_COLOR);
                     return;
                 default:
