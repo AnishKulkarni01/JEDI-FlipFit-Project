@@ -1,7 +1,7 @@
 package com.flipkart.dao;
 
 import com.flipkart.bean.Gym;
-import com.flipkart.utils.Utils;
+import com.flipkart.utils.DBUtils;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -28,7 +28,7 @@ public class GymDAO {
 
     public void sendOnboardReq(String name, String gstin, String city, int seats,String gymOwnerId) {
         try{
-            conn= Utils.connect();
+            conn= DBUtils.connect();
             stmt = conn.prepareStatement(SEND_GYM_ONBOARD_REQUEST);
 
             stmt.setString(1, name);
@@ -46,7 +46,7 @@ public class GymDAO {
 
     public void onBoardGym(String gymId) {
         try {
-            conn = Utils.connect();
+            conn = DBUtils.connect();
             stmt = conn.prepareStatement(APPROVE_GYM_BY_ID);
 
             stmt.setString(1, "true");
@@ -74,7 +74,7 @@ public class GymDAO {
         List<Gym> pendingList = new ArrayList<>();
 
         try {
-            conn = Utils.connect();
+            conn = DBUtils.connect();
             System.out.println("Fetching gym centres..");
 
             stmt = conn.prepareStatement(FETCH_ALL_PENDING_GYM_REQUESTS_BY_GYMOWNERID);
@@ -103,7 +103,7 @@ public class GymDAO {
 
         try{
             System.out.println("Fetching areas...");
-            conn = Utils.connect();
+            conn = DBUtils.connect();
             stmt = conn.prepareStatement(FETCH_ALL_AREAS);
 
             ResultSet rs = stmt.executeQuery();
@@ -120,7 +120,7 @@ public class GymDAO {
         Gym gym = new Gym();
 
         try {
-            conn = Utils.connect();
+            conn = DBUtils.connect();
             System.out.println("Fetching gym centres..");
 
             stmt = conn.prepareStatement(FETCH_GYMS_BY_ID);
@@ -148,7 +148,7 @@ public class GymDAO {
         try {
             System.out.println("Fetching gym centres..");
 
-            conn = Utils.connect();
+            conn = DBUtils.connect();
             stmt = conn.prepareStatement(FETCH_GYMS_BY_AREA);
 
             stmt.setString(1, area);
@@ -177,7 +177,7 @@ public class GymDAO {
         try {
             System.out.println("Fetching gym centres..");
 
-            conn = Utils.connect();
+            conn = DBUtils.connect();
             stmt = conn.prepareStatement(FETCH_GYMS_BY_OWNER);
 
             stmt.setString(1, gymOwnerId);
@@ -206,7 +206,7 @@ public class GymDAO {
         try {
             System.out.println(PURPLE_COLOR + "Fetching pending requests from database..." + RESET_COLOR);
 
-            conn = Utils.connect();
+            conn = DBUtils.connect();
             stmt = conn.prepareStatement(FETCH_ALL_PENDING_GYM_REQUESTS);
 
             ResultSet rs = stmt.executeQuery();
@@ -229,7 +229,7 @@ public class GymDAO {
 
     public void updateGym(String updatedVal, String attr, String gymId) {
         try{
-            Connection conn = Utils.connect();
+            Connection conn = DBUtils.connect();
 
             if(attr.equals("name")) {
                 PreparedStatement stmt1 = conn.prepareStatement(UPDATE_GYM_DETAILS_NAME);

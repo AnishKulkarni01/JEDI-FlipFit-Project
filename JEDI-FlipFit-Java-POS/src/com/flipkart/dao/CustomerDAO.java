@@ -2,9 +2,7 @@ package com.flipkart.dao;
 
 import com.flipkart.bean.Customer;
 
-import java.util.ArrayList;
-import java.util.List;
-import com.flipkart.utils.Utils;
+import com.flipkart.utils.DBUtils;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -26,7 +24,7 @@ public class CustomerDAO {
 
     public void registerCustomer(String username, String password, String email, String contact){
         try {
-            Connection conn = Utils.connect();
+            Connection conn = DBUtils.connect();
             PreparedStatement stmt = conn.prepareStatement(ADD_NEW_CUSTOMER);
 
             stmt.setString(1, username);
@@ -45,7 +43,7 @@ public class CustomerDAO {
         Customer customer = new Customer();
 
         try {
-            Connection conn = Utils.connect();
+            Connection conn = DBUtils.connect();
             PreparedStatement stmt = conn.prepareStatement(GET_CUSTOMER_BY_ID);
 
             stmt.setString(1, customerId);
@@ -69,7 +67,7 @@ public class CustomerDAO {
 
     public void updateCustomerDetails(String newValue, String updateColumn, String customerId) {
         try{
-            Connection conn = Utils.connect();
+            Connection conn = DBUtils.connect();
             PreparedStatement stmt1 = conn.prepareStatement(UPDATE_CUSTOMER_DETAILS_EMAIL);
             PreparedStatement stmt2 = conn.prepareStatement(UPDATE_CUSTOMER_DETAILS_CONTACT);
 
@@ -96,7 +94,7 @@ public class CustomerDAO {
         String customerId = "";
 
         try {
-            Connection conn = Utils.connect();
+            Connection conn = DBUtils.connect();
             PreparedStatement stmt = conn.prepareStatement(GET_CUSTOMER_BY_USERNAME);
 
             stmt.setString(1, username);

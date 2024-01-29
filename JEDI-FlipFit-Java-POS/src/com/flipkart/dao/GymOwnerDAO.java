@@ -1,11 +1,10 @@
 package com.flipkart.dao;
 
 import com.flipkart.bean.GymOwner;
-import com.flipkart.utils.Utils;
+import com.flipkart.utils.DBUtils;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import static com.flipkart.constants.Constants.GREEN_COLOR;
@@ -24,7 +23,7 @@ public class GymOwnerDAO {
 
     public void registerGymOwner(String name, String password,String email,String contact) {
         try {
-            Connection conn = Utils.connect();
+            Connection conn = DBUtils.connect();
             PreparedStatement stmt = conn.prepareStatement(ADD_NEW_GYM_OWNER);
 
             stmt.setString(1, name);
@@ -43,7 +42,7 @@ public class GymOwnerDAO {
         GymOwner gymOwner = new GymOwner();
 
         try {
-            Connection conn = Utils.connect();
+            Connection conn = DBUtils.connect();
             PreparedStatement stmt = conn.prepareStatement(GET_GYM_OWNER_BY_ID);
 
             stmt.setString(1, (gymOwnerId));
@@ -67,7 +66,7 @@ public class GymOwnerDAO {
 
     public void updateGymOwnerDetails(String newValue, String updateColumn, String gymOwnerId) {
         try{
-            Connection conn = Utils.connect();
+            Connection conn = DBUtils.connect();
 
             if(updateColumn.equals("email")) {
                 PreparedStatement stmt1 = conn.prepareStatement(UPDATE_GYM_OWNER_DETAILS_EMAIL);
@@ -97,7 +96,7 @@ public class GymOwnerDAO {
         List<String> gymOwnerDetails = new ArrayList<>();
 
         try {
-            Connection conn = Utils.connect();
+            Connection conn = DBUtils.connect();
             PreparedStatement stmt = conn.prepareStatement(GET_GYM_OWNER_BY_USERNAME);
 
             stmt.setString(1, username);
@@ -122,7 +121,7 @@ public class GymOwnerDAO {
         try{
             System.out.println("Fetching gym owner requests..");
 
-            Connection conn = Utils.connect();
+            Connection conn = DBUtils.connect();
             PreparedStatement stmt = conn.prepareStatement(FETCH_ALL_PENDING_GYM_OWNERS_QUERY);
 
             ResultSet rs = stmt.executeQuery();
@@ -147,7 +146,7 @@ public class GymOwnerDAO {
     public void approveGymOwner(String gymOwnerId){
         try{
 //            System.out.println("Approving...");
-            Connection conn = Utils.connect();
+            Connection conn = DBUtils.connect();
             PreparedStatement stmt = conn.prepareStatement(SQL_APPROVE_GYM_OWNER_BY_ID_QUERY);
 
             stmt.setString(1, gymOwnerId);
@@ -163,7 +162,7 @@ public class GymOwnerDAO {
     public void rejectGymOwner(String gymOwnerId){
         try{
 //            System.out.println("Rejecting...");
-            Connection conn = Utils.connect();
+            Connection conn = DBUtils.connect();
             PreparedStatement stmt = conn.prepareStatement(SQL_REJECT_GYM_OWNER_BY_ID_QUERY);
 
             stmt.setString(1, gymOwnerId);

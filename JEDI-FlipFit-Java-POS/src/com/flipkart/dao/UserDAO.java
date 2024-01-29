@@ -1,8 +1,7 @@
 package com.flipkart.dao;
 
-import com.flipkart.utils.Utils;
+import com.flipkart.utils.DBUtils;
 
-import java.io.PushbackReader;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -35,7 +34,7 @@ public class UserDAO {
         }
 
         try{
-            conn = Utils.connect();
+            conn = DBUtils.connect();
             stmt = conn.prepareStatement(AUTHENTICATE_USER);
 
             stmt.setString(1, username);
@@ -55,7 +54,7 @@ public class UserDAO {
 
     public void addUser(String username, String password, String role) {
         try{
-            conn = Utils.connect();
+            conn = DBUtils.connect();
             stmt = conn.prepareStatement(ADD_USER);
 
             stmt.setString(1, username);
@@ -81,7 +80,7 @@ public class UserDAO {
             List<String> userDetailList = new ArrayList<>();
 
             try{
-                conn = Utils.connect();
+                conn = DBUtils.connect();
                 stmt = conn.prepareStatement(GET_USER);
 
                 stmt.setString(1, this.currentUsername);
@@ -114,7 +113,7 @@ public class UserDAO {
 
     public void updatePassword(String newPassword){
         try {
-            conn = Utils.connect();
+            conn = DBUtils.connect();
             stmt = conn.prepareStatement(UPDATE_USER_PASSWORD);
 
             stmt.setString(1, newPassword);

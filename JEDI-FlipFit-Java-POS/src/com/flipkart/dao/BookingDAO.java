@@ -1,12 +1,11 @@
 package com.flipkart.dao;
 
 import com.flipkart.bean.Booking;
-import com.flipkart.utils.Utils;
+import com.flipkart.utils.DBUtils;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,7 +23,7 @@ public class BookingDAO {
 
     public void addBooking(String customerId,String slotId) {
         try{
-            Connection conn = Utils.connect();
+            Connection conn = DBUtils.connect();
             PreparedStatement stmt = conn.prepareStatement(ADD_BOOKING);
 
             stmt.setString(1,customerId);
@@ -42,7 +41,7 @@ public class BookingDAO {
         List<Booking> bookingList = new ArrayList<>();
 
         try {
-            Connection conn = Utils.connect();
+            Connection conn = DBUtils.connect();
             PreparedStatement stmt = conn.prepareStatement(GET_BOOKING_BY_CUSTOMER_ID);
 
             stmt.setString(1, customerId);
@@ -67,7 +66,7 @@ public class BookingDAO {
 
     public void deleteBookingId(String bookingId) {
         try {
-            Connection conn = Utils.connect();
+            Connection conn = DBUtils.connect();
             PreparedStatement stmt = conn.prepareStatement(CANCEL_BOOKING_BY_ID);
 
             stmt.setString(1, bookingId);

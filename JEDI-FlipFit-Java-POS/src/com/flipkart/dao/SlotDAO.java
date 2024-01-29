@@ -2,7 +2,7 @@
 package com.flipkart.dao;
 
 import com.flipkart.bean.Slot;
-import com.flipkart.utils.Utils;
+import com.flipkart.utils.DBUtils;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -25,7 +25,7 @@ public class SlotDAO {
 
     public void createSlot(String date, String startTime, String gymId) {
         try {
-            Connection conn = Utils.connect();
+            Connection conn = DBUtils.connect();
             PreparedStatement stmt = conn.prepareStatement(ADD_SLOT);
 
             stmt.setString(1, gymId);
@@ -43,7 +43,7 @@ public class SlotDAO {
         List<Slot> slotList = new ArrayList<>();
 
         try {
-            Connection conn = Utils.connect();
+            Connection conn = DBUtils.connect();
             PreparedStatement ps = conn.prepareStatement(FETCH_SLOT_BY_GYMID);
 
             ps.setString(1, gymId);
@@ -69,7 +69,7 @@ public class SlotDAO {
         Set<String> slotIdList = new HashSet<>();
 
         try {
-            Connection conn = Utils.connect();
+            Connection conn = DBUtils.connect();
             PreparedStatement ps = conn.prepareStatement(GET_BOOKING_BY_CUSTOMER_ID);
 
             ps.setString(1, customerId);
@@ -88,7 +88,7 @@ public class SlotDAO {
     public Slot getSlotBySlotId(String slotId) {
         Slot slot = new Slot();
         try{
-            Connection conn = Utils.connect();
+            Connection conn = DBUtils.connect();
             PreparedStatement ps = conn.prepareStatement(FETCH_SLOT_BY_ID);
 
             ps.setString(1, slotId);
@@ -113,7 +113,7 @@ public class SlotDAO {
 
     public void updateSlot(String updatedVal, String attr, String slotId) {
         try{
-            Connection conn = Utils.connect();
+            Connection conn = DBUtils.connect();
 
             if(attr.equals("date")) {
                 PreparedStatement stmt1 = conn.prepareStatement(UPDATE_SLOT_DETAILS_DATE);
@@ -138,7 +138,7 @@ public class SlotDAO {
     public void deleteSlotById(String slotId)
     {
         try {
-            Connection conn = Utils.connect();
+            Connection conn = DBUtils.connect();
             PreparedStatement stmt = conn.prepareStatement(DELETE_SLOT_BY_ID);
             stmt.setString(1, slotId);
             stmt.executeUpdate();
