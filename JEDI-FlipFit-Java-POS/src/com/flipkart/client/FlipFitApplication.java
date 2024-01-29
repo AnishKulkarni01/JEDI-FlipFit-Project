@@ -1,5 +1,6 @@
 package com.flipkart.client;
 
+import com.flipkart.exceptions.CustomerRegistrationFailedException;
 import com.flipkart.service.impl.CustomerServiceImpl;
 import com.flipkart.service.impl.GymOwnerServiceImpl;
 import com.flipkart.service.impl.UserServiceImpl;
@@ -66,7 +67,7 @@ public class FlipFitApplication {
         }
     }
 
-    private static void registerGymCustomer(){
+    private static void registerGymCustomer()  {
         String username, passcode, email, contact;
         System.out.println(GREEN_COLOR + "Registering Gym Customer." + RESET_COLOR + "\n");
 
@@ -140,7 +141,7 @@ public class FlipFitApplication {
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args){
         mainPage();
     }
 }

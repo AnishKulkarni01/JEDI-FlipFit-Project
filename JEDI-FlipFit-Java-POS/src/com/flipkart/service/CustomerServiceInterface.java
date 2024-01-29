@@ -1,5 +1,7 @@
 package com.flipkart.service;
 
+import com.flipkart.exceptions.CustomerRegistrationFailedException;
+
 public interface CustomerServiceInterface {
     void updateCustomerDetails(String updatedVal,String attr,String customerId);
 
