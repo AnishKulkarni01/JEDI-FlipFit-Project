@@ -1,6 +1,7 @@
 package com.flipkart.dao;
 
 import com.flipkart.bean.GymOwner;
+import com.flipkart.exceptions.GymOwnerDneException;
 import com.flipkart.utils.DBUtils;
 
 import java.sql.*;
@@ -38,7 +39,7 @@ public class GymOwnerDAO {
         }
     }
 
-    public GymOwner getGymOwner(String gymOwnerId) {
+    public GymOwner getGymOwner(String gymOwnerId) throws GymOwnerDneException {
         GymOwner gymOwner = new GymOwner();
 
         try {
@@ -57,14 +58,18 @@ public class GymOwnerDAO {
             gymOwner.setContact(rs.getString("contact"));
 
             stmt.close();
-        } catch (Exception e) {
+        }catch (SQLException e)
+        {
+            throw new GymOwnerDneException();
+        }
+        catch (Exception e) {
             e.printStackTrace();
         }
 
         return gymOwner;
     }
 
-    public void updateGymOwnerDetails(String newValue, String updateColumn, String gymOwnerId) {
+    public void updateGymOwnerDetails(String newValue, String updateColumn, String gymOwnerId) throws GymOwnerDneException {
         try{
             Connection conn = DBUtils.connect();
 
@@ -88,7 +93,8 @@ public class GymOwnerDAO {
             }
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new GymOwnerDneException();
+           // e.printStackTrace();
         }
     }
 
@@ -143,7 +149,7 @@ public class GymOwnerDAO {
         return gymOwnerList;
     }
 
-    public void approveGymOwner(String gymOwnerId){
+    public void approveGymOwner(String gymOwnerId) throws GymOwnerDneException{
         try{
 //            System.out.println("Approving...");
             Connection conn = DBUtils.connect();
@@ -154,12 +160,16 @@ public class GymOwnerDAO {
             stmt.executeUpdate();
             stmt.close();
             System.out.println(GREEN_COLOR + "Gym Owner Request with GymOwnerId " + gymOwnerId + " has been successfully approved." + RESET_COLOR);
-        } catch (Exception e){
+        }catch(SQLException e)
+        {
+            throw new GymOwnerDneException();
+        }
+        catch (Exception e){
             e.printStackTrace();
         }
     }
 
-    public void rejectGymOwner(String gymOwnerId){
+    public void rejectGymOwner(String gymOwnerId) throws GymOwnerDneException{
         try{
 //            System.out.println("Rejecting...");
             Connection conn = DBUtils.connect();
@@ -170,7 +180,12 @@ public class GymOwnerDAO {
             stmt.executeUpdate();
             stmt.close();
             System.out.println(GREEN_COLOR + "Gym Owner Request with GymOwnerId " + gymOwnerId + " has been successfully rejected." + RESET_COLOR);
-        } catch (Exception e){
+        }
+        catch (SQLException e)
+        {
+            throw new GymOwnerDneException();
+        }
+        catch (Exception e){
             e.printStackTrace();
         }
     }

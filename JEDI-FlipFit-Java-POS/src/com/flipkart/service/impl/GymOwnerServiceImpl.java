@@ -3,6 +3,7 @@ package com.flipkart.service.impl;
 import com.flipkart.bean.GymOwner;
 import com.flipkart.dao.GymOwnerDAO;
 import com.flipkart.dao.UserDAO;
+import com.flipkart.exceptions.GymOwnerDneException;
 import com.flipkart.service.GymOwnerServiceInterface;
 
 import java.util.ArrayList;
@@ -30,7 +31,12 @@ public class GymOwnerServiceImpl implements GymOwnerServiceInterface {
     }
 
     public void updateGymOwnerDetails(String updatedVal,String attr,String customerId) {
-        gymOwnerDAO.updateGymOwnerDetails(updatedVal, attr, customerId);
+        try {
+            gymOwnerDAO.updateGymOwnerDetails(updatedVal, attr, customerId);
+        } catch (GymOwnerDneException e) {
+            System.out.println(e.getMessage());
+        }
+
     }
 
     public void viewGymOwnerRequests(){
@@ -64,10 +70,17 @@ public class GymOwnerServiceImpl implements GymOwnerServiceInterface {
     }
 
     public void approveGymOwner(String gymOwnerId){
-        gymOwnerDAO.approveGymOwner(String.valueOf(gymOwnerId));
+        try {
+            gymOwnerDAO.approveGymOwner(String.valueOf(gymOwnerId));
+        } catch (GymOwnerDneException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     public void rejectGymOwner(String gymOwnerId){
-        gymOwnerDAO.rejectGymOwner(String.valueOf(gymOwnerId));
+        try {
+            gymOwnerDAO.rejectGymOwner(String.valueOf(gymOwnerId));
+        } catch (GymOwnerDneException e) {
+            System.out.println(e.getMessage());        }
     }
 }
