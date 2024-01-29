@@ -2,6 +2,8 @@ package com.flipkart.dao;
 
 import com.flipkart.bean.Customer;
 
+import com.flipkart.exceptions.CustomerDneException;
+import com.flipkart.exceptions.CustomerRegistrationFailedException;
 import com.flipkart.utils.DBUtils;
 
 import java.sql.Connection;
@@ -22,7 +24,7 @@ public class CustomerDAO {
         return customerDAO;
     }
 
-    public void registerCustomer(String username, String password, String email, String contact){
+    public void registerCustomer(String username, String password, String email, String contact) throws CustomerRegistrationFailedException {
         try {
             Connection conn = DBUtils.connect();
             PreparedStatement stmt = conn.prepareStatement(ADD_NEW_CUSTOMER);
@@ -34,7 +36,11 @@ public class CustomerDAO {
 
             stmt.executeUpdate();
             stmt.close();
-        }  catch (Exception e) {
+        }catch (SQLException e)
+        {
+            throw new CustomerRegistrationFailedException(username);
+        }
+        catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -65,7 +71,7 @@ public class CustomerDAO {
         return customer;
     }
 
-    public void updateCustomerDetails(String newValue, String updateColumn, String customerId) {
+    public void updateCustomerDetails(String newValue, String updateColumn, String customerId) throws CustomerDneException {
         try{
             Connection conn = DBUtils.connect();
             PreparedStatement stmt1 = conn.prepareStatement(UPDATE_CUSTOMER_DETAILS_EMAIL);
@@ -86,7 +92,7 @@ public class CustomerDAO {
             }
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new CustomerDneException();
         }
     }
 

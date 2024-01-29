@@ -2,6 +2,8 @@ package com.flipkart.service.impl;
 
 import com.flipkart.dao.CustomerDAO;
 import com.flipkart.dao.UserDAO;
+import com.flipkart.exceptions.CustomerDneException;
+import com.flipkart.exceptions.CustomerRegistrationFailedException;
 import com.flipkart.service.CustomerServiceInterface;
 
 import java.util.List;
@@ -12,11 +14,19 @@ public class CustomerServiceImpl implements CustomerServiceInterface {
     UserDAO userDAO = UserDAO.getInstance();
 
     public void updateCustomerDetails(String updatedVal, String attr, String customerId) {
-        customerDAO.updateCustomerDetails(updatedVal, attr, customerId);
+        try {
+            customerDAO.updateCustomerDetails(updatedVal, attr, customerId);
+        } catch (CustomerDneException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     public void register(String name, String password, String email, String contact) {
-        customerDAO.registerCustomer(name, password, email, contact);
+        try {
+            customerDAO.registerCustomer(name, password, email, contact);
+        } catch (CustomerRegistrationFailedException e) {
+            System.out.println(e.getMessage());
+        }
         userDAO.addUser(name, password, ROLE_GYM_CUSTOMER);
     }
 
