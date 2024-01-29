@@ -2,6 +2,9 @@ package com.flipkart.dao;
 
 import com.flipkart.bean.Customer;
 
+import com.flipkart.exceptions.CustomerDetailsNotUpdatedException;
+import com.flipkart.exceptions.CustomerNotFoundException;
+import com.flipkart.exceptions.CustomerRegistrationFailedException;
 import com.flipkart.utils.DBUtils;
 
 import java.sql.Connection;
@@ -22,7 +25,7 @@ public class CustomerDAO {
         return customerDAO;
     }
 
-    public void registerCustomer(String username, String password, String email, String contact){
+    public void registerCustomer(String username, String password, String email, String contact) throws CustomerRegistrationFailedException {
         try {
             Connection conn = DBUtils.connect();
             PreparedStatement stmt = conn.prepareStatement(ADD_NEW_CUSTOMER);
@@ -34,12 +37,12 @@ public class CustomerDAO {
 
             stmt.executeUpdate();
             stmt.close();
-        }  catch (Exception e) {
-            e.printStackTrace();
+        }  catch (SQLException e) {
+            throw new CustomerRegistrationFailedException(username);
         }
     }
 
-    public Customer getCustomer(String customerId){
+    public Customer getCustomer(String customerId) throws CustomerNotFoundException{
         Customer customer = new Customer();
 
         try {
@@ -59,13 +62,13 @@ public class CustomerDAO {
 
             stmt.close();
         } catch (SQLException exp) {
-            exp.printStackTrace();
+            throw new CustomerNotFoundException(customerId);
         }
 
         return customer;
     }
 
-    public void updateCustomerDetails(String newValue, String updateColumn, String customerId) {
+    public void updateCustomerDetails(String newValue, String updateColumn, String customerId) throws CustomerDetailsNotUpdatedException{
         try{
             Connection conn = DBUtils.connect();
             PreparedStatement stmt1 = conn.prepareStatement(UPDATE_CUSTOMER_DETAILS_EMAIL);
@@ -86,11 +89,11 @@ public class CustomerDAO {
             }
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new CustomerDetailsNotUpdatedException(customerId);
         }
     }
 
-    public String getIdFromName(String username){
+    public String getIdFromName(String username) throws CustomerNotFoundException{
         String customerId = "";
 
         try {
@@ -104,8 +107,8 @@ public class CustomerDAO {
 
             customerId = rs.getString("customerId");
             stmt.close();
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (SQLException e) {
+            throw new CustomerNotFoundException(username);
         }
 
         return customerId;
