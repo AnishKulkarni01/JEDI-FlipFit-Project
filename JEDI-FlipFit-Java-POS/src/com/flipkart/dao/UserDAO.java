@@ -67,7 +67,12 @@ public class UserDAO {
 
             stmt.executeUpdate();
             stmt.close();
-        } catch (Exception e){
+        }
+        catch (SQLException e)
+        {
+            System.out.println("Type mismatch");
+        }
+        catch (Exception e){
             e.printStackTrace();
         }
     }
