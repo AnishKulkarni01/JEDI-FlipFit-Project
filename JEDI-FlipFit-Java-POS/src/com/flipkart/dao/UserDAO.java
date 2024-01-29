@@ -1,5 +1,6 @@
 package com.flipkart.dao;
 
+import com.flipkart.exceptions.AuthenticationFailedException;
 import com.flipkart.utils.DBUtils;
 
 import java.sql.Connection;
@@ -35,7 +36,7 @@ public class UserDAO {
      * @param role
      * @return
      */
-    public boolean check(String username, String password, String role){
+    public boolean check(String username, String password, String role)throws AuthenticationFailedException {
         boolean isRegisteredUser = true;
         GymOwnerDAO gymOwnerDAO = GymOwnerDAO.getInstance();
 
@@ -58,7 +59,7 @@ public class UserDAO {
 
             stmt.close();
         }catch(SQLException e) {
-            System.out.println("");
+throw new AuthenticationFailedException();
         }
         catch(Exception e){
             e.printStackTrace();

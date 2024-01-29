@@ -24,11 +24,11 @@ public class DBUtils {
      */
     public static Connection connect() throws SQLException {
         if (singleInstance == null || singleInstance.isClosed()) {
-            System.out.println(PURPLE_COLOR + "Creating a new connection to DB...." + RESET_COLOR);
+           // System.out.println(PURPLE_COLOR + "Creating a new connection to DB...." + RESET_COLOR);
 
             try {
                 Connection connection = DriverManager.getConnection(DB_URL, USER, PASS);
-                System.out.println(GREEN_COLOR + "Connection to database is successful." + RESET_COLOR);
+               // System.out.println(GREEN_COLOR + "Connection to database is successful." + RESET_COLOR);
                 singleInstance = connection;
                 return connection;
             } catch (SQLException e) {

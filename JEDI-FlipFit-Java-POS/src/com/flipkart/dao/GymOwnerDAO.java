@@ -2,6 +2,7 @@ package com.flipkart.dao;
 
 import com.flipkart.bean.GymOwner;
 import com.flipkart.exceptions.GymOwnerDneException;
+import com.flipkart.exceptions.GymOwnerRegistrationFailedException;
 import com.flipkart.utils.DBUtils;
 
 import java.sql.*;
@@ -29,7 +30,7 @@ public class GymOwnerDAO {
      * @param email
      * @param contact
      */
-    public void registerGymOwner(String name, String password,String email,String contact) {
+    public void registerGymOwner(String name, String password,String email,String contact) throws GymOwnerRegistrationFailedException {
         try {
             Connection conn = DBUtils.connect();
             PreparedStatement stmt = conn.prepareStatement(ADD_NEW_GYM_OWNER);
@@ -41,7 +42,13 @@ public class GymOwnerDAO {
 
             stmt.executeUpdate();
             stmt.close();
-        }  catch (Exception e) {
+            System.out.println(GREEN_COLOR + "Gym Owner Registration Request for " + name + " sent." + RESET_COLOR);
+
+        }catch (SQLException e)
+        {
+            throw new GymOwnerRegistrationFailedException(name);
+        }
+        catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -111,6 +118,7 @@ public class GymOwnerDAO {
                 stmt2.executeUpdate();
                 stmt2.close();
             }
+            System.out.println(GREEN_COLOR + "Gym Owner Details with GymOwnerId " + gymOwnerId + " have been successfully updated." + RESET_COLOR);
 
         } catch (SQLException e) {
             throw new GymOwnerDneException();

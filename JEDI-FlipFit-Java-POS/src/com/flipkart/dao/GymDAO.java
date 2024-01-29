@@ -50,6 +50,8 @@ public class GymDAO {
 
             stmt.executeUpdate();
             stmt.close();
+            System.out.println(GREEN_COLOR + "Gym Onboard Request for " + name + " has been sent." + RESET_COLOR);
+
         } catch(Exception e) {
             e.printStackTrace();
         }
@@ -100,7 +102,7 @@ public class GymDAO {
 
         try {
             conn = DBUtils.connect();
-            System.out.println("Fetching gym centres..");
+            System.out.println("Fetching gym centers..");
 
             stmt = conn.prepareStatement(FETCH_ALL_PENDING_GYM_REQUESTS_BY_GYMOWNERID);
             stmt.setString(1, gymOwnerId);

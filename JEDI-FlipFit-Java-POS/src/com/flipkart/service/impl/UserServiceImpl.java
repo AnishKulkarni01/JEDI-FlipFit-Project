@@ -1,6 +1,7 @@
 package com.flipkart.service.impl;
 
 import com.flipkart.dao.UserDAO;
+import com.flipkart.exceptions.AuthenticationFailedException;
 import com.flipkart.service.UserServiceInterface;
 
 import java.util.List;
@@ -13,7 +14,12 @@ public class UserServiceImpl implements UserServiceInterface {
     Scanner scanner = new Scanner(System.in);
 
     public boolean authenticate(String username, String password,String role) {
-        return userDAO.check(username, password,role);
+        try {
+            return userDAO.check(username, password,role);
+        } catch (AuthenticationFailedException e) {
+            System.out.println(e.getMessage());
+        }
+        return false;
     }
 
     public void login(String username){

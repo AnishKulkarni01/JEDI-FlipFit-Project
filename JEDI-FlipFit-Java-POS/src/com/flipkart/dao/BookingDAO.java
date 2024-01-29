@@ -13,6 +13,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.flipkart.constants.Constants.GREEN_COLOR;
+import static com.flipkart.constants.Constants.RESET_COLOR;
 import static com.flipkart.constants.SQLConstants.*;
 
 public class BookingDAO {
@@ -41,6 +43,8 @@ public class BookingDAO {
 
             stmt.executeUpdate();
             stmt.close();
+            System.out.println(GREEN_COLOR + "Booking has been successfully added." + RESET_COLOR);
+
         } catch(SQLException e)
         {
             throw new SlotDneException();
@@ -98,6 +102,8 @@ public class BookingDAO {
             stmt.setString(1, bookingId);
 
             stmt.executeUpdate();
+            System.out.println(GREEN_COLOR + "Booking has been deleted." + RESET_COLOR);
+
         } catch(SQLException e)
         {
             throw new BookingDneException();

@@ -4,6 +4,7 @@ import com.flipkart.bean.GymOwner;
 import com.flipkart.dao.GymOwnerDAO;
 import com.flipkart.dao.UserDAO;
 import com.flipkart.exceptions.GymOwnerDneException;
+import com.flipkart.exceptions.GymOwnerRegistrationFailedException;
 import com.flipkart.service.GymOwnerServiceInterface;
 
 import java.util.ArrayList;
@@ -17,7 +18,11 @@ public class GymOwnerServiceImpl implements GymOwnerServiceInterface {
     UserDAO userDAO = UserDAO.getInstance();
 
     public void register(String username, String password, String email, String contact) {
-        gymOwnerDAO.registerGymOwner(username, password,email,contact);
+        try {
+            gymOwnerDAO.registerGymOwner(username, password,email,contact);
+        } catch (GymOwnerRegistrationFailedException e) {
+            System.out.println(e.getMessage());
+        }
         userDAO.addUser(username, password, "GYM_OWNER");
     }
 

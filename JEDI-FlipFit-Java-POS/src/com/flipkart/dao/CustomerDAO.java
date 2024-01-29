@@ -11,6 +11,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import static com.flipkart.constants.Constants.GREEN_COLOR;
+import static com.flipkart.constants.Constants.RESET_COLOR;
 import static com.flipkart.constants.SQLConstants.*;
 
 public class CustomerDAO {
@@ -110,6 +112,7 @@ public class CustomerDAO {
                 stmt2.executeUpdate();
                 stmt2.close();
             }
+            System.out.println(GREEN_COLOR + "Customer Details with CustomerId " + customerId + " have been successfully updated." + RESET_COLOR);
 
         } catch (SQLException e) {
             throw new CustomerDneException();
