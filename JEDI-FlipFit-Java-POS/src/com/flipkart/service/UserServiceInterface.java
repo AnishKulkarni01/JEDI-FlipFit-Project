@@ -6,4 +6,5 @@ public interface UserServiceInterface {
     void login(String username);
 
     void updatePassword();
+    String getCurrentUsername();
 }

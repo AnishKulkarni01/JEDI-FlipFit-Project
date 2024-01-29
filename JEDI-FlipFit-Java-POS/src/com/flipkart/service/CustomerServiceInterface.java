@@ -6,4 +6,5 @@ public interface CustomerServiceInterface {
     void register(String name, String password, String email, String contact);
 
     void viewProfile();
+    String getCustomerIdFromUsername(String username);
 }
