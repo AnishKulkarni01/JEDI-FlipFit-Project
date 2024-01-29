@@ -70,7 +70,7 @@ public class GymDAO {
 
     }
 
-    public List<Gym> viewPendingRequests(int gymOwnerId) {
+    public List<Gym> viewPendingRequests(String gymOwnerId) {
         List<Gym> pendingList = new ArrayList<>();
 
         try {
@@ -78,7 +78,7 @@ public class GymDAO {
             System.out.println("Fetching gym centres..");
 
             stmt = conn.prepareStatement(FETCH_ALL_PENDING_GYM_REQUESTS_BY_GYMOWNERID);
-            stmt.setString(1, Integer.toString(gymOwnerId));
+            stmt.setString(1, gymOwnerId);
 
             ResultSet rs = stmt.executeQuery();
             while(rs.next()) {

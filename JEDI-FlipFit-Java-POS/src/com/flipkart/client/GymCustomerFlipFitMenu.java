@@ -2,35 +2,37 @@ package com.flipkart.client;
 import com.flipkart.bean.Booking;
 import com.flipkart.bean.Gym;
 import com.flipkart.bean.Slot;
-import com.flipkart.dao.*;
-import com.flipkart.service.impl.CustomerServiceImpl;
+import com.flipkart.service.impl.*;
 
 import java.util.*;
 
 import static com.flipkart.constants.Constants.*;
 
 public class GymCustomerFlipFitMenu {
-    CustomerServiceImpl customerService=new CustomerServiceImpl();
-    UserDAO userDao= UserDAO.getInstance();
-    CustomerDAO customerDAO = CustomerDAO.getInstance();
-    BookingDAO bookingDAO =BookingDAO.getInstance();
-    String customerId = customerDAO.getIdFromName(userDao.getCurrentUser().get(0));
-    SlotDAO slotDAO =SlotDAO.getInstance();
-    GymDAO gymDao= GymDAO.getInstance();
+    UserServiceImpl userServiceImpl = new UserServiceImpl();
+    CustomerServiceImpl customerServiceImpl = new CustomerServiceImpl();
+    BookingServiceImpl bookingServiceImpl = new BookingServiceImpl();
+    SlotServiceImpl slotServiceImpl = new SlotServiceImpl();
+    GymServiceImpl gymServiceImpl = new GymServiceImpl();
+    String customerId = getCustomerId();
     Scanner scanner = new Scanner(System.in);
 
     private void showMenuOptions() {
         System.out.println("1. " + YELLOW_COLOR + "Edit Profile\n" + RESET_COLOR + "2. " + YELLOW_COLOR + "View Profile\n" + RESET_COLOR + "3. " + YELLOW_COLOR + "View Bookings\n" + RESET_COLOR + "4. " + YELLOW_COLOR + "Book Slot\n" + RESET_COLOR + "5. " + YELLOW_COLOR + "Cancel Booking\n" + RESET_COLOR + "6. " + YELLOW_COLOR + "Log Out\n" + RESET_COLOR + "7. " + YELLOW_COLOR + "Back" + RESET_COLOR);
     }
 
+    private String getCustomerId(){
+        return customerServiceImpl.getCustomerIdFromUsername(userServiceImpl.getCurrentUsername());
+    }
+
     private void listSlots(){
-        List<String> areas = gymDao.getAllAreas();
+        List<String> areas = gymServiceImpl.getAreas();
         for(String area : areas){
             System.out.println("    " + Integer.toString(areas.indexOf(area)+1) + ". " + area);
         }
         int areaOption = scanner.nextInt();
         String selectedArea = areas.get(areaOption-1);
-        List<Gym>gymList=gymDao.getGymsByArea(selectedArea);
+        List<Gym>gymList = gymServiceImpl.getGymByAreas(selectedArea);
         for(int i=0;i<gymList.size();i++)
         {
             ArrayList<String> details = new ArrayList<String>();
@@ -48,10 +50,10 @@ public class GymCustomerFlipFitMenu {
         }
         System.out.println("Enter GymId :");
         String gymId=scanner.next();
-        Set<String>st=slotDAO.getSlotsByCustomerId(customerId);
+        Set<String>st=slotServiceImpl.getSlotsByCustomerId(customerId);
 
         System.out.println("Choose a slot at " + selectedArea);
-        List<Slot> slotList = slotDAO.getSlotsByGymId(gymId);
+        List<Slot> slotList = slotServiceImpl.getSlotsByGymId(gymId);
         for(Slot slot: slotList) {
             if(!st.contains(slot.getSlotId())) System.out.println("Slot Id : " + slot.getSlotId() +" Date : "+slot.getDate()+" Time : "+slot.getStartTime());
         }
@@ -61,13 +63,13 @@ public class GymCustomerFlipFitMenu {
         System.out.println(BLUE_COLOR + "The bookings are as follows - " + RESET_COLOR);
 
         //booking.toString() later
-        for(Booking booking : bookingDAO.getBookingbyCustId(customerId)){
-            Slot slot = slotDAO.getSlotBySlotId(booking.getSlotId());
+        for(Booking booking : bookingServiceImpl.getBookingByCustomerId(customerId)){
+            Slot slot = slotServiceImpl.getSlotBySlotId(booking.getSlotId());
             String[] headers = {PURPLE_COLOR + " Booking Id " + RESET_COLOR, PURPLE_COLOR + " Gym " + RESET_COLOR, PURPLE_COLOR + " Time " + RESET_COLOR, PURPLE_COLOR + " Date " + RESET_COLOR};
             System.out.println("| " + String.join(" | ", headers) + " |");
             ArrayList<String> details = new ArrayList<>();
             details.add(booking.getBookingId());
-            details.add(gymDao.getGymById(slot.getGymId()).getName());
+            details.add(gymServiceImpl.getGymById(slot.getGymId()).getName());
             details.add(slot.getStartTime());
             details.add(slot.getDate());
             String formatSpecifier;
@@ -86,9 +88,7 @@ public class GymCustomerFlipFitMenu {
                 }
                 System.out.printf("| " + formatSpecifier, details.get(i));
             }
-            System.out.println(" |");
-//            System.out.println("BookingId : "+booking.getBookingId()+" Gym : " + gymDao.getGymById(slot.getGymId()).getName() + " Time : " + slot.getStartTime()+" Date : "+slot.getDate());
-        }
+            System.out.println(" |"); }
     }
     private void bookSlot(){
         System.out.println(BLUE_COLOR + "Book your Slot :)" + RESET_COLOR);
@@ -96,13 +96,13 @@ public class GymCustomerFlipFitMenu {
         System.out.println("Select an area where you'd like to book a slot.");
         String slotId = scanner.next();
 
-        bookingDAO.addBooking(customerId, slotId);
+        bookingServiceImpl.addBooking(customerId, slotId);
         System.out.println(GREEN_COLOR + "Booking successfully added." + RESET_COLOR);
     }
 
     private void cancelSlot(){
-        for(Booking booking : bookingDAO.getBookingbyCustId(customerId)){
-            Slot slot = slotDAO.getSlotBySlotId(booking.getSlotId());
+        for(Booking booking : bookingServiceImpl.getBookingByCustomerId(customerId)){
+            Slot slot = slotServiceImpl.getSlotBySlotId(booking.getSlotId());
             String[] headers = {PURPLE_COLOR + " Booking Id " + RESET_COLOR, PURPLE_COLOR + " Date " + RESET_COLOR, PURPLE_COLOR + " Time " + RESET_COLOR};
             System.out.println("| " + String.join(" | ", headers) + " |");
             ArrayList<String> details = new ArrayList<>();
@@ -126,12 +126,12 @@ public class GymCustomerFlipFitMenu {
         }
         System.out.println("Enter BookingId - ");
         String deleteBookingId = scanner.next();
-        bookingDAO.deleteBookingId(deleteBookingId);
+        bookingServiceImpl.deleteBooking(deleteBookingId);
     }
 
     private void viewProfile(){
         System.out.println("Profile details are as follows - ");
-        customerService.viewProfile();
+        customerServiceImpl.viewProfile();
     }
 
     private void editProfile() {
@@ -145,13 +145,13 @@ public class GymCustomerFlipFitMenu {
                 case 1:
                     System.out.println("Enter the updated email - ");
                     String newValue = scanner.next();
-                    customerService.updateCustomerDetails(newValue, "email", customerId);
+                    customerServiceImpl.updateCustomerDetails(newValue, "email", customerId);
                     System.out.println(GREEN_COLOR + "Email has been updated successfully." + RESET_COLOR);
                     return;
                 case 2:
                     System.out.println("Enter the updated contact number - ");
                     String newValue1 = scanner.next();
-                    customerService.updateCustomerDetails(newValue1, "contact", customerId);
+                    customerServiceImpl.updateCustomerDetails(newValue1, "contact", customerId);
                     System.out.println(GREEN_COLOR + "Contact number has been updated successfully." + RESET_COLOR);
                     return;
                 default:

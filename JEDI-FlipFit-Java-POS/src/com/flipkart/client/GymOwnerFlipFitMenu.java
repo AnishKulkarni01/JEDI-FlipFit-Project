@@ -4,6 +4,9 @@ import com.flipkart.bean.Gym;
 import com.flipkart.bean.Slot;
 import com.flipkart.dao.*;
 import com.flipkart.service.impl.GymOwnerServiceImpl;
+import com.flipkart.service.impl.GymServiceImpl;
+import com.flipkart.service.impl.SlotServiceImpl;
+import com.flipkart.service.impl.UserServiceImpl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,13 +15,16 @@ import java.util.Scanner;
 import static com.flipkart.constants.Constants.*;
 
 public class GymOwnerFlipFitMenu {
-    UserDAO userDao = UserDAO.getInstance();
-    SlotDAO slotDAO = SlotDAO.getInstance();
-    GymDAO gymDao = GymDAO.getInstance();
-    GymOwnerDAO ownDao = GymOwnerDAO.getInstance();
-    String gymOwnerId = ownDao.getIdFromName(userDao.getCurrentUser().get(0)).get(0);
+    UserServiceImpl userServiceImpl = new UserServiceImpl();
+    SlotServiceImpl slotServiceImpl = new SlotServiceImpl();
+    GymServiceImpl gymServiceImpl = new GymServiceImpl();
+    GymOwnerServiceImpl gymOwnerServiceImpl = new GymOwnerServiceImpl();
+    String gymOwnerId = getGymOwnerId();
     Scanner scanner= new Scanner(System.in);
-    GymOwnerServiceImpl gymOwnerServiceImpl =new GymOwnerServiceImpl();
+
+    public String getGymOwnerId(){
+        return gymOwnerServiceImpl.getOwnerIdByUsername(userServiceImpl.getCurrentUsername()).get(0);
+    }
 
     private void showMenuOptions(){
         System.out.println("1. " + YELLOW_COLOR + "Request Gym Onboarding\n" + RESET_COLOR +
@@ -47,7 +53,7 @@ public class GymOwnerFlipFitMenu {
         System.out.println("Enter Seats : ");
         int seats = scanner.nextInt();
 
-        gymDao.sendOnboardReq(gymName, gstin, city, seats, gymOwnerId);
+        gymServiceImpl.sendGymRequest(gymName, gstin, city, seats, gymOwnerId);
         System.out.println(GREEN_COLOR + "Request Sent Successfully" + RESET_COLOR);
     }
 
@@ -65,16 +71,16 @@ public class GymOwnerFlipFitMenu {
 
             switch (updateColumn) {
                 case 1:
-                    gymDao.updateGym(newValue, "name", gymId);
+                    gymServiceImpl.updateGymDetails(newValue, "name", gymId);
                     return;
                 case 2:
-                    gymDao.updateGym(newValue, "city", gymId);
+                    gymServiceImpl.updateGymDetails(newValue, "city", gymId);
                     return;
                 case 3:
-                    gymDao.updateGym(newValue, "seats", gymId);
+                    gymServiceImpl.updateGymDetails(newValue, "seats", gymId);
                     return;
                 case 4:
-                    gymDao.updateGym(newValue, "gstin", gymId);
+                    gymServiceImpl.updateGymDetails(newValue, "gstin", gymId);
                     return;
                 default:
                     System.out.println(RED_COLOR + "Please select a valid option" + RESET_COLOR);
@@ -121,7 +127,7 @@ public class GymOwnerFlipFitMenu {
         System.out.println("StartTime : ");
         String time = scanner.next();
 
-        slotDAO.createSlot(date, time, gymId);
+        slotServiceImpl.createSlot(date, time, gymId);
     }
 
     private void updateSlot(){
@@ -140,10 +146,10 @@ public class GymOwnerFlipFitMenu {
 
             switch(updateSlotColumn){
                 case 1:
-                    slotDAO.updateSlot(newValue, "date", updateSlotId);
+                    slotServiceImpl.updateSlot(newValue, "date", updateSlotId);
                     return;
                 case 2:
-                    slotDAO.updateSlot(newValue, "startTime", updateSlotId);
+                    slotServiceImpl.updateSlot(newValue, "startTime", updateSlotId);
                     return;
                 default:
                     System.out.println(RED_COLOR + "Please select valid option." + RESET_COLOR);
@@ -156,8 +162,7 @@ public class GymOwnerFlipFitMenu {
         System.out.println("Enter GymId");
         int viewSlotGymId= scanner.nextInt();
 
-        //need slot.toString()
-        List<Slot> slotList=slotDAO.getSlotsByGymId(Integer.toString(viewSlotGymId));
+        List<Slot> slotList=slotServiceImpl.getSlotsByGymId(Integer.toString(viewSlotGymId));
         if(slotList.isEmpty())
         {
             System.out.println("Enter correct gymId");
@@ -184,26 +189,25 @@ public class GymOwnerFlipFitMenu {
                 System.out.printf("| " + formatSpecifier, details.get(i));
             }
             System.out.println(" |");
-//            System.out.println("SlotId : "+slot.getSlotId()+" StartTime : "+slot.getStartTime()+" Date : "+slot.getDate());
         }
     }
     private void deleteSlot()
     {
         System.out.println("Enter SlotId : ");
         int delSlotId=scanner.nextInt();
-        slotDAO.deleteSlotById(Integer.toString(delSlotId));
+        slotServiceImpl.deleteSlotById(Integer.toString(delSlotId));
     }
 
     private void viewGyms(){
         System.out.println("Viewing Gyms");
-        for(Gym gym : gymDao.getGymsByOwner(gymOwnerId)){
+        for(Gym gym : gymServiceImpl.getGymsByOwnerId(gymOwnerId)){
             System.out.println(gym.toString());
         }
     }
 
     private void viewPendingRequests(){
         System.out.println("Showing Pending Requests");
-        for(Gym gym : gymDao.viewPendingRequests(Integer.parseInt(gymOwnerId))){
+        for(Gym gym : gymServiceImpl.viewPendingRequests(gymOwnerId)){
             System.out.println(gym.toString());
         }
     }

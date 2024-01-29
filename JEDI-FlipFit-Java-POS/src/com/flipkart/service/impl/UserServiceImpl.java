@@ -20,6 +20,10 @@ public class UserServiceImpl implements UserServiceInterface {
         userDAO.setCurrentUser(username);
     }
 
+    public String getCurrentUsername(){
+        return userDAO.getCurrentUser().get(0);
+    }
+
     public void updatePassword(){
         List<String> currentUserDetails = userDAO.getCurrentUser();
 
