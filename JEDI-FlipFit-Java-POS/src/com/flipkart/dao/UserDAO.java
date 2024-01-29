@@ -5,6 +5,7 @@ import com.flipkart.utils.DBUtils;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.*;
 
 import static com.flipkart.constants.Constants.*;
@@ -45,7 +46,10 @@ public class UserDAO {
             if(!rs.next()) isRegisteredUser = false;
 
             stmt.close();
-        } catch(Exception e){
+        }catch(SQLException e) {
+            System.out.println("");
+        }
+        catch(Exception e){
             e.printStackTrace();
         }
 

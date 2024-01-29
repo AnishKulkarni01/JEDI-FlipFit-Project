@@ -2,6 +2,9 @@ package com.flipkart.service.impl;
 
 import com.flipkart.bean.Slot;
 import com.flipkart.dao.SlotDAO;
+import com.flipkart.exceptions.CustomerDneException;
+import com.flipkart.exceptions.GymDneException;
+import com.flipkart.exceptions.SlotDneException;
 import com.flipkart.service.SlotServiceInterface;
 
 import java.util.List;
@@ -11,22 +14,41 @@ public class SlotServiceImpl implements SlotServiceInterface {
     SlotDAO slotDAO = SlotDAO.getInstance();
 
     public Set<String> getSlotsByCustomerId(String customerId){
-        return slotDAO.getSlotsByCustomerId(customerId);
+        try {
+            return slotDAO.getSlotsByCustomerId(customerId);
+        } catch (CustomerDneException e) {
+            System.out.println(e.getMessage());
+        }
+        return null;
     }
 
     public List<Slot> getSlotsByGymId(String gymId){
-        return slotDAO.getSlotsByGymId(gymId);
+        try {
+            return slotDAO.getSlotsByGymId(gymId);
+        } catch (GymDneException e) {
+            System.out.println(e.getMessage());
+        }
+        return null;
     }
 
     public Slot getSlotBySlotId(String slotId){
-        return slotDAO.getSlotBySlotId(slotId);
+        try {
+            return slotDAO.getSlotBySlotId(slotId);
+        } catch (SlotDneException e) {
+            System.out.println(e.getMessage());        }
+        return null;
     }
 
     public void createSlot(String date, String startTime, String gymId){
-        slotDAO.createSlot(date, startTime, gymId);
+        try {
+            slotDAO.createSlot(date, startTime, gymId);
+        } catch (GymDneException e) {
+            System.out.println(e.getMessage());
+        }
+        return ;
     }
 
-    public void updateSlot(String newValue, String updateColumn, String slotId){
+    public void updateSlot(String newValue, String updateColumn, String slotId) {
         slotDAO.updateSlot(newValue, updateColumn, slotId);
     }
 

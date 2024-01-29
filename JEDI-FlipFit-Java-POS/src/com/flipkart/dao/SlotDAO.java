@@ -1,7 +1,11 @@
 
 package com.flipkart.dao;
 
+import com.flipkart.bean.Gym;
 import com.flipkart.bean.Slot;
+import com.flipkart.exceptions.CustomerDneException;
+import com.flipkart.exceptions.GymDneException;
+import com.flipkart.exceptions.SlotDneException;
 import com.flipkart.utils.DBUtils;
 
 import java.sql.*;
@@ -23,7 +27,7 @@ public class SlotDAO {
         return slotDAO;
     }
 
-    public void createSlot(String date, String startTime, String gymId) {
+    public void createSlot(String date, String startTime, String gymId) throws GymDneException {
         try {
             Connection conn = DBUtils.connect();
             PreparedStatement stmt = conn.prepareStatement(ADD_SLOT);
@@ -34,12 +38,17 @@ public class SlotDAO {
 
             stmt.executeUpdate();
             stmt.close();
-        } catch (Exception e) {
+        }catch(SQLException e)
+        {
+            throw new GymDneException();
+            //System.out.println("GymId does not exist");
+        }
+        catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public List<Slot> getSlotsByGymId(String gymId) {
+    public List<Slot> getSlotsByGymId(String gymId) throws GymDneException {
         List<Slot> slotList = new ArrayList<>();
 
         try {
@@ -60,12 +69,15 @@ public class SlotDAO {
                 slotList.add(slt);
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new GymDneException();
+
+            //System.out.println("GymId does not exist.");
+            //throw new RuntimeException(e);
         }
 
         return slotList;
     }
-    public Set<String> getSlotsByCustomerId(String customerId) {
+    public Set<String> getSlotsByCustomerId(String customerId) throws CustomerDneException {
         Set<String> slotIdList = new HashSet<>();
 
         try {
@@ -79,13 +91,15 @@ public class SlotDAO {
                 slotIdList.add(rs.getString("slotId"));
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new CustomerDneException();
+            //System.out.println("No bookings found for the above CustomerId");
+            //throw new RuntimeException(e);
         }
 
         return slotIdList;
     }
 
-    public Slot getSlotBySlotId(String slotId) {
+    public Slot getSlotBySlotId(String slotId) throws SlotDneException {
         Slot slot = new Slot();
         try{
             Connection conn = DBUtils.connect();
@@ -104,6 +118,11 @@ public class SlotDAO {
 
                 return slot;
             }
+
+        } catch(SQLException e)
+        {
+            throw new SlotDneException();
+            //System.out.println("SlotId does not exist");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -111,7 +130,7 @@ public class SlotDAO {
         return slot;
     }
 
-    public void updateSlot(String updatedVal, String attr, String slotId) {
+    public void updateSlot(String updatedVal, String attr, String slotId){
         try{
             Connection conn = DBUtils.connect();
 
@@ -131,7 +150,11 @@ public class SlotDAO {
                 stmt2.executeUpdate();
                 stmt2.close();
             }
-        } catch (Exception e) {
+        }catch (SQLException e)
+        {
+            System.out.println("SlotId does not exist");
+        }
+        catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -146,6 +169,10 @@ public class SlotDAO {
         }catch(SQLIntegrityConstraintViolationException e) {
             System.out.println(YELLOW_COLOR + "Slot already booked by Customers" +  RESET_COLOR);
             System.out.println(RED_COLOR + "Delete Failed" + RESET_COLOR);
+        }
+        catch(SQLException e)
+        {
+            System.out.println("SlotId does not exist.");
         }
         catch(Exception e) {
             System.out.println(e);
