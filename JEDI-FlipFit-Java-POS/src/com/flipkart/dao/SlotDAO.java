@@ -130,7 +130,7 @@ public class SlotDAO {
         return slot;
     }
 
-    public void updateSlot(String updatedVal, String attr, String slotId){
+    public void updateSlot(String updatedVal, String attr, String slotId) throws SlotDneException{
         try{
             Connection conn = DBUtils.connect();
 
@@ -158,7 +158,7 @@ public class SlotDAO {
             e.printStackTrace();
         }
     }
-    public void deleteSlotById(String slotId)
+    public void deleteSlotById(String slotId) throws SlotDneException
     {
         try {
             Connection conn = DBUtils.connect();
@@ -172,7 +172,8 @@ public class SlotDAO {
         }
         catch(SQLException e)
         {
-            System.out.println("SlotId does not exist.");
+            throw new SlotDneException();
+            //System.out.println("SlotId does not exist.");
         }
         catch(Exception e) {
             System.out.println(e);

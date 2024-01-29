@@ -2,6 +2,9 @@ package com.flipkart.service.impl;
 
 import com.flipkart.bean.Gym;
 import com.flipkart.dao.GymDAO;
+import com.flipkart.exceptions.GymAreaDneException;
+import com.flipkart.exceptions.GymDneException;
+import com.flipkart.exceptions.GymOwnerDneException;
 import com.flipkart.service.GymServiceInterface;
 
 import java.util.List;
@@ -18,15 +21,30 @@ public class GymServiceImpl implements GymServiceInterface {
     }
 
     public Gym getGymById(String gymId){
-        return gymDao.getGymById(gymId);
+        try {
+            return gymDao.getGymById(gymId);
+        } catch (GymDneException e) {
+            System.out.println(e.getMessage());
+        }
+        return null;
     }
 
     public List<Gym> getGymsByOwnerId(String gymOwnerId){
-        return gymDao.getGymsByOwner(gymOwnerId);
+        try {
+            return gymDao.getGymsByOwner(gymOwnerId);
+        } catch (GymOwnerDneException e) {
+            System.out.println(e.getMessage());
+        }
+        return null;
     }
 
     public List<Gym> getGymByAreas(String area){
-        return gymDao.getGymsByArea(area);
+        try {
+            return gymDao.getGymsByArea(area);
+        } catch (GymAreaDneException e) {
+            System.out.println(e.getMessage());
+        }
+        return null;
     }
 
     public void viewGymRequests() {
@@ -55,7 +73,12 @@ public class GymServiceImpl implements GymServiceInterface {
     }
 
     public List<Gym> viewPendingRequests(String gymOwnerId){
-        return gymDao.viewPendingRequests(gymOwnerId);
+        try {
+            return gymDao.viewPendingRequests(gymOwnerId);
+        } catch (GymOwnerDneException e) {
+            System.out.println(e.getMessage());
+        }
+        return null;
     }
 
     public void onBoardGym(String gymId){
@@ -67,7 +90,12 @@ public class GymServiceImpl implements GymServiceInterface {
     }
 
     public void updateGymDetails(String newValue, String updateColumn, String gymId){
-        gymDao.updateGym(newValue, updateColumn, gymId);
+        try {
+            gymDao.updateGym(newValue, updateColumn, gymId);
+        } catch (GymDneException e) {
+            System.out.println(e.getMessage());
+        }
+
     }
 
     public void deleteGymRequest(String gymId){

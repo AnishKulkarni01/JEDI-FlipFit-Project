@@ -1,11 +1,15 @@
 package com.flipkart.dao;
 
 import com.flipkart.bean.Gym;
+import com.flipkart.exceptions.GymAreaDneException;
+import com.flipkart.exceptions.GymDneException;
+import com.flipkart.exceptions.GymOwnerDneException;
 import com.flipkart.utils.DBUtils;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.*;
 
 import static com.flipkart.constants.Constants.*;
@@ -70,7 +74,7 @@ public class GymDAO {
 
     }
 
-    public List<Gym> viewPendingRequests(String gymOwnerId) {
+    public List<Gym> viewPendingRequests(String gymOwnerId) throws GymOwnerDneException {
         List<Gym> pendingList = new ArrayList<>();
 
         try {
@@ -91,7 +95,11 @@ public class GymDAO {
                         g.setIsApproved(rs.getString("isApproved"));
                 pendingList.add(g);
             }
-        } catch (Exception e) {
+        }catch(SQLException e)
+        {
+            throw new GymOwnerDneException();
+        }
+        catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -116,7 +124,7 @@ public class GymDAO {
         return areas;
     }
 
-    public Gym getGymById(String gymId) {
+    public Gym getGymById(String gymId) throws GymDneException {
         Gym gym = new Gym();
 
         try {
@@ -135,14 +143,18 @@ public class GymDAO {
                 gym.setGymId(rs.getString("gymId"));
                 gym.setIsApproved(rs.getString("isApproved"));
             }
-        } catch (Exception e) {
+        }catch (SQLException e)
+        {
+            throw new GymDneException();
+        }
+        catch (Exception e) {
             e.printStackTrace();
         }
 
         return gym;
     }
 
-    public List<Gym> getGymsByArea(String area) {
+    public List<Gym> getGymsByArea(String area) throws GymAreaDneException {
         List<Gym> gymList = new ArrayList<>();
 
         try {
@@ -164,14 +176,18 @@ public class GymDAO {
                 gym.setIsApproved(rs.getString("isApproved"));
                 gymList.add(gym);
             }
-        } catch (Exception e) {
+        }catch (SQLException e)
+        {
+            throw new GymAreaDneException();
+        }
+        catch (Exception e) {
             e.printStackTrace();
         }
 
         return gymList;
     }
 
-    public List<Gym> getGymsByOwner(String gymOwnerId) {
+    public List<Gym> getGymsByOwner(String gymOwnerId) throws GymOwnerDneException {
         List<Gym> gymList = new ArrayList<>();
 
         try {
@@ -193,7 +209,11 @@ public class GymDAO {
                 gym.setIsApproved(rs.getString("isApproved"));
                 gymList.add(gym);
             }
-        } catch (Exception e) {
+        } catch (SQLException e)
+        {
+            throw new GymOwnerDneException();
+        }
+        catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -227,7 +247,7 @@ public class GymDAO {
         return pendingList;
     }
 
-    public void updateGym(String updatedVal, String attr, String gymId) {
+    public void updateGym(String updatedVal, String attr, String gymId) throws GymDneException {
         try{
             Connection conn = DBUtils.connect();
 
@@ -268,7 +288,11 @@ public class GymDAO {
                 stmt4.close();
             }
 
-        } catch (Exception e) {
+        }catch (SQLException e)
+        {
+            throw new GymDneException();
+        }
+        catch (Exception e) {
             e.printStackTrace();
         }
     }

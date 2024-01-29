@@ -49,10 +49,19 @@ public class SlotServiceImpl implements SlotServiceInterface {
     }
 
     public void updateSlot(String newValue, String updateColumn, String slotId) {
-        slotDAO.updateSlot(newValue, updateColumn, slotId);
+        try {
+            slotDAO.updateSlot(newValue, updateColumn, slotId);
+        } catch (SlotDneException e) {
+            System.out.println(e.getMessage());
+        }
+        return;
     }
 
     public void deleteSlotById(String slotId){
-        slotDAO.deleteSlotById(slotId);
+        try {
+            slotDAO.deleteSlotById(slotId);
+        } catch (SlotDneException e) {
+            System.out.println(e.getMessage());
+        }
     }
 }
