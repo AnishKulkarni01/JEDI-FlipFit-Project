@@ -26,7 +26,7 @@ public class GymCustomerFlipFitMenu {
     private void listSlots(){
         List<String> areas = gymDao.getAllAreas();
         for(String area : areas){
-            System.out.println("    " + areas.indexOf(area)+1 + ". " + area);
+            System.out.println("    " + Integer.toString(areas.indexOf(area)+1) + ". " + area);
         }
         int areaOption = scanner.nextInt();
         String selectedArea = areas.get(areaOption-1);
