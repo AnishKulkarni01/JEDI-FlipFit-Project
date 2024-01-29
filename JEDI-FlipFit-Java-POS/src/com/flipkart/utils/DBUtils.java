@@ -6,7 +6,7 @@ import static com.flipkart.constants.Constants.*;
 public class DBUtils {
     static final String DB_URL = "jdbc:mysql://localhost:3306/jedi_flipfit_schema";
     static final String USER = "root";
-    static final String PASS = "Abhishek@108";
+    static final String PASS = "$$Root1$$";
     private static Connection singleInstance = null;
 
     static {
