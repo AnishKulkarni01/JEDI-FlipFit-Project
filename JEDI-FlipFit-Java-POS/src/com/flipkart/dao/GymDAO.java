@@ -70,7 +70,7 @@ public class GymDAO {
             stmt.setString(2, gymId);
 
             stmt.executeUpdate();
-            System.out.println(GREEN_COLOR + "Gym Onboarding request with " + gymId + " has been approved." + RESET_COLOR);
+            System.out.println(GREEN_COLOR + "\nGym Onboarding request with " + gymId + " has been approved.\n" + RESET_COLOR);
         } catch (Exception e) {
             // Handle errors for Class.forName
             e.printStackTrace();
@@ -118,8 +118,7 @@ public class GymDAO {
                         g.setIsApproved(rs.getString("isApproved"));
                 pendingList.add(g);
             }
-        }catch(SQLException e)
-        {
+        }catch(SQLException e) {
             throw new GymOwnerDneException();
         }
         catch (Exception e) {
@@ -176,8 +175,7 @@ public class GymDAO {
                 gym.setGymId(rs.getString("gymId"));
                 gym.setIsApproved(rs.getString("isApproved"));
             }
-        }catch (SQLException e)
-        {
+        }catch (SQLException e) {
             throw new GymDneException();
         }
         catch (Exception e) {
@@ -215,11 +213,9 @@ public class GymDAO {
                 gym.setIsApproved(rs.getString("isApproved"));
                 gymList.add(gym);
             }
-        }catch (SQLException e)
-        {
+        }catch (SQLException e) {
             throw new GymAreaDneException();
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -254,11 +250,9 @@ public class GymDAO {
                 gym.setIsApproved(rs.getString("isApproved"));
                 gymList.add(gym);
             }
-        } catch (SQLException e)
-        {
+        } catch (SQLException e) {
             throw new GymOwnerDneException();
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -344,11 +338,9 @@ public class GymDAO {
                 stmt4.close();
             }
 
-        }catch (SQLException e)
-        {
+        } catch (SQLException e) {
             throw new GymDneException();
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

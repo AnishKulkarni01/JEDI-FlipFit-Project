@@ -49,9 +49,15 @@ public class GymServiceImpl implements GymServiceInterface {
 
     public void viewGymRequests() {
         List<Gym> requestDetails = gymDao.viewRequests();
+        String formatSpecifier = "%-20s";
 
-        String[] headers = {PURPLE_COLOR + "  GymId  " + RESET_COLOR, PURPLE_COLOR + "  Name   " + RESET_COLOR, PURPLE_COLOR + "  City   " + RESET_COLOR, PURPLE_COLOR + "  GSTIN  " + RESET_COLOR, PURPLE_COLOR + "  Seats   " + RESET_COLOR};
-        System.out.println("| " + String.join(" | ", headers) + " |");
+        String[] headers = {PURPLE_COLOR + "       GymId        " + RESET_COLOR,
+                PURPLE_COLOR + "        Name        " + RESET_COLOR,
+                PURPLE_COLOR + "        City        " + RESET_COLOR,
+                PURPLE_COLOR + "       GSTIN        " + RESET_COLOR,
+                PURPLE_COLOR + "       Seats        " + RESET_COLOR};
+        for(String header: headers) System.out.printf("| " + formatSpecifier, header);
+        System.out.println(" |");
 
         for(Gym gym : requestDetails){
             String output = gym.toString();
@@ -63,13 +69,11 @@ public class GymServiceImpl implements GymServiceInterface {
 
             for (String pair : keyValuePairs) {
                 String[] entry = pair.split("=");
-                String value = entry[1].trim();
-                String formatSpecifier = "%-10s";
-                System.out.printf("| " + formatSpecifier, value);
+                System.out.printf("| " + formatSpecifier, entry[1].replace("'", ""));
             }
             System.out.println(" |");
         }
-
+        System.out.println();
     }
 
     public List<Gym> viewPendingRequests(String gymOwnerId){

@@ -10,7 +10,7 @@ import static com.flipkart.constants.Constants.*;
 public class AdminFlipFitMenu {
     GymServiceImpl gymServiceImpl = new GymServiceImpl();
     GymOwnerServiceImpl gymOwnerServiceImpl = new GymOwnerServiceImpl();
-    Scanner scanner = new Scanner(System.in);
+    Scanner scanner = new Scanner(System.in).useDelimiter("\\n");
 
     public void showMenuOptions(){
         System.out.println("1. " + YELLOW_COLOR + "View Pending Requests.\n" + RESET_COLOR +
@@ -19,7 +19,7 @@ public class AdminFlipFitMenu {
                 "4. " + YELLOW_COLOR + "Approve Gym Owner Requests.\n" + RESET_COLOR +
                 "5. " + YELLOW_COLOR + "Decline Gym Owner Requests.\n" + RESET_COLOR +
                 "6. " + YELLOW_COLOR +"Log Out\n" + RESET_COLOR + "7. " + YELLOW_COLOR +
-                "Back" + RESET_COLOR);
+                "Back\n" + RESET_COLOR);
     }
 
     private void printGymRequests(){
@@ -37,7 +37,7 @@ public class AdminFlipFitMenu {
             int action = scanner.nextInt();
             switch(action){
                 case 1:
-                    System.out.println(BLUE_COLOR + "Viewing Pending Requests" + RESET_COLOR);
+                    System.out.println(BLUE_COLOR + "\nViewing Pending Requests\n" + RESET_COLOR);
                     printGymRequests();
                     break;
                 case 2:
@@ -54,23 +54,23 @@ public class AdminFlipFitMenu {
                     break;
                 case 4:
                     printGymOwnerRequests();
-                    System.out.println(BLUE_COLOR + "Select GymOwnerId to approve request - " + RESET_COLOR);
+                    System.out.println(BLUE_COLOR + "\nSelect GymOwnerId to approve request - " + RESET_COLOR);
                     int approveGymOwnerId = scanner.nextInt();
                     gymOwnerServiceImpl.approveGymOwner(String.valueOf(approveGymOwnerId));
                     break;
                 case 5:
                     printGymOwnerRequests();
-                    System.out.println(BLUE_COLOR + "Select GymOwnerId to reject request - " + RESET_COLOR);
+                    System.out.println(BLUE_COLOR + "\nSelect GymOwnerId to reject request - " + RESET_COLOR);
                     int rejectGymOwnerId = scanner.nextInt();
                     gymOwnerServiceImpl.rejectGymOwner(String.valueOf(rejectGymOwnerId));
                     break;
                 case 6:
-                    System.out.println(GREEN_COLOR + "Logged out successfully." + RESET_COLOR);
+                    System.out.println(GREEN_COLOR + "\nLogged out successfully." + RESET_COLOR);
                     return;
                 case 7:
                     return;
                 default:
-                    System.out.println(RED_COLOR + "Please select an appropriate option from the menu." + RESET_COLOR);
+                    System.out.println(RED_COLOR + "\nPlease select an appropriate option from the menu." + RESET_COLOR);
                     break;
             }
         }

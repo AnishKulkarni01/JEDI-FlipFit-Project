@@ -32,7 +32,11 @@ public class CustomerServiceImpl implements CustomerServiceInterface {
 
     public void viewProfile() {
         List<String> userDetails = userDAO.getCurrentUser();
-        System.out.println(PURPLE_COLOR + "Username : " + RESET_COLOR + userDetails.get(0) + "\n" + PURPLE_COLOR + "Role : " + RESET_COLOR + userDetails.get(1) + "\n" + PURPLE_COLOR + "Password : " + RESET_COLOR + userDetails.get(2) + "\n" + PURPLE_COLOR + "Contact : " + RESET_COLOR + userDetails.get(3) + "\n" + PURPLE_COLOR + "Email : " + RESET_COLOR + userDetails.get(4) + "\n");
+        System.out.println(PURPLE_COLOR + "\nUsername : " + RESET_COLOR + userDetails.get(0) + "\n" +
+                PURPLE_COLOR + "Role : " + RESET_COLOR + userDetails.get(1) + "\n" +
+                PURPLE_COLOR + "Password : " + RESET_COLOR + userDetails.get(2) + "\n" +
+                PURPLE_COLOR + "Contact : " + RESET_COLOR + userDetails.get(3) + "\n" +
+                PURPLE_COLOR + "Email : " + RESET_COLOR + userDetails.get(4) + "\n");
     }
 
     public String getCustomerIdFromUsername(String username) {

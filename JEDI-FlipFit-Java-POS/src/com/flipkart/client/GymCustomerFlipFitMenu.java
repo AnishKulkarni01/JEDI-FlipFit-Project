@@ -3,6 +3,7 @@ import com.flipkart.bean.Booking;
 import com.flipkart.bean.Gym;
 import com.flipkart.bean.Slot;
 import com.flipkart.service.impl.*;
+import com.flipkart.validator.Validators;
 
 import java.util.*;
 
@@ -14,11 +15,18 @@ public class GymCustomerFlipFitMenu {
     BookingServiceImpl bookingServiceImpl = new BookingServiceImpl();
     SlotServiceImpl slotServiceImpl = new SlotServiceImpl();
     GymServiceImpl gymServiceImpl = new GymServiceImpl();
+    Validators validators = new Validators();
     String customerId = getCustomerId();
-    Scanner scanner = new Scanner(System.in);
+    Scanner scanner = new Scanner(System.in).useDelimiter("\\n");
 
     private void showMenuOptions() {
-        System.out.println("1. " + YELLOW_COLOR + "Edit Profile\n" + RESET_COLOR + "2. " + YELLOW_COLOR + "View Profile\n" + RESET_COLOR + "3. " + YELLOW_COLOR + "View Bookings\n" + RESET_COLOR + "4. " + YELLOW_COLOR + "Book Slot\n" + RESET_COLOR + "5. " + YELLOW_COLOR + "Cancel Booking\n" + RESET_COLOR + "6. " + YELLOW_COLOR + "Log Out\n" + RESET_COLOR + "7. " + YELLOW_COLOR + "Back" + RESET_COLOR);
+        System.out.println("1. " + YELLOW_COLOR + "\nEdit Profile\n" + RESET_COLOR +
+                "2. " + YELLOW_COLOR + "View Profile\n" + RESET_COLOR +
+                "3. " + YELLOW_COLOR + "View Bookings\n" + RESET_COLOR +
+                "4. " + YELLOW_COLOR + "Book Slot\n" + RESET_COLOR +
+                "5. " + YELLOW_COLOR + "Cancel Booking\n" + RESET_COLOR +
+                "6. " + YELLOW_COLOR + "Log Out\n" + RESET_COLOR +
+                "7. " + YELLOW_COLOR + "Back\n" + RESET_COLOR);
     }
 
     private String getCustomerId(){
@@ -136,26 +144,40 @@ public class GymCustomerFlipFitMenu {
 
     private void editProfile() {
         while(true) {
-            System.out.println("Choose an appropriate option to update the value - ");
+            System.out.println("\nChoose an appropriate option to update the value - ");
             System.out.println("1. " + YELLOW_COLOR + "Email\n" + RESET_COLOR +
                     "2. " + YELLOW_COLOR + "Contact" + RESET_COLOR);
             int updateColumn = scanner.nextInt();
 
             switch (updateColumn) {
                 case 1:
-                    System.out.println("Enter the updated email - ");
-                    String newValue = scanner.next();
+                    String newValue;
+                    while(true) {
+                        System.out.println("\nEnter the updated email - ");
+                        newValue = scanner.next();
+                        if(!validators.isEmailValid(newValue)){
+                            System.out.println("\nIncorrect email id format. Please try again.");
+                        }
+                        else break;
+                    }
                     customerServiceImpl.updateCustomerDetails(newValue, "email", customerId);
-                    System.out.println(GREEN_COLOR + "Email has been updated successfully." + RESET_COLOR);
+                    System.out.println(GREEN_COLOR + "\nEmail has been updated successfully.\n" + RESET_COLOR);
                     return;
                 case 2:
-                    System.out.println("Enter the updated contact number - ");
-                    String newValue1 = scanner.next();
+                    String newValue1;
+                    while(true) {
+                        System.out.println("\nEnter the updated contact number - ");
+                        newValue1 = scanner.next();
+                        if(!validators.isPhoneValid(newValue1)){
+                            System.out.println("\nIncorrect phone number format. Please try again.");
+                        }
+                        else break;
+                    }
                     customerServiceImpl.updateCustomerDetails(newValue1, "contact", customerId);
-                    System.out.println(GREEN_COLOR + "Contact number has been updated successfully." + RESET_COLOR);
+                    System.out.println(GREEN_COLOR + "\nContact number has been updated successfully.\n" + RESET_COLOR);
                     return;
                 default:
-                    System.out.println(RED_COLOR + "Please select a valid option" + RESET_COLOR);
+                    System.out.println(RED_COLOR + "\nPlease select a valid option\n" + RESET_COLOR);
             }
         }
     }

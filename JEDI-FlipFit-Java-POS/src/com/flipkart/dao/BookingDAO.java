@@ -45,10 +45,8 @@ public class BookingDAO {
             stmt.close();
             System.out.println(GREEN_COLOR + "Booking has been successfully added." + RESET_COLOR);
 
-        } catch(SQLException e)
-        {
+        } catch(SQLException e) {
             throw new SlotDneException();
-            //System.out.println("SlotId does not exist");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -80,8 +78,7 @@ public class BookingDAO {
 
                 bookingList.add(booking);
             }
-        } catch(SQLException e)
-        {
+        } catch(SQLException e) {
             throw new CustomerDneException();
         } catch (Exception e) {
             e.printStackTrace();
@@ -103,9 +100,7 @@ public class BookingDAO {
 
             stmt.executeUpdate();
             System.out.println(GREEN_COLOR + "Booking has been deleted." + RESET_COLOR);
-
-        } catch(SQLException e)
-        {
+        } catch(SQLException e) {
             throw new BookingDneException();
         } catch (Exception e) {
             e.printStackTrace();

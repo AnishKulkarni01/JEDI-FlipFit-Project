@@ -7,6 +7,7 @@ import com.flipkart.service.impl.GymOwnerServiceImpl;
 import com.flipkart.service.impl.GymServiceImpl;
 import com.flipkart.service.impl.SlotServiceImpl;
 import com.flipkart.service.impl.UserServiceImpl;
+import com.flipkart.validator.Validators;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,8 +20,9 @@ public class GymOwnerFlipFitMenu {
     SlotServiceImpl slotServiceImpl = new SlotServiceImpl();
     GymServiceImpl gymServiceImpl = new GymServiceImpl();
     GymOwnerServiceImpl gymOwnerServiceImpl = new GymOwnerServiceImpl();
+    Validators validators = new Validators();
     String gymOwnerId = getGymOwnerId();
-    Scanner scanner= new Scanner(System.in);
+    Scanner scanner= new Scanner(System.in).useDelimiter("\\n");
 
     public String getGymOwnerId(){
         return gymOwnerServiceImpl.getOwnerIdByUsername(userServiceImpl.getCurrentUsername()).get(0);
@@ -104,14 +106,28 @@ public class GymOwnerFlipFitMenu {
 
             switch (updateColumn) {
                 case 1:
-                    System.out.println("Enter the updated email");
-                    String newValue = scanner.next();
+                    String newValue;
+                    while(true) {
+                        System.out.println("\nEnter the updated email - ");
+                        newValue = scanner.next();
+                        if(!validators.isEmailValid(newValue)){
+                            System.out.println("\nIncorrect email id format. Please try again.");
+                        }
+                        else break;
+                    }
                     gymOwnerServiceImpl.updateGymOwnerDetails(newValue, "email", gymOwnerId);
                     System.out.println(GREEN_COLOR + "Email has been updated successfully." + RESET_COLOR);
                     return;
                 case 2:
-                    System.out.println("Enter the updated contact number - ");
-                    String newValue1 = scanner.next();
+                    String newValue1;
+                    while(true) {
+                        System.out.println("\nEnter the updated contact number - ");
+                        newValue1 = scanner.next();
+                        if(!validators.isPhoneValid(newValue1)){
+                            System.out.println("\nIncorrect phone number format. Please try again.");
+                        }
+                        else break;
+                    }
                     gymOwnerServiceImpl.updateGymOwnerDetails(newValue1, "contact", gymOwnerId);
                     System.out.println(GREEN_COLOR + "Contact number has been updated successfully." + RESET_COLOR);
                     return;
@@ -125,11 +141,25 @@ public class GymOwnerFlipFitMenu {
 
         System.out.println(BLUE_COLOR + "Enter the following details - " + RESET_COLOR);
         System.out.println("GymId : ");
-        String gymId = scanner.next();
-        System.out.println("Date (Enter in DD/MM/YYYY format) : ");
-        String date = scanner.next();
-        System.out.println("StartTime (Enter in 24-hour format as HH:MM) : ");
-        String time = scanner.next();
+        String date, time, gymId = scanner.next();
+
+        while(true) {
+            System.out.println("Date (Enter in DD/MM/YYYY format) : ");
+            date = scanner.next();
+            if(!validators.isFutureDate(date)){
+                System.out.println("Please enter a date in the future in the right format.");
+            }
+            else break;
+        }
+
+        while(true) {
+            System.out.println("StartTime (Enter in 24-hour format as HH:MM) : ");
+            time = scanner.next();
+            if(!validators.isTimeValid(time)){
+                System.out.println("Please enter the time in the right format.");
+            }
+            else break;
+        }
 
         slotServiceImpl.createSlot(date, time, gymId);
     }
@@ -145,15 +175,30 @@ public class GymOwnerFlipFitMenu {
                     "2. " + YELLOW_COLOR + "Start Time (Enter in 24-hour format as HH:MM) : " + RESET_COLOR);
             int updateSlotColumn = scanner.nextInt();
 
-            System.out.println("Enter new value");
-            String newValue = scanner.next();
-
             switch(updateSlotColumn){
                 case 1:
-                    slotServiceImpl.updateSlot(newValue, "date", updateSlotId);
+                    String date;
+                    while(true) {
+                        System.out.println("Date (Enter in DD/MM/YYYY format) : ");
+                        date = scanner.next();
+                        if(!validators.isFutureDate(date)){
+                            System.out.println("Please enter a date in the future in the right format.");
+                        }
+                        else break;
+                    }
+                    slotServiceImpl.updateSlot(date, "date", updateSlotId);
                     return;
                 case 2:
-                    slotServiceImpl.updateSlot(newValue, "startTime", updateSlotId);
+                    String time;
+                    while(true) {
+                        System.out.println("StartTime (Enter in 24-hour format as HH:MM) : ");
+                        time = scanner.next();
+                        if(!validators.isTimeValid(time)){
+                            System.out.println("Please enter the time in the right format.");
+                        }
+                        else break;
+                    }
+                    slotServiceImpl.updateSlot(time, "startTime", updateSlotId);
                     return;
                 default:
                     System.out.println(RED_COLOR + "Please select valid option." + RESET_COLOR);

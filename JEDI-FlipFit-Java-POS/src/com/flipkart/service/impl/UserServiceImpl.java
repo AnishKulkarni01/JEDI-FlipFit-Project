@@ -11,7 +11,7 @@ import static com.flipkart.constants.Constants.*;
 
 public class UserServiceImpl implements UserServiceInterface {
     UserDAO userDAO = UserDAO.getInstance();
-    Scanner scanner = new Scanner(System.in);
+    Scanner scanner = new Scanner(System.in).useDelimiter("\\n");
 
     public boolean authenticate(String username, String password,String role) {
         try {

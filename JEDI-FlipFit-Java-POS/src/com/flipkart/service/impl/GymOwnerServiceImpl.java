@@ -46,7 +46,10 @@ public class GymOwnerServiceImpl implements GymOwnerServiceInterface {
 
     public void viewGymOwnerRequests(){
         List<GymOwner> gymOwnerList = gymOwnerDAO.getPendingGymOwners();
-        String[] headers = {PURPLE_COLOR + " Gym Owner Id " + RESET_COLOR, PURPLE_COLOR + " Gym Owner Name " + RESET_COLOR, PURPLE_COLOR + " Gym Owner Contact " + RESET_COLOR, PURPLE_COLOR + " Gym Owner Email " + RESET_COLOR};
+        String[] headers = {PURPLE_COLOR + " Gym Owner Id " + RESET_COLOR,
+                PURPLE_COLOR + " Gym Owner Name " + RESET_COLOR,
+                PURPLE_COLOR + " Gym Owner Contact " + RESET_COLOR,
+                PURPLE_COLOR + "     Gym Owner Email     " + RESET_COLOR};
         System.out.println("| " + String.join(" | ", headers) + " |");
         for(GymOwner gymOwner : gymOwnerList){
             ArrayList<String> details = new ArrayList<>();
@@ -66,7 +69,7 @@ public class GymOwnerServiceImpl implements GymOwnerServiceInterface {
                     formatSpecifier = "%-20s";
                 }
                 else{
-                    formatSpecifier = "%-17s";
+                    formatSpecifier = "%-25s";
                 }
                 System.out.printf("| " + formatSpecifier, details.get(i));
             }

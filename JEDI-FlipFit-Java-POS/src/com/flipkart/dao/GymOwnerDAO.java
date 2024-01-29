@@ -162,7 +162,7 @@ public class GymOwnerDAO {
         List<GymOwner> gymOwnerList = new ArrayList<>();
 
         try{
-            System.out.println("Fetching gym owner requests..");
+            System.out.println("\nFetching gym owner requests..");
 
             Connection conn = DBUtils.connect();
             PreparedStatement stmt = conn.prepareStatement(FETCH_ALL_PENDING_GYM_OWNERS_QUERY);
@@ -201,7 +201,7 @@ public class GymOwnerDAO {
 
             stmt.executeUpdate();
             stmt.close();
-            System.out.println(GREEN_COLOR + "Gym Owner Request with GymOwnerId " + gymOwnerId + " has been successfully approved." + RESET_COLOR);
+            System.out.println(GREEN_COLOR + "\nGym Owner Request with GymOwnerId " + gymOwnerId + " has been successfully approved.\n" + RESET_COLOR);
         }catch(SQLException e)
         {
             throw new GymOwnerDneException();
@@ -226,7 +226,7 @@ public class GymOwnerDAO {
 
             stmt.executeUpdate();
             stmt.close();
-            System.out.println(GREEN_COLOR + "Gym Owner Request with GymOwnerId " + gymOwnerId + " has been successfully rejected." + RESET_COLOR);
+            System.out.println(GREEN_COLOR + "\nGym Owner Request with GymOwnerId " + gymOwnerId + " has been successfully rejected.\n" + RESET_COLOR);
         }
         catch (SQLException e)
         {

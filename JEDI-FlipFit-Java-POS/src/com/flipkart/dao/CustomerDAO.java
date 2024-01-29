@@ -46,8 +46,7 @@ public class CustomerDAO {
 
             stmt.executeUpdate();
             stmt.close();
-        }catch (SQLException e)
-        {
+        }catch (SQLException e) {
             throw new CustomerRegistrationFailedException(username);
         }
         catch (Exception e) {
