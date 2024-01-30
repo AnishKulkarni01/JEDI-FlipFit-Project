@@ -102,7 +102,7 @@ public class GymDAO {
 
         try {
             conn = DBUtils.connect();
-            System.out.println("Fetching gym centers..");
+            //System.out.println("Fetching gym centers..");
 
             stmt = conn.prepareStatement(FETCH_ALL_PENDING_GYM_REQUESTS_BY_GYMOWNERID);
             stmt.setString(1, gymOwnerId);
@@ -195,7 +195,7 @@ public class GymDAO {
         List<Gym> gymList = new ArrayList<>();
 
         try {
-            System.out.println("Fetching gym centres..");
+            //System.out.println("Fetching gym centres..");
 
             conn = DBUtils.connect();
             stmt = conn.prepareStatement(FETCH_GYMS_BY_AREA);
@@ -232,7 +232,7 @@ public class GymDAO {
         List<Gym> gymList = new ArrayList<>();
 
         try {
-            System.out.println("Fetching gym centres..");
+            //System.out.println("Fetching gym centres..");
 
             conn = DBUtils.connect();
             stmt = conn.prepareStatement(FETCH_GYMS_BY_OWNER);

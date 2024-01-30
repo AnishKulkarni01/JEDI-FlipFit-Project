@@ -53,7 +53,7 @@ public class SQLConstants {
         public static final String GET_BOOKING_BY_CUSTOMER_ID ="Select * From jedi_flipfit_schema.Booking where customerId = ?;";
         public static final String CANCEL_BOOKING_BY_ID= "Delete from jedi_flipfit_schema.Booking where bookingId = ?;";
         public static final String ADD_BOOKING= "INSERT INTO jedi_flipfit_schema.Booking (customerID, slotId) values(?, ?);";
-
+        public static final String COUNT_BOOKINGS_BY_SLOTID="Select COUNT(slotId) as NumBookedSeats from jedi_flipfit_schema.Booking where slotId=?";
         // ------------- Schedule -------------
         public static final String ADD_SCHEDULE="INSERT INTO jedi_flipfit_schema.Schedule(scheduleId, date, slotId, availability ) values (?,?,?,?);";
         public static final String GET_SCHEDULES_BY_DATE="SELECT * FROM jedi_flipfit_schema.Schedule WHERE date=?;";

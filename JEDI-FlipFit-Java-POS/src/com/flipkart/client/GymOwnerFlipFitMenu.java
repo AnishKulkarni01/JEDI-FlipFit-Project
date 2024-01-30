@@ -249,15 +249,46 @@ public class GymOwnerFlipFitMenu {
 
     private void viewGyms(){
         System.out.println("Viewing Gyms");
+        String[] headers = {PURPLE_COLOR + " Gym Id " + RESET_COLOR, PURPLE_COLOR + " Gym Name " + RESET_COLOR,PURPLE_COLOR + " City " + RESET_COLOR,PURPLE_COLOR + " GSTIN " + RESET_COLOR,PURPLE_COLOR + " Seats " + RESET_COLOR};
+        System.out.println("| " + String.join(" | ", headers) + " |");
         for(Gym gym : gymServiceImpl.getGymsByOwnerId(gymOwnerId)){
-            System.out.println(gym.toString());
+            ArrayList<String> details = new ArrayList<String>();
+            details.add(gym.getGymId());
+            details.add(gym.getName());
+            details.add(gym.getCity());
+            details.add(gym.getGstin());
+            details.add(Integer.toString(gym.getSeats()));
+
+
+            String formatSpecifier;
+            for (String detail: details){
+                formatSpecifier = "%-9s";
+                System.out.printf("| " + formatSpecifier, detail);
+            }
+            System.out.println(" |");
         }
     }
 
     private void viewPendingRequests(){
         System.out.println("Showing Pending Requests");
+        String[] headers = {PURPLE_COLOR + " Gym Id " + RESET_COLOR, PURPLE_COLOR + " Gym Name " + RESET_COLOR,PURPLE_COLOR + " City " + RESET_COLOR,PURPLE_COLOR + " GSTIN " + RESET_COLOR,PURPLE_COLOR + " Seats " + RESET_COLOR};
+        System.out.println("| " + String.join(" | ", headers) + " |");
         for(Gym gym : gymServiceImpl.viewPendingRequests(gymOwnerId)){
-            System.out.println(gym.toString());
+            ArrayList<String> details = new ArrayList<String>();
+            details.add(gym.getGymId());
+            details.add(gym.getName());
+            details.add(gym.getCity());
+            details.add(gym.getGstin());
+            details.add(Integer.toString(gym.getSeats()));
+
+
+            String formatSpecifier;
+            for (String detail: details){
+                formatSpecifier = "%-9s";
+                System.out.printf("| " + formatSpecifier, detail);
+            }
+            System.out.println(" |");
+            //System.out.println(gym.toString())
         }
     }
 

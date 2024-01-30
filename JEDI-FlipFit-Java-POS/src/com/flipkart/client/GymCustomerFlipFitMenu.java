@@ -41,13 +41,14 @@ public class GymCustomerFlipFitMenu {
         int areaOption = scanner.nextInt();
         String selectedArea = areas.get(areaOption-1);
         List<Gym>gymList = gymServiceImpl.getGymByAreas(selectedArea);
+        String[] headers = {PURPLE_COLOR + " Gym Id " + RESET_COLOR, PURPLE_COLOR + " Gym Name " + RESET_COLOR};
+        System.out.println("| " + String.join(" | ", headers) + " |");
         for(int i=0;i<gymList.size();i++)
         {
             ArrayList<String> details = new ArrayList<String>();
             details.add(gymList.get(i).getGymId());
             details.add(gymList.get(i).getName());
-            String[] headers = {PURPLE_COLOR + " Gym Id " + RESET_COLOR, PURPLE_COLOR + " Gym Name " + RESET_COLOR};
-            System.out.println("| " + String.join(" | ", headers) + " |");
+
 
             String formatSpecifier;
             for (String detail: details){
@@ -62,8 +63,26 @@ public class GymCustomerFlipFitMenu {
 
         System.out.println("Choose a slot at " + selectedArea);
         List<Slot> slotList = slotServiceImpl.getSlotsByGymId(gymId);
+        String[] headers1 = {PURPLE_COLOR + " Slot Id " + RESET_COLOR, PURPLE_COLOR + " Date " + RESET_COLOR,PURPLE_COLOR + " StartTime " + RESET_COLOR};
+        System.out.println("| " + String.join(" | ", headers) + " |");
         for(Slot slot: slotList) {
-            if(!st.contains(slot.getSlotId())) System.out.println("Slot Id : " + slot.getSlotId() +" Date : "+slot.getDate()+" Time : "+slot.getStartTime() +":00\n");
+            if(!st.contains(slot.getSlotId()) && bookingServiceImpl.canBook(slot.getSlotId(),gymId))
+
+            {
+                ArrayList<String> details = new ArrayList<String>();
+                details.add(slot.getSlotId());
+                details.add(slot.getDate());
+                details.add(slot.getStartTime());
+
+
+                String formatSpecifier;
+                for (String detail: details){
+                    formatSpecifier = "%-9s";
+                    System.out.printf("| " + formatSpecifier, detail);
+                }
+                System.out.println(" |");
+                //System.out.println("Slot Id : " + slot.getSlotId() +" Date : "+slot.getDate()+" Time : "+slot.getStartTime() +":00");
+            }
         }
     }
 
@@ -71,10 +90,11 @@ public class GymCustomerFlipFitMenu {
         System.out.println(BLUE_COLOR + "The bookings are as follows - " + RESET_COLOR);
 
         //booking.toString() later
+        String[] headers = {PURPLE_COLOR + " Booking Id " + RESET_COLOR, PURPLE_COLOR + " Gym " + RESET_COLOR, PURPLE_COLOR + " Time " + RESET_COLOR, PURPLE_COLOR + " Date " + RESET_COLOR};
+        System.out.println("| " + String.join(" | ", headers) + " |");
         for(Booking booking : bookingServiceImpl.getBookingByCustomerId(customerId)){
             Slot slot = slotServiceImpl.getSlotBySlotId(booking.getSlotId());
-            String[] headers = {PURPLE_COLOR + " Booking Id " + RESET_COLOR, PURPLE_COLOR + " Gym " + RESET_COLOR, PURPLE_COLOR + " Time " + RESET_COLOR, PURPLE_COLOR + " Date " + RESET_COLOR};
-            System.out.println("| " + String.join(" | ", headers) + " |");
+
             ArrayList<String> details = new ArrayList<>();
             details.add(booking.getBookingId());
             details.add(gymServiceImpl.getGymById(slot.getGymId()).getName());

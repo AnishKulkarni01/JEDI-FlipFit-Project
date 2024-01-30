@@ -6,6 +6,7 @@ import com.flipkart.exceptions.CustomerDneException;
 import com.flipkart.exceptions.SlotDneException;
 import com.flipkart.utils.DBUtils;
 
+import javax.sound.midi.Soundbank;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,12 +14,13 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.flipkart.constants.Constants.GREEN_COLOR;
-import static com.flipkart.constants.Constants.RESET_COLOR;
+import static com.flipkart.constants.Constants.*;
 import static com.flipkart.constants.SQLConstants.*;
 
 public class BookingDAO {
     static BookingDAO bookingDAO = null;
+    GymDAO gymDao= GymDAO.getInstance();
+
     public static synchronized BookingDAO getInstance() {
         if(bookingDAO ==null) {
             bookingDAO =new BookingDAO();
@@ -105,5 +107,30 @@ public class BookingDAO {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+    public boolean canBook(String slotId,String gymId)
+    {
+        try {
+            Connection conn = DBUtils.connect();
+            PreparedStatement stmt = conn.prepareStatement(COUNT_BOOKINGS_BY_SLOTID);
+
+            stmt.setString(1, slotId);
+            ResultSet rs= stmt.executeQuery();
+            int numBookedSeats=0;
+            while(rs.next()) {
+                numBookedSeats=Integer.parseInt(rs.getString("NumBookedSeats"));
+                break;
+            }
+            int totalSeats=gymDao.getGymById(gymId).getSeats();
+            if(numBookedSeats>=totalSeats) return false;
+            return true;
+
+        } catch(SQLException e)
+        {
+            System.out.println(RED_COLOR+"Slot already full"+RESET_COLOR);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return true;
     }
 }

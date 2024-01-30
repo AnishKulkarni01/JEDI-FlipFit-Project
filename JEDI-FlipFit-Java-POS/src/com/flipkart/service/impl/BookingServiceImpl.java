@@ -33,4 +33,8 @@ public class BookingServiceImpl implements BookingServiceInterface {
         } catch (BookingDneException e) {
             System.out.println(e.getMessage());  }
     }
+    public boolean canBook(String slotId,String gymId)
+    {
+        return bookingDAO.canBook(slotId, gymId);
+    }
 }
