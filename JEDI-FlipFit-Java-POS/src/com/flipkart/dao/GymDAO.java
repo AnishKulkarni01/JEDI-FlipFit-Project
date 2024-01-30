@@ -4,12 +4,10 @@ import com.flipkart.bean.Gym;
 import com.flipkart.exceptions.GymAreaDneException;
 import com.flipkart.exceptions.GymDneException;
 import com.flipkart.exceptions.GymOwnerDneException;
+import com.flipkart.exceptions.SlotDneException;
 import com.flipkart.utils.DBUtils;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.*;
 
 import static com.flipkart.constants.Constants.*;
@@ -82,6 +80,25 @@ public class GymDAO {
      * @param gymId
      */
     public void deleteGymRequest(String gymId) {
+        try {
+            Connection conn = DBUtils.connect();
+            PreparedStatement stmt = conn.prepareStatement(DELETE_GYM_BY_ID);
+            stmt.setString(1, gymId);
+            stmt.executeUpdate();
+            System.out.println(GREEN_COLOR + "Slot Deleted Successfully." + RESET_COLOR);
+        }catch(SQLIntegrityConstraintViolationException e) {
+            System.out.println(YELLOW_COLOR + "Slot already booked by Customers" +  RESET_COLOR);
+            System.out.println(RED_COLOR + "Delete Failed" + RESET_COLOR);
+        }
+        catch(SQLException e)
+        {
+            //throw new SlotDneException();
+            System.out.println("SlotId does not exist.");
+        }
+        catch(Exception e) {
+            System.out.println(e);
+            System.out.println(RED_COLOR + "Oops! An error occurred. Try again later." + RESET_COLOR);
+        }
         for(int i=0;i<reqList.size();i++) {
             if(Objects.equals(reqList.get(i).getGymId(), gymId)) {
                 reqList.remove(i);

@@ -40,6 +40,7 @@ public class SQLConstants {
         public static final String UPDATE_GYM_DETAILS_CITY = "UPDATE jedi_flipfit_schema.Gym SET city = ? WHERE gymId =?;";
         public static final String UPDATE_GYM_DETAILS_SEATS = "UPDATE jedi_flipfit_schema.Gym SET seats = ? WHERE gymId =?;";
         public static final String UPDATE_GYM_DETAILS_GSTIN = "UPDATE jedi_flipfit_schema.Gym SET gstin = ? WHERE gymId =?;";
+        public static final String DELETE_GYM_BY_ID= "Delete from jedi_flipfit_schema.Gym where gymId = ?;";
 
         //    ------- Customer ---------------
         public static final String CUSTOMER_LOGIN_QUERY = "SELECT * FROM jedi_flipfit_schema.Customer WHERE username = ? AND password = ?;";
