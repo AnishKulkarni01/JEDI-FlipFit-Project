@@ -1,21 +1,9 @@
 package com.flipkart.bean;
 
-public class Admin {
-    int AdminID;
-    String username;
-    String password;
-
-    public int getAdminID() {
-        return AdminID;
-    }
-
-    /**
-     *
-     * @param adminID
-     */
-    public void setAdminID(int adminID) {
-        AdminID = adminID;
-    }
+public class User {
+    private String username;
+    private String role;
+    private String password;
 
     public String getUsername() {
         return username;
@@ -39,5 +27,17 @@ public class Admin {
      */
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    /**
+     *
+     * @param role
+     */
+    public void setRole(String role) {
+        this.role = role;
     }
 }

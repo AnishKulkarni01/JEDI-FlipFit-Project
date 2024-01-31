@@ -1,17 +1,18 @@
 package com.flipkart.dao;
 
+import com.flipkart.bean.Admin;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class AdminDAO {
+    static AdminDAO adminDAO = null;
 
-    public boolean makeAdmin(String adminID)
-    {
-        //Provides admin privileges to a user
-        return false;
-    }
+    public static synchronized AdminDAO getInstance() {
+        if(adminDAO == null) {
+            adminDAO =new AdminDAO();
+        }
 
-    public boolean removeAdmin(String adminID)
-    {
-        //Revokes admin privileges from a user
-        return false;
+        return adminDAO;
     }
-    
 }

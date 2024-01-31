@@ -1,38 +1,56 @@
 package com.flipkart.bean;
 
 public class Customer {
-    private int customerID;
+    private String customerId;
     private String password;
-    private String name;
+    private String username;
+    private String email;
+    private String contact;
 
-    public int getCustomerID() {
-        return customerID;
+    public String getCustomerId() {
+        return customerId;
     }
 
-    public void setCustomerID(int customerID) {
-        this.customerID = customerID;
+    /**
+     *
+     * @param customerId
+     */
+    public void setCustomerId(String customerId) {
+        this.customerId = customerId;
     }
 
     public String getPassword() {
         return password;
     }
 
+    /**
+     *
+     * @param password
+     */
     public void setPassword(String password) {
         this.password = password;
     }
 
-    public String getName() {
-        return name;
+    public String getUsername() {
+        return username;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    /**
+     *
+     * @param username
+     */
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getEmail() {
         return email;
     }
 
+    /**
+     *
+     * @param email
+     */
     public void setEmail(String email) {
         this.email = email;
     }
@@ -41,12 +59,11 @@ public class Customer {
         return contact;
     }
 
+    /**
+     *
+     * @param contact
+     */
     public void setContact(String contact) {
         this.contact = contact;
     }
-
-    private String email;
-    private String contact;
-
-
 }

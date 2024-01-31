@@ -1,22 +1,32 @@
 package com.flipkart.bean;
 
 public class GymOwner {
-    private int gymOwnerID;
+    private String gymOwnerId;
     private String password;
     private String name;
+    private String contact;
+    private String email;
 
-    public int getCustomerID() {
-        return gymOwnerID;
+    public String getGymOwnerId() {
+        return gymOwnerId;
     }
 
-    public void setCustomerID(int gymOwnerID) {
-        this.gymOwnerID = gymOwnerID;
+    /**
+     *
+     * @param gymOwnerId
+     */
+    public void setGymOwnerId(String gymOwnerId) {
+        this.gymOwnerId = gymOwnerId;
     }
 
     public String getPassword() {
         return password;
     }
 
+    /**
+     *
+     * @param password
+     */
     public void setPassword(String password) {
         this.password = password;
     }
@@ -25,27 +35,35 @@ public class GymOwner {
         return name;
     }
 
+    /**
+     *
+     * @param name
+     */
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     public String getContact() {
         return contact;
     }
 
+    /**
+     *
+     * @param contact
+     */
     public void setContact(String contact) {
         this.contact = contact;
     }
 
-    private String email;
-    private String contact;
+    public String getEmail() {
+        return email;
+    }
 
+    /**
+     *
+     * @param email
+     */
+    public void setEmail(String email) {
+        this.email = email;
+    }
 }
