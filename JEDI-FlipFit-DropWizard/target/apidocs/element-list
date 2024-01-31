@@ -1,0 +1,12 @@
+com.flipkart.app
+com.flipkart.bean
+com.flipkart.client
+com.flipkart.config
+com.flipkart.constants
+com.flipkart.controller
+com.flipkart.dao
+com.flipkart.exceptions
+com.flipkart.service
+com.flipkart.service.impl
+com.flipkart.utils
+com.flipkart.validator
