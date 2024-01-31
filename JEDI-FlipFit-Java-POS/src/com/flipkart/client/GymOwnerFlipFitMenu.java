@@ -93,10 +93,12 @@ public class GymOwnerFlipFitMenu {
             }
         }
     }
+
     private void viewProfile(){
         System.out.println("Profile details are as follows - ");
         gymOwnerServiceImpl.viewProfile();
     }
+
     private void editProfile() {
         while(true) {
             System.out.println("Choose an appropriate option to update the value - ");
@@ -136,6 +138,7 @@ public class GymOwnerFlipFitMenu {
             }
         }
     }
+
     private void addSlot(){
         System.out.println("Add Slots");
 
@@ -240,8 +243,8 @@ public class GymOwnerFlipFitMenu {
             System.out.println(" |");
         }
     }
-    private void deleteSlot()
-    {
+
+    private void deleteSlot() {
         System.out.println("Enter SlotId : ");
         int delSlotId=scanner.nextInt();
         slotServiceImpl.deleteSlotById(Integer.toString(delSlotId));
